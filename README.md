@@ -1,4 +1,4 @@
-# Ranker
+# Zetrox
 
 ### Starten
 1. Installiere dir [GIT](https://git-scm.com/)
