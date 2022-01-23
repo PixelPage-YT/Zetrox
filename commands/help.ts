@@ -133,7 +133,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                                 "fields": [
                                   {
                                     "name": "Einladungs-Kanal",
-                                    "value": "Du kannst einen Kanal setzen,\nin den hereingeschrieben wird,\nwenn jemand Eingeladen wird.\n`/welcomechannel <KanalName>`"
+                                    "value": "Du kannst einen Kanal setzen,\nin den hereingeschrieben wird,\nwenn jemand Eingeladen wird.\n`/einstellungen <inviteKanal> <Kanal>`"
                                   },
                                   {
                                     "name": "Einladungen sehen",

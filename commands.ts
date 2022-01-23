@@ -17,6 +17,17 @@ export const commands: harmony.SlashCommandPartial[] = [
         ]
     },
     {
+        name: "invites",
+        description: "Zeigt die Einladungsanzahl eines Benutzers",
+        options: [
+            {
+                type: 6,
+                name: "user",
+                description: "Ein bestimmtes Mitglied"
+            }
+        ]
+    },
+    {
         name: "leaderboard",
         description: "Zeigt Nachrichten oder Invites in einer Rangliste",
         options: [
@@ -38,6 +49,25 @@ export const commands: harmony.SlashCommandPartial[] = [
                 description: "invites oder messages",
                 required: true
             }
+        ]
+    },
+    {
+        "name": "einstellungen",
+        "description": "Konfiguriere den Bot nach deinen Wünschen!",
+        "options": [
+          {
+            "type": 1,
+            "name": "invitekanal",
+            "description": "Setze einen Kanal, in den Wilkommensnachrichten geschrieben werden!",
+            "options": [
+              {
+                "type": 7,
+                "name": "channel",
+                "description": "der Kanal",
+                "required": true
+              }
+            ]
+          }
         ]
     }
 ];
