@@ -67,6 +67,19 @@ export const commands: harmony.SlashCommandPartial[] = [
                 "required": true
               }
             ]
+          },
+          {
+            "type": 1,
+            "name": "antispamtime",
+            "description": "Setze eine Zeit, in der nur eine Nachricht zählt.",
+            "options": [
+              {
+                "type": 4,
+                "name": "time",
+                "description": "Die Zeit in Sekunden",
+                "required": true
+              }
+            ]
           }
         ]
     }

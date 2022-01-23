@@ -6,6 +6,8 @@ import {invites} from "./commands/invites.ts"
 import {ready} from "./listeners/ready.ts"
 import {messageCreate} from "./listeners/messageCreate.ts"
 import {leaderboard} from "./commands/leaderboard.ts"
+import{eInviteKanal} from "./commands/einstellungen/inviteKanal.ts"
+import{eAntiSpamTime} from "./commands/einstellungen/antiSpamTime.ts"
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -38,6 +40,16 @@ class Zetrox extends harmony.Client {
     ready(){
         ready(this);
     }
+
+    @harmony.subslash("einstellungen", "invitekanal")
+    invitekanal(i:harmony.Interaction){
+        eInviteKanal(i, this)
+    }
+
+    @harmony.subslash("einstellungen", "antispamtime")
+    antispamtime(i:harmony.Interaction){
+        eAntiSpamTime(i, this)
+    }
 }
 
 const client = new Zetrox();
@@ -52,31 +64,7 @@ if(Deno.args[0] == undefined || Deno.args[0] == "dev"){
     console.log("[Info] Der Bot wird im PRODUCTION Modus gestartet. (Zetrox)")
 }
 
-if(Deno.args[1] != undefined){
-    if(Deno.args[1] == "newSlash"){
-        console.log("[Info] Alle Slash Commands werden gelöscht")
-        let customCommand = Deno.args[2]
-        if(customCommand){
-            const clguilds = await client.guilds.array()
-            for(let guild of clguilds){
-                let commands = await guild.commands.all()
-                for(let command of commands.array()){
-                    if(command.name == customCommand){
-                        command.delete()
-                    }
-                }
-            }
-        }else{
-            const clguilds = await client.guilds.array()
-            for(let guild of clguilds){
-                let commands = await guild.commands.all()
-                for(let command of commands.array()){
-                    command.delete()
-                }
-            }
-        }
-    }
-}
+
 
 async function checkSlash(){
     commands.forEach(command => {
@@ -140,6 +128,35 @@ client.on("guildMemberAdd", async (member:harmony.Member) => {
                     }
                     invitedb[invite.guild.id][invite.inviter.id].count++
                     invitedb[invite.guild.id][invite.inviter.id].invited.push(member.id)
+                    const invChanneldb = JSON.parse(Deno.readTextFileSync("./databases/invites/inviteChannels.json"))
+                    if(invChanneldb[member.guild.id]){
+                        let channel = await member.guild.channels.get(invChanneldb[member.guild.id])
+                        if(channel == undefined){
+                            let channel = await member.guild.channels.resolve(invChanneldb[member.guild.id])
+                        }
+                        if(channel != undefined && channel.isText()){
+                            channel.send({
+                                embeds: [
+                                    {
+                                        "title": member.user.username,
+                                        "description": "ist gerade dem Server beigetreten!",
+                                        "color": 5814783,
+                                        "author": {
+                                          "name": "Neues Mitglied",
+                                          "icon_url": "https://emoji.gg/assets/emoji/3118-discord-members.png"
+                                        },
+                                        "thumbnail": {
+                                          "url": member.avatarURL()
+                                        },
+                                        "footer": {
+                                            "text": "⇢ Zetrox von Folizza Studios",
+                                            "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                        }
+                                    }
+                                ]
+                            })
+                        }
+                    }
                     // console.log(member.user.username + " wurde eingeladen von " + invite.inviter.username)
                     Deno.writeTextFileSync("./databases/invites/invites.json", JSON.stringify(invitedb))
                 }
@@ -181,4 +198,4 @@ client.on("guildMemberRemove", (member:harmony.Member) => {
     }
 })
 
-client.connect(token, [harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
+client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
