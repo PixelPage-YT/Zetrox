@@ -9,6 +9,9 @@ import {leaderboard} from "./commands/leaderboard.ts"
 import{eInviteKanal} from "./commands/einstellungen/inviteKanal.ts"
 import{eAntiSpamTime} from "./commands/einstellungen/antiSpamTime.ts"
 import{eTeamRole} from "./commands/einstellungen/teamRole.ts"
+import{bonusAddMessages,bonusRemoveMessages} from "./commands/bonus/messages.ts"
+import{bonusAddInvites,bonusRemoveInvites} from "./commands/bonus/invites.ts"
+
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -55,6 +58,26 @@ class Zetrox extends harmony.Client {
     @harmony.subslash("einstellungen", "teamrole")
     teamrole(i:harmony.Interaction){
         eTeamRole(i, this)
+    }
+
+    @harmony.groupslash("bonus", "add", "messages")
+    bonusAddMessages(i:harmony.Interaction){
+        bonusAddMessages(i, this);
+    }
+    
+    @harmony.groupslash("bonus", "remove", "messages")
+    bonusRemoveMessages(i:harmony.Interaction){
+        bonusRemoveMessages(i, this);
+    }
+
+    @harmony.groupslash("bonus", "add", "invites")
+    bonusAddInvites(i:harmony.Interaction){
+        bonusAddInvites(i, this);
+    }
+
+    @harmony.groupslash("bonus", "remove", "invites")
+    bonusRemoveInvites(i:harmony.Interaction){
+        bonusRemoveInvites(i, this);
     }
 }
 
@@ -145,7 +168,7 @@ client.on("guildMemberAdd", async (member:harmony.Member) => {
                                 embeds: [
                                     {
                                         "title": member.user.username,
-                                        "description": "ist gerade dem Server beigetreten!",
+                                        "description": "ist gerade dem Server beigetreten! \n*Er/Sie wurde eingeladen von* **" + invite.inviter.username + "**",
                                         "color": 5814783,
                                         "author": {
                                           "name": "Neues Mitglied",

@@ -95,5 +95,134 @@ export const commands: harmony.SlashCommandPartial[] = [
             ]
           }
         ]
+    },
+    {
+      "name": "bonus",
+      "description": "Verwalte die Bonuspunkte eines Mitgliedes.",
+      "options": [
+        {
+          "type": 2,
+          "name": "add",
+          "description": "Füge jemandem Bonuspunkte hinzu.",
+          "options": [
+            {
+              "type": 1,
+              "name": "messages",
+              "description": "Füge jemandem Nachrichten hinzu.",
+              "options": [
+                {
+                  "type": 4,
+                  "name": "anzahl",
+                  "description": "Die Anzahl der Nachrichten.",
+                  "required": true
+                },
+                {
+                  "type": 6,
+                  "name": "user",
+                  "description": "Der Benutzer, dem die Nachrichten hinzugefügt werden."
+                }
+              ]
+            },
+            {
+              "type": 1,
+              "name": "invites",
+              "description": "Füge jemandem Einladungen hinzu.",
+              "options": [
+                {
+                  "type": 4,
+                  "name": "anzahl",
+                  "description": "Die Anzahl der Einladungen.",
+                  "required": true
+                },
+                {
+                  "type": 6,
+                  "name": "user",
+                  "description": "Der Benutzer, dem die Einladungen hinzugefügt werden."
+                }
+              ]
+            },
+            {
+              "type": 1,
+              "name": "gamepoints",
+              "description": "Füge jemandem Spielpunkte hinzu.",
+              "options": [
+                {
+                  "type": 4,
+                  "name": "anzahl",
+                  "description": "Die Anzahl der Spielpunkte.",
+                  "required": true,
+                  "choices": []
+                },
+                {
+                  "type": 6,
+                  "name": "user",
+                  "description": "Der Benutzer, dem die SpielPunkte hinzugefügt werden."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": 2,
+          "name": "remove",
+          "description": "Entferne jemandem BonusPunkte.",
+          "options": [
+            {
+              "type": 1,
+              "name": "messages",
+              "description": "Entferne jemandem Nachrichten.",
+              "options": [
+                {
+                  "type": 4,
+                  "name": "anzahl",
+                  "description": "Die Anzahl der Nachrichten.",
+                  "required": true
+                },
+                {
+                  "type": 6,
+                  "name": "user",
+                  "description": "Der Benutzer, dem die Nachrichten entfernt werden."
+                }
+              ]
+            },
+            {
+              "type": 1,
+              "name": "invites",
+              "description": "Entferne jemandem Einladungen.",
+              "options": [
+                {
+                  "type": 4,
+                  "name": "anzahl",
+                  "description": "Die Anzahl der Einladungen.",
+                  "required": true
+                },
+                {
+                  "type": 6,
+                  "name": "user",
+                  "description": "Der Benutzer, dem die Einladungen entfernt werden."
+                }
+              ]
+            },
+            {
+              "type": 1,
+              "name": "gamepoints",
+              "description": "Entferne jemandem Spielpunkte.",
+              "options": [
+                {
+                  "type": 4,
+                  "name": "anzahl",
+                  "description": "Die Anzahl der Spielpunkte.",
+                  "required": true
+                },
+                {
+                  "type": 6,
+                  "name": "user",
+                  "description": "Der Benutzer, dem die SpielPunkte entfernt werden."
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
 ];
