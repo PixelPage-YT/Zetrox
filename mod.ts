@@ -3,6 +3,7 @@ import { commands } from "./commands.ts"
 import {help, helpselect} from "./commands/help.ts"
 import {messages} from "./commands/messages.ts"
 import {invites} from "./commands/invites.ts"
+import {gamePoints} from "./commands/gamePoints.ts"
 import {ready} from "./listeners/ready.ts"
 import {messageCreate} from "./listeners/messageCreate.ts"
 import {leaderboard} from "./commands/leaderboard.ts"
@@ -11,6 +12,7 @@ import{eAntiSpamTime} from "./commands/einstellungen/antiSpamTime.ts"
 import{eTeamRole} from "./commands/einstellungen/teamRole.ts"
 import{bonusAddMessages,bonusRemoveMessages} from "./commands/bonus/messages.ts"
 import{bonusAddInvites,bonusRemoveInvites} from "./commands/bonus/invites.ts"
+import{bonusAddGamePoints,bonusRemoveGamePoints} from "./commands/bonus/gamepoints.ts"
 
 
 class Zetrox extends harmony.Client {
@@ -28,6 +30,11 @@ class Zetrox extends harmony.Client {
     @harmony.slash()
     invites(i:harmony.Interaction){
         invites(i,this);
+    }
+
+    @harmony.slash()
+    gamepoints(i:harmony.Interaction){
+        gamePoints(i,this);
     }
 
     @harmony.slash()
@@ -78,6 +85,14 @@ class Zetrox extends harmony.Client {
     @harmony.groupslash("bonus", "remove", "invites")
     bonusRemoveInvites(i:harmony.Interaction){
         bonusRemoveInvites(i, this);
+    }
+    @harmony.groupslash("bonus", "add", "gamepoints")
+    bonusAddGamePoints(i:harmony.Interaction){
+        bonusAddGamePoints(i, this);
+    }
+    @harmony.groupslash("bonus", "remove", "gamepoints")
+    bonusRemoveGamePoints(i:harmony.Interaction){
+        bonusRemoveGamePoints(i, this);
     }
 }
 

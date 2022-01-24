@@ -106,7 +106,7 @@ export async function bonusRemoveMessages(i:harmony.Interaction,client:harmony.C
                     }]})
                 }else{
                     i.respond({
-                        content: ":x: Du kannst jemandem maximal 10000 Nachrichten und minimal 1 hinzufügen! :x:",
+                        content: ":x: Du kannst jemandem maximal 10000 Nachrichten und minimal 1 entfernen! :x:",
                         ephemeral: true
                     })
                 }

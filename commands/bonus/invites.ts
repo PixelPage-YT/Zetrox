@@ -106,7 +106,7 @@ export async function bonusRemoveInvites(i:harmony.Interaction,client:harmony.Cl
                     }]})
                 }else{
                     i.respond({
-                        content: ":x: Du kannst jemandem maximal 10000 Einladungen und minimal 1 hinzufügen! :x:",
+                        content: ":x: Du kannst jemandem maximal 10000 Einladungen und minimal 1 entfernen! :x:",
                         ephemeral: true
                     })
                 }

@@ -224,5 +224,16 @@ export const commands: harmony.SlashCommandPartial[] = [
           ]
         }
       ]
+    },
+    {
+      "name": "gamepoints",
+      "description": "Zeigt dir SpielPunkte eines Benutzers an.",
+      "options": [
+        {
+          "type": 6,
+          "name": "user",
+          "description": "Ein bestimmter Benutzer"
+        }
+      ]
     }
 ];
