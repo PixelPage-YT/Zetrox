@@ -6,7 +6,7 @@ import {invites} from "./commands/invites.ts"
 import {gamePoints} from "./commands/gamePoints.ts"
 import {ready} from "./listeners/ready.ts"
 import {messageCreate} from "./listeners/messageCreate.ts"
-import {leaderboard} from "./commands/leaderboard.ts"
+import {lbInvites,lbMessages,lbGamepoints} from "./commands/leaderboard.ts"
 import{eInviteKanal} from "./commands/einstellungen/inviteKanal.ts"
 import{eAntiSpamTime} from "./commands/einstellungen/antiSpamTime.ts"
 import{eTeamRole} from "./commands/einstellungen/teamRole.ts"
@@ -35,16 +35,6 @@ class Zetrox extends harmony.Client {
     @harmony.slash()
     gamepoints(i:harmony.Interaction){
         gamePoints(i,this);
-    }
-
-    @harmony.slash()
-    leaderboard(i:harmony.Interaction){
-        leaderboard(i,this);
-    }
-
-    @harmony.slash()
-    lb(i:harmony.Interaction){
-        leaderboard(i,this);
     }
 
     @harmony.event()
@@ -93,6 +83,31 @@ class Zetrox extends harmony.Client {
     @harmony.groupslash("bonus", "remove", "gamepoints")
     bonusRemoveGamePoints(i:harmony.Interaction){
         bonusRemoveGamePoints(i, this);
+    }
+
+    @harmony.subslash("leaderboard","invites")
+    lbInvites(i:harmony.Interaction){
+        lbInvites(i,this)
+    }
+    @harmony.subslash("leaderboard","messages")
+    lbMessages(i:harmony.Interaction){
+        lbMessages(i,this)
+    }
+    @harmony.subslash("leaderboard","gamepoints")
+    lbGamepoints(i:harmony.Interaction){
+        lbGamepoints(i,this)
+    }
+    @harmony.subslash("lb","invites")
+    lb1Invites(i:harmony.Interaction){
+        lbInvites(i,this)
+    }
+    @harmony.subslash("lb","messages")
+    lb1Messages(i:harmony.Interaction){
+        lbMessages(i,this)
+    }
+    @harmony.subslash("lb","gamepoints")
+    lb1Gamepoints(i:harmony.Interaction){
+        lbGamepoints(i,this)
     }
 }
 

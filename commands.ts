@@ -28,28 +28,52 @@ export const commands: harmony.SlashCommandPartial[] = [
         ]
     },
     {
-        name: "leaderboard",
-        description: "Zeigt Nachrichten oder Invites in einer Rangliste",
-        options: [
-            {
-                type: 3,
-                name: "type",
-                description: "invites oder messages",
-                required: true
-            }
-        ]
+      "name": "leaderboard",
+      "description": "Zeigt Nachrichten/Invites oder GamePoints in einer Rangliste",
+      "options": [
+        {
+          "type": 1,
+          "name": "messages",
+          "description": "Zeigt Nachrichten in einer Rangliste",
+          "options": []
+        },
+        {
+          "type": 1,
+          "name": "invites",
+          "description": "Zeigt Invites in einer Rangliste",
+          "options": []
+        },
+        {
+          "type": 1,
+          "name": "gamepoints",
+          "description": "Zeigt GamePoints in einer Rangliste",
+          "options": []
+        }
+      ]
     },
     {
-        name: "lb",
-        description: "Zeigt Nachrichten oder Invites in einer Rangliste",
-        options: [
-            {
-                type: 3,
-                name: "type",
-                description: "invites oder messages",
-                required: true
-            }
-        ]
+      "name": "lb",
+      "description": "Zeigt Nachrichten/Invites oder GamePoints in einer Rangliste",
+      "options": [
+        {
+          "type": 1,
+          "name": "messages",
+          "description": "Zeigt Nachrichten in einer Rangliste",
+          "options": []
+        },
+        {
+          "type": 1,
+          "name": "invites",
+          "description": "Zeigt Invites in einer Rangliste",
+          "options": []
+        },
+        {
+          "type": 1,
+          "name": "gamepoints",
+          "description": "Zeigt GamePoints in einer Rangliste",
+          "options": []
+        }
+      ]
     },
     {
         "name": "einstellungen",

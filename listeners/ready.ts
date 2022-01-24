@@ -14,6 +14,7 @@ export async function ready(client:harmony.Client) {
                     for(let command of commands.array()){
                         if(command.name == customCommand){
                             command.delete()
+                            console.info("[Info] Slash Command " + command.name + " in dem Server " + command.guild?.name + " gelöscht.")
                         }
                     }
                 }
