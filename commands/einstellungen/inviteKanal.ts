@@ -1,8 +1,9 @@
 import * as harmony from "https://code.harmony.rocks/main"
+import {isAuthorized} from "../../util/isAuthorized.ts"
 
 export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
     if(i.member){
-        if(i.member.permissions.toArray().findIndex(index => index === "MANAGE_GUILD") == -1){
+        if(!(await isAuthorized(i.member))){
             i.respond({
                 content: ":x: Du hast dazu keine Rechte! :x:",
                 ephemeral: true
