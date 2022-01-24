@@ -80,6 +80,19 @@ export const commands: harmony.SlashCommandPartial[] = [
                 "required": true
               }
             ]
+          },
+          {
+            "type": 1,
+            "name": "teamrole",
+            "description": "Setze eine Rolle, die den Bot steuern darf.",
+            "options": [
+              {
+                "type": 8,
+                "name": "role",
+                "description": "Die Rolle, die den Bot steuern darf.",
+                "required": true
+              }
+            ]
           }
         ]
     }

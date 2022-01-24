@@ -24,6 +24,7 @@ export async function ready(client:harmony.Client) {
                     let commands = await guild.commands.all()
                     for(let command of commands.array()){
                         command.delete()
+                        console.info("[Info] Slash Command " + command.name + " in dem Server " + command.guild?.name + " gelöscht.")
                     }
                 }
             }

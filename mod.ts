@@ -8,6 +8,7 @@ import {messageCreate} from "./listeners/messageCreate.ts"
 import {leaderboard} from "./commands/leaderboard.ts"
 import{eInviteKanal} from "./commands/einstellungen/inviteKanal.ts"
 import{eAntiSpamTime} from "./commands/einstellungen/antiSpamTime.ts"
+import{eTeamRole} from "./commands/einstellungen/teamRole.ts"
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -49,6 +50,11 @@ class Zetrox extends harmony.Client {
     @harmony.subslash("einstellungen", "antispamtime")
     antispamtime(i:harmony.Interaction){
         eAntiSpamTime(i, this)
+    }
+
+    @harmony.subslash("einstellungen", "teamrole")
+    teamrole(i:harmony.Interaction){
+        eTeamRole(i, this)
     }
 }
 
