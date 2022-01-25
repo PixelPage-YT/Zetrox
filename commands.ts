@@ -259,5 +259,13 @@ export const commands: harmony.SlashCommandPartial[] = [
           "description": "Ein bestimmter Benutzer"
         }
       ]
+    },
+    {
+      "name": "gtn",
+      "description": "Errate eine Zahl und bekomme Spielpunkte!"
+    },
+    {
+      "name": "info",
+      "description": "Erhalte Infos über Zetrox!"
     }
 ];

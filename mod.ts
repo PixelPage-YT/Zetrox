@@ -13,6 +13,9 @@ import{eTeamRole} from "./commands/einstellungen/teamRole.ts"
 import{bonusAddMessages,bonusRemoveMessages} from "./commands/bonus/messages.ts"
 import{bonusAddInvites,bonusRemoveInvites} from "./commands/bonus/invites.ts"
 import{bonusAddGamePoints,bonusRemoveGamePoints} from "./commands/bonus/gamepoints.ts"
+import {gtn} from "./commands/gtn.ts"
+import {info} from "./commands/info.ts"
+import {interactionCreate} from "./listeners/interactionCreate.ts"
 
 
 class Zetrox extends harmony.Client {
@@ -108,6 +111,15 @@ class Zetrox extends harmony.Client {
     @harmony.subslash("lb","gamepoints")
     lb1Gamepoints(i:harmony.Interaction){
         lbGamepoints(i,this)
+    }
+
+    @harmony.slash("gtn")
+    gtn(i:harmony.Interaction){
+        gtn(i,this)
+    }
+    @harmony.slash("info")
+    info(i:harmony.Interaction){
+        info(i,this)
     }
 }
 
@@ -256,5 +268,9 @@ client.on("guildMemberRemove", (member:harmony.Member) => {
         }
     }
 })
+
+// client.on("interactionCreate", (i:harmony.Interaction) => {
+//     interactionCreate(i, client)
+// })
 
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);

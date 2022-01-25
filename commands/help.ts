@@ -31,7 +31,7 @@ export async function help(i:harmony.Interaction,client:harmony.Client){
         }
     ]
     i.respond({
-        content: "Hey! Du brauchst Hilfe bei Zetrox? Kein Problem. \nWähle eine Kategorie und wir erklären dir mehr!",
+        content: "Hey! Du brauchst Hilfe bei Zetrox? Kein Problem. \nWähle eine Kategorie und wir erklären dir mehr!\nMit /info kannst du dir weitere Infos geben lassen.",
         components: controls
     })
 }
