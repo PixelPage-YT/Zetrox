@@ -267,5 +267,9 @@ export const commands: harmony.SlashCommandPartial[] = [
     {
       "name": "info",
       "description": "Erhalte Infos über Zetrox!"
+    },
+    {
+      "name": "emojiquiz",
+      "description": "Errate den Begriff anhand von Emojis und bekomme Spielpunkte!"
     }
 ];

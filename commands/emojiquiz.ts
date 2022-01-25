@@ -1,22 +1,23 @@
 import * as harmony from "https://code.harmony.rocks/main"
-import {modifyGamePoints} from "./bonus/gamepoints.ts"
+import {getGamePoints,modifyGamePoints} from "./bonus/gamepoints.ts"
+import{
+    random
+} from "https://raw.githubusercontent.com/PixelPage-YT/random/main/mod.ts"
 import {
-    randomNumber,
-    randomNumberGenerator,
-    randomNumberList,
-} from "https://deno.land/x/random_number/mod.ts";
-
-export async function gtn(i:harmony.Interaction,client:harmony.Client) {
+    database
+} from "../util/database.ts"
+export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
     if(i.member){
         if(i.guild){
-            let zahl = randomNumber({ integer: true, max: 100 });
-            let guessed:number;
+            const emojis = database("emojiquiz.json").data;
+            const solution:{emojis:string,points:number,solutions:string[]} = random.choice(emojis)
+            let guessed:string
             let startTime = Date.now()
             i.respond({
                 embeds:[
                     {
-                        "title": ":game_die: Guess The Number :game_die:",
-                        "description": "*Bei Guess The Number musst du eine Zahl erraten und dir wird gesagt, ob die Lösung größer oder Kleiner ist.*\n**Je schneller du bist, desto mehr Punkte gibt es!**\nErrate eine Zahl zwischen 0 und 100!",
+                        "title": ":game_die: Emojiquiz :game_die:",
+                        "description": "*Beim Emojiquiz musst du anhand von Emojis herausfinden, um welchen Gegenstand/Film/Song/Person es sich handelt!*\n**Je schneller du bist, desto mehr Punkte gibt es!**\nDu hast 50 Sekunden Zeit.\n__**Emojis:**__ **" + solution.emojis + "**",
                         "color": 44469,
                         "footer": {
                             "text": "⇢ Zetrox von Folizza Studios",
@@ -28,32 +29,25 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
             while(true){
                 let answer1 = await client.waitFor("messageCreate", (message) => {
                     return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                }, 10000)
+                }, 50000)
                 let answer: harmony.Message | undefined;
                 if(answer1[0]){
                     answer = answer1[0]
                 }
 
                 if(answer instanceof harmony.Message){
-                    guessed = parseInt(answer.content)
-                    if(guessed < zahl){
-                        i.channel?.send({content:":game_die: Die gesuchte Zahl ist **größer** :game_die:"})
+                    guessed = answer.content
+                    if(solution.solutions.findIndex(index => index.toLowerCase() === answer?.content.toLocaleLowerCase()) == -1){
+                        answer.addReaction("❌")
                     }
-                    if(guessed > zahl){
-                        i.channel?.send({content:":game_die: Die gesuchte Zahl ist **kleiner** :game_die:"})
-                    }
-                    if(guessed == zahl){
+                    if(solution.solutions.findIndex(index => index.toLowerCase() === answer?.content.toLocaleLowerCase()) != -1){
                         let endtime = Date.now()
                         let difference = endtime - startTime
-                        let realdifference = endtime - startTime
                         let minutes:number = Math.floor(difference / 60000)
                         difference -= minutes * 60000
                         let seconds = difference / 1000
 
-                        let belohnung:number = 0
-                        if(!((realdifference / 300) > 99)){
-                            belohnung = Math.floor(100 - (realdifference / 300))
-                        }
+                        let belohnung:number = solution.points
                         i.channel?.send({
                             embeds:[
                                 {
@@ -70,7 +64,7 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
                                       },
                                       {
                                         "name": "Lösung",
-                                        "value": zahl.toString()
+                                        "value": solution.solutions.toString()
                                       }
                                     ],
                                     "footer": {
@@ -85,7 +79,7 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
                     }
                 }else{
                     i.channel?.send({
-                        content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
+                        content:":x: Bitte antworte innerhalb 50 Sekunden :x:"
                     })
                     break;
                 }

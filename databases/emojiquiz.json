@@ -1,0 +1,54 @@
+{
+    "data": [
+        {
+            "emojis": "👣 🏐 🌾 ",
+            "points": 34,
+            "solutions":["Fußballfeld", "Fussballfeld"]
+        },
+        {
+            "emojis": "🎩 💫 🐇",
+            "points": 10,
+            "solutions": ["Zauberer","Zauberin"]
+        },
+        {
+            "emojis": "🐤 🔥",
+            "points": 50,
+            "solutions": ["Phönix", "Phoenix"]
+        },
+        {
+            "emojis": "🐍 🐾 🌈",
+            "points": 45,
+            "solutions": ["Chameleon"]
+        },
+        {
+            "emojis": "🐛 🔦",
+            "points": 47,
+            "solutions": ["Glühwürmchen", "Gluewuermschen"]
+        },
+        {
+            "emojis": "📄 💧 💩",
+            "points": 38,
+            "solutions": ["Toilettenpapier"]
+        },
+        {
+            "emojis": "🌽 💥",
+            "points": 42,
+            "solutions": ["Popcorn"]
+        },
+        {
+            "emojis": "👨 💶",
+            "points": 70,
+            "solutions": ["Kopfgeld"]
+        },
+        {
+            "emojis": "🎅 🎁",
+            "points": 20,
+            "solutions": ["Weihnachten","Weihnachtsmann"]
+        },
+        {
+            "emojis": "🐊 🩴",
+            "points": 34,
+            "solutions": ["Croc", "Crocs"]
+        }
+    ]
+}

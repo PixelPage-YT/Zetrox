@@ -15,6 +15,7 @@ import{bonusAddInvites,bonusRemoveInvites} from "./commands/bonus/invites.ts"
 import{bonusAddGamePoints,bonusRemoveGamePoints} from "./commands/bonus/gamepoints.ts"
 import {gtn} from "./commands/gtn.ts"
 import {info} from "./commands/info.ts"
+import {emojiquiz} from "./commands/emojiquiz.ts"
 import {interactionCreate} from "./listeners/interactionCreate.ts"
 
 
@@ -121,6 +122,12 @@ class Zetrox extends harmony.Client {
     info(i:harmony.Interaction){
         info(i,this)
     }
+
+    @harmony.slash("emojiquiz")
+    emojiquiz(i:harmony.Interaction){
+        emojiquiz(i,this)
+    }
+    
 }
 
 const client = new Zetrox();
