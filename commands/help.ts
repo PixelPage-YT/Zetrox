@@ -103,16 +103,16 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                                 "color": 44469,
                                 "fields": [
                                   {
-                                    "name": "Tic Tac Toe",
-                                    "value": "Bei Tic Tac Toe musst du versuchen,\n 3 von deinen Spielsteinen in einer Reihe anzuordnen.\n`/tictactoe <Optional: Gegner>`"
-                                  },
-                                  {
                                     "name": "Emojiquiz",
                                     "value": "Beim Emojiquiz werden dir verschiedene Emojis gezeigt,\ndie du einem Wort zuordnen musst!\n`/emojiquiz`"
                                   },
                                   {
                                     "name": "Guess the Number",
                                     "value": "Bei Guess the Number geht es darum, eine Zahl zu erraten.\nJe schneller du bist, desto besser ist deine Belohnung!\n`/gtn`"
+                                  },
+                                  {
+                                    "name": "Quiz",
+                                    "value": "Beim Quiz geht es darum, knifflige Fragen zu beantworten!\n`/quiz`"
                                   }
                                 ],
                                 "footer": {

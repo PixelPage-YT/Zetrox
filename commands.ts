@@ -271,5 +271,9 @@ export const commands: harmony.SlashCommandPartial[] = [
     {
       "name": "emojiquiz",
       "description": "Errate den Begriff anhand von Emojis und bekomme Spielpunkte!"
+    },
+    {
+      "name": "quiz",
+      "description": "Beantworte Fragen und bekomme Spielpunkte!"
     }
 ];

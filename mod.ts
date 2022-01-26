@@ -16,6 +16,7 @@ import{bonusAddGamePoints,bonusRemoveGamePoints} from "./commands/bonus/gamepoin
 import {gtn} from "./commands/gtn.ts"
 import {info} from "./commands/info.ts"
 import {emojiquiz} from "./commands/emojiquiz.ts"
+import {quiz} from "./commands/quiz.ts"
 import {interactionCreate} from "./listeners/interactionCreate.ts"
 
 
@@ -126,6 +127,11 @@ class Zetrox extends harmony.Client {
     @harmony.slash("emojiquiz")
     emojiquiz(i:harmony.Interaction){
         emojiquiz(i,this)
+    }
+
+    @harmony.slash("quiz")
+    quiz(i:harmony.Interaction){
+        quiz(i,this)
     }
     
 }
@@ -279,5 +285,5 @@ client.on("guildMemberRemove", (member:harmony.Member) => {
 // client.on("interactionCreate", (i:harmony.Interaction) => {
 //     interactionCreate(i, client)
 // })
-
+client.setPresence({ type: "LISTENING", name: " /help" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);

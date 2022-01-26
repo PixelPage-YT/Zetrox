@@ -1,0 +1,49 @@
+{
+    "comment": "Solution ist immer +1",
+    "data": [
+        {
+            "frage": "Woher kamen die Farben der deutschen Flagge?",
+            "possible": [
+                "Schwarz steht für das minimalistische, Rot steht für rote Rosen und Gold für Reichtum",
+                "Schwarz steht für langsames Internet (Black Screen), Rot steht für Blut, weil jeder in Deutschland das hat und Gold hat keine Bedeutung",
+                "Schwarz steht für die schwarzen Anzüge der Krieger, Rot für die roten Augen der Krieger und Gold für die goldenen Knöpfe der Krieger.",
+                "Schwarz steht für dunkle Sääle des ersten Parlamentes, Rot steht für Blut, das in Kriegen verloren wurde und Gold hatte die Farbe des ersten Gastbuches."
+            ],
+            "solution": 2,
+            "points": 20
+        },
+        {
+            "frage": "Welcher deutsche Herrscher trug den Beinamen “der Große”?",
+            "possible": [
+                "Friedrich der I. von Preußen",
+                "Friedrich der II. von Preußen",
+                "Friedrich der III. von Sachsen",
+                "Friedrich der III. von Österreich"
+            ],
+            "solution": 1,
+            "points": 40
+        },
+        {
+            "frage": "Welche Gürtelfarbe existiert nicht im Kampfsport Karate?",
+            "possible": [
+                "Schwarz",
+                "Weiß",
+                "Braun",
+                "Rot"
+            ],
+            "solution": 3,
+            "points":30
+        },
+        {
+            "frage": "Einen Feinschmecker nennt man auch?",
+            "possible": [
+                "Fentiker",
+                "Gourmet",
+                "Gonzierer",
+                "Katenter"
+            ],
+            "solution": 1,
+            "points": 20
+        }
+    ]
+}
