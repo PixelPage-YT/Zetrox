@@ -18,6 +18,7 @@ import {info} from "./commands/info.ts"
 import {emojiquiz} from "./commands/emojiquiz.ts"
 import {quiz} from "./commands/quiz.ts"
 import {ssp} from "./commands/ssp.ts"
+import {einwort} from "./commands/einwort.ts"
 import {resetGamePoints,resetInvites,resetMessages} from "./commands/reset.ts"
 import {interactionCreate} from "./listeners/interactionCreate.ts"
 
@@ -152,6 +153,10 @@ class Zetrox extends harmony.Client {
     @harmony.slash("ssp")
     ssp(i:harmony.Interaction){
         ssp(i,this)
+    }
+    @harmony.slash("einwort")
+    einwort(i:harmony.Interaction){
+        einwort(i,this)
     }
 }
 
