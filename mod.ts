@@ -17,6 +17,7 @@ import {gtn} from "./commands/gtn.ts"
 import {info} from "./commands/info.ts"
 import {emojiquiz} from "./commands/emojiquiz.ts"
 import {quiz} from "./commands/quiz.ts"
+import {ssp} from "./commands/ssp.ts"
 import {resetGamePoints,resetInvites,resetMessages} from "./commands/reset.ts"
 import {interactionCreate} from "./listeners/interactionCreate.ts"
 
@@ -147,6 +148,11 @@ class Zetrox extends harmony.Client {
     resetGamePoints(i:harmony.Interaction){
         resetGamePoints(i,this)
     }
+
+    @harmony.slash("ssp")
+    ssp(i:harmony.Interaction){
+        ssp(i,this)
+    }
 }
 
 const client = new Zetrox();
@@ -204,9 +210,7 @@ client.on("interactionCreate", (i:harmony.Interaction) => {
     }
 })
 client.on("messageCreate", (message) => {
-    if(client._id != undefined){
-        messageCreate(message,client._id);
-    }
+    messageCreate(message);
 })
 client.on("guildMemberAdd", async (member:harmony.Member) => {
     //const channel = member.guild.channels.resolve('');

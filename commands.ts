@@ -299,5 +299,16 @@ export const commands: harmony.SlashCommandPartial[] = [
           "options": []
         }
       ]
+    },
+    {
+      "name": "ssp",
+      "description": "Spiele Schere Stein Papier und erhalte SpielPunkte!",
+      "options": [
+        {
+          "type": 6,
+          "name": "user",
+          "description": "Der Spieler, gegen den du spielst!"
+        }
+      ]
     }
 ];

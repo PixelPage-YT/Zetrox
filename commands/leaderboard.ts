@@ -41,7 +41,7 @@ export async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                 if(currentuser == undefined){
                     currentuser = await i.client.users.resolve(element.member)
                 }
-                if(currentuser != undefined){
+                if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
                     if(parseInt(index)+1 == 1){
                         content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                     }else if(parseInt(index)+1 == 2){
@@ -51,8 +51,6 @@ export async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                     }else{
                         content += (parseInt(index)+1).toString() + " **" + currentuser.username + "** | " + element.count.toString() + "\n"
                     }
-                }else{
-                    content += (parseInt(index)+1) + " Invalid-User" + " | " + element.count.toString() + "\n"
                 }
             }
         }
@@ -106,7 +104,7 @@ export async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
             if(currentuser == undefined){
                 currentuser = await i.client.users.resolve(element.member)
             }
-            if(currentuser != undefined){
+            if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
                 if(parseInt(index)+1 == 1){
                     content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                 }else if(parseInt(index)+1 == 2){
@@ -116,8 +114,6 @@ export async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
                 }else{
                     content += (parseInt(index)+1).toString() + " **" + currentuser.username + "** | " + element.count.toString() + "\n"
                 }
-            }else{
-                content += (parseInt(index)+1) + " Invalid-User" + " | " + element.count.toString() + "\n"
             }
         }
     }
@@ -169,7 +165,7 @@ export async function lbGamepoints(i:harmony.Interaction, client:harmony.Client)
             if(currentuser == undefined){
                 currentuser = await i.client.users.resolve(element.member)
             }
-            if(currentuser != undefined){
+            if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
                 if(parseInt(index)+1 == 1){
                     content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                 }else if(parseInt(index)+1 == 2){
@@ -179,8 +175,6 @@ export async function lbGamepoints(i:harmony.Interaction, client:harmony.Client)
                 }else{
                     content += (parseInt(index)+1).toString() + " **" + currentuser.username + "** | " + element.count.toString() + "\n"
                 }
-            }else{
-                content += (parseInt(index)+1) + " Invalid-User" + " | " + element.count.toString() + "\n"
             }
         }
     }

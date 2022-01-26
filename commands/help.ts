@@ -113,6 +113,10 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                                   {
                                     "name": "Quiz",
                                     "value": "Beim Quiz geht es darum, knifflige Fragen zu beantworten!\n`/quiz`"
+                                  },
+                                  {
+                                    "name": "Schere Stein Papier",
+                                    "value": "Ein spaßiges Duel gegen den Bot oder gegen deinen Freund!\n`/ssp <Optional: User>`"
                                   }
                                 ],
                                 "footer": {
