@@ -34,7 +34,7 @@ export async function invites(i:harmony.Interaction, client:harmony.Client){
                         "color": 15658734,
                         "author": {
                             "name": "Einladungs-Tracker",
-                            "icon_url": "https://emoji.gg/assets/emoji/3646-imessageokay.png"
+                            "icon_url": "https://emoji.gg/assets/emoji/7236-invite-listen.png"
                         },
                         "footer": {
                         "text": "⇢ Zetrox von Folizza Studios",

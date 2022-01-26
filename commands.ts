@@ -275,5 +275,29 @@ export const commands: harmony.SlashCommandPartial[] = [
     {
       "name": "quiz",
       "description": "Beantworte Fragen und bekomme Spielpunkte!"
+    },
+    {
+      "name": "reset",
+      "description": "Setze etwas zurück",
+      "options": [
+        {
+          "type": 1,
+          "name": "invites",
+          "description": "Setze alle Einladungen zurück!",
+          "options": []
+        },
+        {
+          "type": 1,
+          "name": "messages",
+          "description": "Setze alle Nachrichten zurück!",
+          "options": []
+        },
+        {
+          "type": 1,
+          "name": "gamepoints",
+          "description": "Setze alle Spielpunkte zurück!",
+          "options": []
+        }
+      ]
     }
 ];

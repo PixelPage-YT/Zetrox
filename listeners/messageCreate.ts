@@ -1,9 +1,9 @@
 import * as harmony from "https://code.harmony.rocks/main"
 
-export async function messageCreate(message:harmony.Message) {
+export async function messageCreate(message:harmony.Message,clientid:string) {
     let messagedb = JSON.parse(Deno.readTextFileSync("./databases/messages.json"));
     let antiSpamTimeDB = JSON.parse(Deno.readTextFileSync("./databases/antiSpamTime.json"));
-    if(message.guild){
+    if(message.guild && message.author.id != clientid){
         if(!(messagedb[message.guild.id])){
             messagedb[message.guild.id] = {}
         }
