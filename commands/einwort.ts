@@ -43,7 +43,7 @@ export async function einwort(i:harmony.Interaction,client:harmony.Client) {
                     current += " " + wort
                     Deno.writeTextFileSync("./einwortGeschichte.txt", current)
                     Deno.writeTextFileSync("./databases/einwortLast.txt", i.member.id)
-                    //uploadGe()
+                    uploadGe()
                     i.respond({
                         embeds: [
                             {
@@ -84,15 +84,15 @@ export async function einwort(i:harmony.Interaction,client:harmony.Client) {
     }
 }
 
-// export async function uploadGe(){
-//     const form2 = new FormData()
-//     form2.append("geschichte.txt",Deno.readTextFileSync("./einwortGeschichte.txt"))
-//     fetch( "https://zetrox:hasehase@neocities.org/api/upload", {
-//         method: 'POST', 
-//         headers:form2
-//     } )
-//         .then( response => response.json() )
-//         .then( response => {
-//             console.log(response)
-//         } );
-// }
+export async function uploadGe(){
+    const form2 = new FormData()
+    form2.append("geschichte.txt",Deno.readTextFileSync("./einwortGeschichte.txt"))
+    fetch( "https://zetrox:hasehase@neocities.org/api/upload", {
+        method: 'POST', 
+        body:form2
+    } )
+        .then( response => response.json() )
+        .then( response => {
+            console.log(response)
+        } );
+}

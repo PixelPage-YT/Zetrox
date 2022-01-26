@@ -311,15 +311,18 @@ export const commands: harmony.SlashCommandPartial[] = [
         }
       ]
     },
-    {
-      "name": "einwort",
-      "description": "Die Zetrox-Globale Ein-Wort Geschichte!",
-      "options": [
-        {
-          "type": 3,
-          "name": "wort",
-          "description": "Das Wort, das hinzugefügt werden soll!"
-        }
-      ]
-    }
+    
 ];
+/*
+Erstmal Herausgenommen
+{
+  "name": "einwort",
+  "description": "Die Zetrox-Globale Ein-Wort Geschichte!",
+  "options": [
+    {
+      "type": 3,
+      "name": "wort",
+      "description": "Das Wort, das hinzugefügt werden soll!"
+    }
+  ]
+} */

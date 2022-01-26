@@ -154,10 +154,10 @@ class Zetrox extends harmony.Client {
     ssp(i:harmony.Interaction){
         ssp(i,this)
     }
-    @harmony.slash("einwort")
-    einwort(i:harmony.Interaction){
-        einwort(i,this)
-    }
+    // @harmony.slash("einwort")
+    // einwort(i:harmony.Interaction){
+    //     einwort(i,this)
+    // }
 }
 
 const client = new Zetrox();
