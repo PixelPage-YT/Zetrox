@@ -25,11 +25,12 @@ export async function help(i:harmony.Interaction,client:harmony.Client){
                 {
                     type: harmony.MessageComponentType.SELECT,
                     customID: 'help-select',
-                    options: [{label:"Gewinnspiele erstellen",value:"help-giveaways"},{label:"Eigene Commands erstellen",value:"help-commands"},{label:"Minigames spielen",value:"help-minigames"},{label:"Einladungen zählen",value:"help-invites"},{label:"Nachrichten zählen",value:"help-messages"},{label:"Statistik-Nachrichten erstellen",value:"help-stats"}]
+                    options: [{label:"Gewinnspiele erstellen",value:"help-giveaways"},{label:"Minigames spielen",value:"help-minigames"},{label:"Einladungen zählen",value:"help-invites"},{label:"Nachrichten zählen",value:"help-messages"},{label:"Statistik-Nachrichten erstellen",value:"help-stats"}]
                 }
             ]
         }
     ]
+    // {label:"Eigene Commands erstellen",value:"help-commands"}
     i.respond({
         content: "Hey! Du brauchst Hilfe bei Zetrox? Kein Problem. \nWähle eine Kategorie und wir erklären dir mehr!\nMit /info kannst du dir weitere Infos geben lassen.",
         components: controls
@@ -69,31 +70,31 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                         ]
                     })
                 }
-                if(i.values[0] == "help-commands"){
-                    i.respond({
-                        embeds:[
-                            {
-                                "title": ":keyboard: Eigene Commands erstellen :keyboard:",
-                                "description": "Mit Zetrox kannst du ganz einfach deine eigenen Commands\nerstellen!",
-                                "color": 44469,
-                                "fields": [
-                                  {
-                                    "name": "Erstellen",
-                                    "value": "Um einen eigenen Befehl zu erstellen musst du nur `/customcommand <Name> <Antwort>` ausführen."
-                                  },
-                                  {
-                                    "name": "Variablen",
-                                    "value": "Du kannst auch Variablen verwenden!\n{author.name} Name des Nutzers\n{guild.membercount} Anzahl der Leute, die auf dem Server sind\n*Du kannst neue Variablen auf unserem Support Server anfragen*"
-                                  }
-                                ],
-                                "footer": {
-                                  "text": "⇢ Zetrox von Folizza Studios",
-                                  "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
-                                }
-                            }
-                        ]
-                    })
-                }
+                // if(i.values[0] == "help-commands"){
+                //     i.respond({
+                //         embeds:[
+                //             {
+                //                 "title": ":keyboard: Eigene Commands erstellen :keyboard:",
+                //                 "description": "Mit Zetrox kannst du ganz einfach deine eigenen Commands\nerstellen!",
+                //                 "color": 44469,
+                //                 "fields": [
+                //                   {
+                //                     "name": "Erstellen",
+                //                     "value": "Um einen eigenen Befehl zu erstellen musst du nur `/customcommand <Name> <Antwort>` ausführen."
+                //                   },
+                //                   {
+                //                     "name": "Variablen",
+                //                     "value": "Du kannst auch Variablen verwenden!\n{author.name} Name des Nutzers\n{guild.membercount} Anzahl der Leute, die auf dem Server sind\n*Du kannst neue Variablen auf unserem Support Server anfragen*"
+                //                   }
+                //                 ],
+                //                 "footer": {
+                //                   "text": "⇢ Zetrox von Folizza Studios",
+                //                   "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                //                 }
+                //             }
+                //         ]
+                //     })
+                // }
                 if(i.values[0] == "help-minigames"){
                     i.respond({
                         embeds:[
@@ -190,16 +191,12 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                                 "color": 44469,
                                 "fields": [
                                   {
-                                    "name": "Einladungen",
-                                    "value": "In der Nachricht werden hilfreiche \nInformationen zu Einladungen zusammengefasst.\n`/stats add invites` zum hinzufügen,\n`/stats remove invites` zum entfernen."
-                                  },
-                                  {
-                                    "name": "Nachrichten",
-                                    "value": "In der Nachricht werden hilfreiche \nInformationen zu Nachrichten zusammengefasst.\n`/stats add messages` zum hinzufügen,\n`/stats remove messages` zum entfernen."
+                                    "name": "Server-Statistiken",
+                                    "value": "In der Nachricht werden hilfreiche \nInformationen zu Einladungen/Nachrichten/Spiele, Mitgliederanzahl und mehr zusammengefasst.\n`/stats server` zum hinzufügen,\nDie Nachricht einfach löschen zum entfernen."
                                   },
                                   {
                                     "name": "Minecraft Server",
-                                    "value": "In der Nachricht werden hilfreiche \nInformationen zu einem Minecraft Server zusammengefasst.\n`/stats add mc <IP>` zum hinzufügen,\n`/stats remove mc` zum entfernen."
+                                    "value": "In der Nachricht werden hilfreiche \nInformationen zu einem Minecraft Server zusammengefasst.\n`/stats minecraft <IP>` zum hinzufügen.\nDie Nachricht einfach löschen zum entfernen.\n"
                                   }
                                 ],
                                 "footer": {
