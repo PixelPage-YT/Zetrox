@@ -140,7 +140,7 @@ export async function lbGamepoints(i:harmony.Interaction, client:harmony.Client)
             "text": "⇢ Zetrox von Folizza Studios",
             "icon_url": "https://images-ext-2.discordapp.net/external/Bz1kDlXLtgMdIMxKgKx1i-8i-wXOSEKFY48ouCl1hPM/https/sph-download.neocities.org/share/GoDaddyStudioPage-0%25202.png"
         }
-        });
+    });
     if(i.guild){
         let points: {member:string,count:number}[];
         points = []

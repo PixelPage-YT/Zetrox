@@ -311,18 +311,29 @@ export const commands: harmony.SlashCommandPartial[] = [
         }
       ]
     },
-    
-];
-/*
-Erstmal Herausgenommen
-{
-  "name": "einwort",
-  "description": "Die Zetrox-Globale Ein-Wort Geschichte!",
-  "options": [
     {
-      "type": 3,
-      "name": "wort",
-      "description": "Das Wort, das hinzugefügt werden soll!"
+      "name": "stats",
+      "description": "Generiere coole Statistik-Nachrichten!",
+      "options": [
+        {
+          "type": 1,
+          "name": "server",
+          "description": "Statistiken für einen gesamten Server",
+          "options": []
+        },
+        {
+          "type": 1,
+          "name": "minecraft",
+          "description": "Statistiken für einen Minecraft Server",
+          "options": [
+            {
+              "type": 3,
+              "name": "ip",
+              "description": "Die IP des Minecraft Servers",
+              "required": true
+            }
+          ]
+        }
+      ]
     }
-  ]
-} */
+];
