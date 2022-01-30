@@ -51,7 +51,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                                 "fields": [
                                   {
                                     "name": "Komplexe Erstellung",
-                                    "value": "Möchtest du bestimmte Bedingungen festlegen, eine Claimtime setzen oder Bypasses einrichten, ist das die beste Möglichkeit dazu. Führe dazu `/giveaway` aus!"
+                                    "value": "Möchtest du bestimmte Bedingungen festlegen, eine Claimtime setzen oder Bypasses einrichten, ist das die beste Möglichkeit dazu. Führe dazu `/giveaway <channel>` aus!"
                                   },
                                   {
                                     "name": "Schnelle Erstellung",

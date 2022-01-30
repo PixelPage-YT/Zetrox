@@ -1,4 +1,9 @@
 # Zetrox
+<p>
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white">
+    <img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white">
+    <img src="https://shield.deno.dev/x/harmony">
+</p>
 
 ### Starten
 1. Installiere dir [GIT](https://git-scm.com/)
@@ -8,3 +13,4 @@
 5. Clone dir diese Repository: `git clone https://github.com/PixelPage-YT/Zetrox.git`
 6. Führe im Repository `deno run --allow-all mod.ts dev` aus um den Bot zu starten. Dadurch wird die Entwicklungsversion gestartet! (Der Bot "Zetrox PTB")
 7. Um den richtigen Bot zu starten, führe `deno run --allow-all mod.ts prod` aus!
+

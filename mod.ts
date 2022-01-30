@@ -20,6 +20,8 @@ import {quiz} from "./commands/quiz.ts"
 import {ssp} from "./commands/ssp.ts"
 import {resetGamePoints,resetInvites,resetMessages} from "./commands/reset.ts"
 import {minecraftStats,serverStats} from "./commands/stats.ts"
+import {gstart} from "./commands/gstart.ts"
+import {giveaway} from "./commands/giveaway.ts"
 import {interactionCreate} from "./listeners/interactionCreate.ts"
 import {database,saveDatabase} from "./util/database.ts"
 
@@ -162,6 +164,15 @@ class Zetrox extends harmony.Client {
     @harmony.subslash("stats","minecraft")
     minecraftStats(i:harmony.Interaction){
         minecraftStats(i,this)
+    }
+
+    @harmony.slash("gstart")
+    gstart(i:harmony.Interaction){
+        gstart(i,this)
+    }
+    @harmony.slash("giveaway")
+    giveaway(i:harmony.Interaction){
+        giveaway(i,this)
     }
 }
 
@@ -553,8 +564,123 @@ client.on("guildMemberRemove", (member:harmony.Member) => {
     }
 })
 
-// client.on("interactionCreate", (i:harmony.Interaction) => {
-//     interactionCreate(i, client)
-// })
+function randomChoice(arr:any) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+async function checkGW(){
+    try{
+        let gwdb:{"giveaways": {channel:string,end:number,winnercount:number,users:string[],preis:string}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
+        let index = 0
+        for(let gw of gwdb.giveaways){
+            if(gw.end < Date.now()){
+                let channel = await client.channels.get(gw.channel)
+                if(channel == undefined){
+                    channel = await client.channels.resolve(gw.channel)
+                }
+                if(channel != undefined){
+                    if(gw.winnercount > 1){
+                        let winnernames = []
+                        let winnermentions = []
+                        let users = gw.users
+                        let winnercount = gw.winnercount
+                        while(winnercount!=0){
+                            let choice:string = randomChoice(users)
+                            let user = await client.users.get(choice)
+                            if(user == undefined){
+                                user = await client.users.resolve(choice)
+                            }
+                            if(user != undefined){
+                                users.splice(users.findIndex(user=>user === choice))
+                                winnernames.push(user.username)
+                                winnermentions.push(user.mention)
+                                winnercount--
+                            }
+                        }
+                        if(channel.isText()){
+                            channel.send({
+                                embeds:[
+                                    {
+                                        "title": winnernames.join(", "),
+                                        "description": `***Glückwunsch! ***\nDu hast **${gw.preis}** gewonnen!`,
+                                        "color": 44469,
+                                        "author": {
+                                            "name": "Verlosungs-Ende",
+                                            "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
+                                        },
+                                        "footer": {
+                                            "text": "⇢ Zetrox von Folizza Studios",
+                                            "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                        }
+                                    }
+                                ],
+                                content:winnermentions.join(" ")
+                            })
+                            gwdb.giveaways.splice(index)
+                            Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
+                        }
+                    }else{
+                        let winner = await client.users.get(randomChoice(gw.users))
+                        if(winner == undefined){
+                            winner = await client.users.resolve(randomChoice(gw.users))
+                        }
+                        if(winner != undefined){
+                            if(channel.isText()){
+                                channel.send({
+                                    embeds:[
+                                        {
+                                            "title": winner?.username,
+                                            "description": `***Glückwunsch! ***\nDu hast **${gw.preis}** gewonnen!`,
+                                            "color": 44469,
+                                            "author": {
+                                                "name": "Verlosungs-Ende",
+                                                "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
+                                            },
+                                            "footer": {
+                                                "text": "⇢ Zetrox von Folizza Studios",
+                                                "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                            }
+                                        }
+                                    ],
+                                    content:winner?.mention
+                                })
+                                gwdb.giveaways.splice(index)
+                                Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
+                            }
+                        }else{
+                            if(channel.isText()){
+                                channel.send({
+                                    embeds:[
+                                        {
+                                            "title": "Kein gewinner!",
+                                            "description": `Niemand hat teilgenommen.\nDer Preis war ${gw.preis}!`,
+                                            "color": 14233679,
+                                            "author": {
+                                                "name": "Verlosungs-Ende",
+                                                "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
+                                            },
+                                            "footer": {
+                                                "text": "⇢ Zetrox von Folizza Studios",
+                                                "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                            }
+                                        }
+                                    ]
+                                })
+                                gwdb.giveaways.splice(index)
+                                Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
+                            }
+                        }
+                    }
+                }
+            }
+            index++
+        }
+    }catch(err){
+        console.log(err)
+    }
+}
+setInterval(checkGW, 10000)
+client.on("interactionCreate", (i:harmony.Interaction) => {
+    interactionCreate(i, client)
+})
 client.setPresence({ type: "LISTENING", name: " /help" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);

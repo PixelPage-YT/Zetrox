@@ -265,6 +265,18 @@ export const commands: harmony.SlashCommandPartial[] = [
       "description": "Errate eine Zahl und bekomme Spielpunkte!"
     },
     {
+      "name": "giveaway",
+      "description": "Erstelle eine Verlosung!",
+      "options": [
+        {
+          "type": 7,
+          "name": "channel",
+          "description": "Der Kanal, in dem das Giveaway stattfindet.",
+          "required": true
+        }
+      ]
+    },
+    {
       "name": "info",
       "description": "Erhalte Infos über Zetrox!"
     },
@@ -333,6 +345,50 @@ export const commands: harmony.SlashCommandPartial[] = [
               "required": true
             }
           ]
+        }
+      ]
+    },
+    {
+      "name": "gstart",
+      "description": "Starte ein Giveaway (Schnell)",
+      "options": [
+        {
+          "type": 3,
+          "name": "preis",
+          "description": "Der Preis, den der Gewinner erhält.",
+          "required": true,
+          "choices": []
+        },
+        {
+          "type": 4,
+          "name": "gewinneranzahl",
+          "description": "Die Anzahl der Personen, die gewinnen können.",
+          "required": true,
+          "choices": []
+        },
+        {
+          "type": 4,
+          "name": "sekunden",
+          "description": "Die Anzahl der Sekunden, wie lange ein Giveaway läuft.",
+          "choices": []
+        },
+        {
+          "type": 4,
+          "name": "minuten",
+          "description": "Die Anzahl der Minuten, wie lang das Gewinnspiel läuft",
+          "choices": []
+        },
+        {
+          "type": 4,
+          "name": "stunden",
+          "description": "Die Anzahl der Stunden, wie lang das Gewinnspiel läuft",
+          "choices": []
+        },
+        {
+          "type": 4,
+          "name": "tage",
+          "description": "Die Anzahl der Tage, wie lang das Gewinnspiel läuft",
+          "choices": []
         }
       ]
     }
