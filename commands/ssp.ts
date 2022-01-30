@@ -39,7 +39,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                             ]
                         },
                     ]
-                    i.respond({
+                    let question = await i.respond({
                         embeds:[
                             {
                                 "title": ":game_die: Schere Stein Papier (Single-Player) :game_die:",
@@ -89,22 +89,17 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                             "title": ":game_die: Spiel abgeschlossen! :game_die:",
                                             "color": 44469,
                                             "fields": [
-                                            {
-                                                "name": "Du hast gewählt",
-                                                "value": userChoice
-                                            },
-                                            {
-                                                "name": "Ich habe gewählt",
-                                                "value": computerChoice
-                                            },
-                                            {
-                                                "name": "SpielStand",
-                                                "value": ":tada: Gewonnen :tada:"
-                                            },
-                                            {
-                                                "name": "Deine Belohnung",
-                                                "value": "20 SpielPunkte"
-                                            }
+                                                {
+                                                    "name": "Spielstand",
+                                                    "value": `
+:crown: **${i.member.user.username}** (${userChoice})
+:second_place: **Zetrox** (${computerChoice})
+`
+                                                },
+                                                {
+                                                    name:"Deine Belohnung",
+                                                    value:"20 Spielpunkte <:ZetroCoin:935256569984208917>"
+                                                }
                                             ],
                                                 "footer": {
                                                 "text": "⇢ Zetrox von Folizza Studios",
@@ -113,6 +108,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                         }
                                     ]
                                 })
+                                question.deleteResponse()
                                 modifyGamePoints(i.member,20)
                             }
                             if(checker(userChoice,computerChoice) == "verloren"){
@@ -122,22 +118,17 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                             "title": ":game_die: Spiel abgeschlossen! :game_die:",
                                             "color": 44469,
                                             "fields": [
-                                            {
-                                                "name": "Du hast gewählt",
-                                                "value": userChoice
-                                            },
-                                            {
-                                                "name": "Ich habe gewählt",
-                                                "value": computerChoice
-                                            },
-                                            {
-                                                "name": "SpielStand",
-                                                "value": ":slight_frown: Verloren :slight_frown:"
-                                            },
-                                            {
-                                                "name": "Deine Belohnung",
-                                                "value": "-5 SpielPunkte"
-                                            }
+                                                {
+                                                    "name": "Spielstand",
+                                                    "value": `
+:crown: **Zetrox** (${computerChoice})
+:second_place: **${i.member.user.username}** (${userChoice})
+`
+                                                },
+                                                {
+                                                    name:"Deine Belohnung",
+                                                    value:"-5 Spielpunkte <:ZetroCoin:935256569984208917>"
+                                                }
                                             ],
                                                 "footer": {
                                                 "text": "⇢ Zetrox von Folizza Studios",
@@ -155,22 +146,14 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                             "title": ":game_die: Spiel abgeschlossen! :game_die:",
                                             "color": 44469,
                                             "fields": [
-                                            {
-                                                "name": "Du hast gewählt",
-                                                "value": userChoice
-                                            },
-                                            {
-                                                "name": "Ich habe gewählt",
-                                                "value": computerChoice
-                                            },
-                                            {
-                                                "name": "SpielStand",
-                                                "value": ":heavy_minus_sign: Unentschieden :heavy_minus_sign: "
-                                            },
-                                            {
-                                                "name": "Deine Belohnung",
-                                                "value": "0 SpielPunkte"
-                                            }
+                                                {
+                                                    "name": "Spielstand",
+                                                    "value": `
+:crown: **${i.member.user.username}** (${userChoice})
+:crown: **Zetrox** (${computerChoice})
+*Unentschieden*
+`
+                                                }
                                             ],
                                                 "footer": {
                                                 "text": "⇢ Zetrox von Folizza Studios",
@@ -207,7 +190,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                     ]
                                 },
                             ]
-                            i.respond({
+                            let question = await i.respond({
                                 content: member.user.mention + "\n**" + i.member.user.username + "** sendet dir eine Anfrage zum Spielen von __Schere, Stein, Papier__.\nNimmst du de Herausforderung an?",
                                 components:controls
                             })
@@ -250,7 +233,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                 ]
                                             },
                                         ]
-                                        answer?.respond({
+                                        let question = await answer?.respond({
                                             embeds:[
                                                 {
                                                     "title": ":game_die: Schere Stein Papier (Multi-Player) :game_die:",
@@ -377,24 +360,18 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                                         "color": 44469,
                                                                         "fields": [
                                                                             {
-                                                                                "name": `${i.member.user.username} hat gewählt`,
-                                                                                "value": ownchoice
+                                                                                "name": `Spielstand`,
+                                                                                "value": `
+:crown: **${i.member.user.username}** (${ownchoice})
+:second_place: **${member.user.username}** (${enemychoice})
+`
                                                                             },
                                                                             {
-                                                                                "name": `${member.user.username} hat gewählt`,
-                                                                                "value": enemychoice
-                                                                            },
-                                                                            {
-                                                                                "name": "SpielStand",
-                                                                                "value": `:tada: ${i.member.user.username} hat Gewonnen :tada:`
-                                                                            },
-                                                                            {
-                                                                                "name": i.member.user.username + "s Belohnung",
-                                                                                "value": "20 SpielPunkte"
-                                                                            },
-                                                                            {
-                                                                                "name": member.user.username + "s Belohnung",
-                                                                                "value": "-10 SpielPunkte"
+                                                                                name:"Belohnungen",
+                                                                                value:`
+**${i.member.user.username}** 20 SpielPunkte <:ZetroCoin:935256569984208917>
+**${member.user.username}** -10 Spielpunkte <:ZetroCoin:935256569984208917>
+`
                                                                             }
                                                                         ],
                                                                             "footer": {
@@ -415,24 +392,18 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                                         "color": 44469,
                                                                         "fields": [
                                                                             {
-                                                                                "name": `${i.member.user.username} hat gewählt`,
-                                                                                "value": ownchoice
+                                                                                "name": `Spielstand`,
+                                                                                "value": `
+:crown: **${member.user.username}** (${enemychoice})
+:second_place: **${i.member.user.username}** (${ownchoice})
+`
                                                                             },
                                                                             {
-                                                                                "name": `${member.user.username} hat gewählt`,
-                                                                                "value": enemychoice
-                                                                            },
-                                                                            {
-                                                                                "name": "SpielStand",
-                                                                                "value": `:tada: ${member.user.username} hat Gewonnen :tada:`
-                                                                            },
-                                                                            {
-                                                                                "name": member.user.username + "s Belohnung",
-                                                                                "value": "20 SpielPunkte"
-                                                                            },
-                                                                            {
-                                                                                "name": i.member.user.username + "s Belohnung",
-                                                                                "value": "-10 SpielPunkte"
+                                                                                name:"Belohnungen",
+                                                                                value:`
+**${member.user.username}** 20 SpielPunkte <:ZetroCoin:935256569984208917>
+**${i.member.user.username}** -10 Spielpunkte <:ZetroCoin:935256569984208917>
+`
                                                                             }
                                                                         ],
                                                                             "footer": {
@@ -453,24 +424,18 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                                         "color": 44469,
                                                                         "fields": [
                                                                             {
-                                                                                "name": `${i.member.user.username} hat gewählt`,
-                                                                                "value": ownchoice
+                                                                                "name": `Spielstand`,
+                                                                                "value": `
+:crown: **${i.member.user.username}** (${ownchoice})
+:crown: **${member.user.username}** (${enemychoice})
+`
                                                                             },
                                                                             {
-                                                                                "name": `${member.user.username} hat gewählt`,
-                                                                                "value": enemychoice
-                                                                            },
-                                                                            {
-                                                                                "name": "SpielStand",
-                                                                                "value": `:heavy_minus_sign: Unentschieden :heavy_minus_sign:`
-                                                                            },
-                                                                            {
-                                                                                "name": i.member.user.username + "s Belohnung",
-                                                                                "value": "0 SpielPunkte"
-                                                                            },
-                                                                            {
-                                                                                "name": member.user.username + "s Belohnung",
-                                                                                "value": "0 SpielPunkte"
+                                                                                name:"Belohnungen",
+                                                                                value:`
+**${i.member.user.username}** 0 SpielPunkte <:ZetroCoin:935256569984208917>
+**${member.user.username}** 0 Spielpunkte <:ZetroCoin:935256569984208917>
+`
                                                                             }
                                                                         ],
                                                                             "footer": {
@@ -480,6 +445,9 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                                     }
                                                                 ]
                                                             })
+                                                        }
+                                                        if(question.message){
+                                                            question.deleteMessage(question.message)
                                                         }
                                                     }
                                                 }else{
@@ -498,7 +466,9 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                             }else{
                                 i.channel?.send({content:":x: **" + member.user.username + "** hat die Herausforderung nicht angenommen."})
                             }     
-
+                            if(question.message){
+                                question.deleteMessage(question.message)
+                            }
                         }
                     }
                 }

@@ -205,7 +205,7 @@ async function checkSlash(){
                         }
                     }
                     if(check == false){
-                        client.interactions.commands.create(command, guild.id)
+                        client.interactions.commands.create(command,guild.id)
                             .then((cmd) => console.log(`[Info] Slash Command ${cmd.name} in ${guild.name} erstellt`))
                             .catch((err) => console.log(`[Info] Es ist fehlgeschlagen, den Slash Command ${command.name} in ${guild.name} einzurichten, weil: ${err}`));
                     }
@@ -214,7 +214,15 @@ async function checkSlash(){
         })
     })
 }
-setInterval(checkSlash,15000)
+if(Deno.args[0] != undefined && Deno.args[0] == "prod"){
+    commands.forEach(command => {
+        client.interactions.commands.create(command)
+            .then((cmd) => console.log(`[Info] Slash Command ${cmd.name} erstellt`))
+            .catch((err) => console.log(`[Info] Es ist fehlgeschlagen, den Slash Command ${command.name} einzurichten, weil: ${err}`));
+    })
+}else{
+    setInterval(checkSlash,15000)
+}
 
 
 async function updateStats(){
@@ -593,15 +601,15 @@ async function checkGW(){
                                 users.splice(users.findIndex(user=>user === choice))
                                 winnernames.push(user.username)
                                 winnermentions.push(user.mention)
-                                winnercount--
                             }
+                            winnercount--
                         }
                         if(channel.isText()){
                             channel.send({
                                 embeds:[
                                     {
                                         "title": winnernames.join(", "),
-                                        "description": `***Glückwunsch! ***\nDu hast **${gw.preis}** gewonnen!`,
+                                        "description": `***Glückwunsch! ***\nIhr habt **${gw.preis}** gewonnen!`,
                                         "color": 44469,
                                         "author": {
                                             "name": "Verlosungs-Ende",
