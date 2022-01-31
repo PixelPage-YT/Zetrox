@@ -1,5 +1,6 @@
 import * as harmony from "https://code.harmony.rocks/main"
 import {database ,saveDatabase} from "../util/database.ts"
+import {isAuthorized} from "../util/isAuthorized.ts"
 
 export async function interactionCreate(i:harmony.Interaction,client:harmony.Client) {
     if(i.isMessageComponent()){
@@ -127,22 +128,124 @@ export async function interactionCreate(i:harmony.Interaction,client:harmony.Cli
                     })
                 }
             }
-        }else if (i.customID == "gw-openweb" && i.member){
-            let webdb:{data:{msgid:string,users:string[]}[]} = database("rweb.json")
-            let check:boolean = false
-            for(let web of webdb.data){
-                if(web.msgid == i.message.id){
-                    check = true
+        }else if(i.customID == "gw-claim" && i.member){
+            let gwdb:{giveaways: {claimmsg:string|undefined,msgid:string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,claimtime:number,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
+            let index = 0;
+            for(let gw of gwdb.giveaways){
+                if(gw.claimmsg == i.message.id){
+                    if(gw.winners.findIndex(index => index === i.member?.id) != -1){
+                        if(gw.claimtime > Date.now()){
+                            i.respond({content:":white_check_mark: " + i.member?.user.mention + " hat seinen Preis geclaimt! :white_check_mark:"})
+                            gwdb.giveaways[index].winners.splice(gwdb.giveaways[index].winners.findIndex(index => index === i.member?.id))
+                            if(gwdb.giveaways[index].winners == []){
+                                gwdb.giveaways.splice(index)
+                            }
+                            saveDatabase("giveaways.json",gwdb)
+                        }else{
+                            i.respond({content:":x: Du hast zu spät geclaimt! :x:",ephemeral:true})
+                        }
+                    }else{
+                        i.respond({content:":x: Du bist kein Gewinner dieser Verlosung oder hast deinen Preis schon geclaimt! :x:",ephemeral:true})
+                    }
                 }
+                index++
             }
-            if(check == false){
-                webdb.data.push({msgid:i.message.id,users:[]})
+        }else if(i.customID == "gw-reroll"){
+            if(!await isAuthorized(i.member)){
+                i.respond({content:":x: Du hast dazu keine Rechte! :x:",ephemeral:true})
+                return
             }
-            for(let web of webdb.data){
-                if(web.msgid == i.message.id){
-                    web.users.push(i.member.id)
+            i.message.delete()
+            let gwdb:{giveaways: {claimtimeraw:number|undefined,sendclaimmsg:boolean|undefined,aclaimmsg:string|undefined,claimmsg:string|undefined,msgid:string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,claimtime:number,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
+            let index = 0;
+            for(let gw of gwdb.giveaways){
+                
+                if(gw.aclaimmsg && gw.aclaimmsg == i.message.id){
+                    
+                    let winnercount = gw.winners.length
+                    let embed = new harmony.Embed({
+                        "color": 44469,
+                        "author": {
+                            "name": "Verlosungs-Ende",
+                            "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
+                        },
+                        "footer": {
+                            "text": "⇢ Zetrox von Folizza Studios",
+                            "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                        }
+                    })
+                    let content = ""
+                    if(winnercount > 0){
+                        
+                        let winnernames = []
+                        let winnermentions = []
+                        let users = gw.users
+                        let winnercount = gw.winnercount
+                        let winnerids = []
+                        while(winnercount!=0){
+                            let choice:string = randomChoice(users)
+                            let user = await client.users.get(choice)
+                            if(user == undefined){
+                                user = await client.users.resolve(choice)
+                            }
+                            if(user != undefined){
+                                users.splice(users.findIndex(user=>user === choice))
+                                winnernames.push(user.username)
+                                winnermentions.push(user.mention)
+                                winnerids.push(user.id)
+                            }
+                            winnercount--
+                        }
+                        embed.setTitle(winnernames.join(", "))
+                        embed.setDescription(`***Glückwunsch! ***\nIhr/Du hast **${gw.preis}** gewonnen!`)
+                        content = winnermentions.join(" ")
+                        let channel = await client.channels.get(gw.channel)
+                        if(channel == undefined){
+                            channel = await client.channels.resolve(gw.channel)
+                        }
+                        if(channel != undefined && channel.isText()){
+                            
+                            if(gw.claimtime != undefined && gw.claimtime < Date.now() && gwdb.giveaways[index].winners.length > 0){
+                                
+                                let waitmsg = await i.respond({content:":game_die: Rerollen... :game_die:"})
+                                const controls: harmony.MessageComponentData[] = [
+                                    {
+                                        type: harmony.MessageComponentType.ACTION_ROW,
+                                        components: [
+                                            {
+                                                type: harmony.MessageComponentType.BUTTON,
+                                                style: harmony.ButtonStyle.BLURPLE,
+                                                customID: 'gw-claim',
+                                                label: "Claimen",
+                                                emoji: {name:"✅"}
+                                            }
+                                        ]
+                                    },
+                                ]
+                                let claimmsg = await i.channel?.send({
+                                    embeds:[
+                                        embed
+                                    ],
+                                    content:content,
+                                    components:controls
+                                })
+                                if(claimmsg){
+                                    gwdb.giveaways[index].claimmsg = claimmsg.id
+                                    // @ts-ignore
+                                    gwdb.giveaways[index].claimtime = Date.now() + gwdb.giveaways[index].claimtimeraw
+                                }
+                            }
+                        }
+                        gwdb.giveaways[index].winners = winnerids
+                        Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
+                    }
                 }
+                index++
             }
         }
     }
+}
+
+function randomChoice(arr:any) {
+    return arr[Math.floor(Math.random() * arr.length)];
 }

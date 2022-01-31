@@ -61,7 +61,7 @@ export async function info(i:harmony.Interaction,client:harmony.Client) {
                 },
                 {
                   "name": "Gesammelte Daten",
-                  "value": "Du kannst [hier](https://zetrox.neocities.org/home/datenschutz.html) sehen, welche Daten Zetrox sammelt.\nDu kannst Deine Daten auch unten verwalten."
+                  "value": "Du kannst [hier](https://zetrox.neocities.org/home/datenschutz.html) sehen, welche Daten Zetrox sammelt."
                 },
                 {
                   "name": "Programmiersprache und Bibliotheken",

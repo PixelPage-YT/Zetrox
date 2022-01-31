@@ -577,20 +577,33 @@ function randomChoice(arr:any) {
 }
 async function checkGW(){
     try{
-        let gwdb:{"giveaways": {channel:string,end:number,winnercount:number,users:string[],preis:string}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
+        let gwdb:{"giveaways": {claimtimeraw:number|undefined,sendclaimmsg:boolean|undefined,aclaimmsg:string|undefined,msgid:string,claimmsg:undefined|string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,claimtime:number,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
         let index = 0
         for(let gw of gwdb.giveaways){
-            if(gw.end < Date.now()){
+            if(gw.end < Date.now() && (gw.ended == undefined || gw.ended == false)){
                 let channel = await client.channels.get(gw.channel)
                 if(channel == undefined){
                     channel = await client.channels.resolve(gw.channel)
                 }
                 if(channel != undefined){
+                    let embed = new harmony.Embed({
+                        "color": 44469,
+                        "author": {
+                            "name": "Verlosungs-Ende",
+                            "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
+                        },
+                        "footer": {
+                            "text": "⇢ Zetrox von Folizza Studios",
+                            "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                        }
+                    })
+                    let content = ""
                     if(gw.winnercount > 1){
                         let winnernames = []
                         let winnermentions = []
                         let users = gw.users
                         let winnercount = gw.winnercount
+                        let winnerids = []
                         while(winnercount!=0){
                             let choice:string = randomChoice(users)
                             let user = await client.users.get(choice)
@@ -601,89 +614,101 @@ async function checkGW(){
                                 users.splice(users.findIndex(user=>user === choice))
                                 winnernames.push(user.username)
                                 winnermentions.push(user.mention)
+                                winnerids.push(user.id)
                             }
                             winnercount--
                         }
-                        if(channel.isText()){
-                            channel.send({
-                                embeds:[
-                                    {
-                                        "title": winnernames.join(", "),
-                                        "description": `***Glückwunsch! ***\nIhr habt **${gw.preis}** gewonnen!`,
-                                        "color": 44469,
-                                        "author": {
-                                            "name": "Verlosungs-Ende",
-                                            "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
-                                        },
-                                        "footer": {
-                                            "text": "⇢ Zetrox von Folizza Studios",
-                                            "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
-                                        }
-                                    }
-                                ],
-                                content:winnermentions.join(" ")
-                            })
-                            gwdb.giveaways.splice(index)
-                            Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
-                        }
+                        embed.setTitle(winnernames.join(", "))
+                        embed.setDescription(`***Glückwunsch! ***\nIhr habt **${gw.preis}** gewonnen!`)
+                        content = winnermentions.join(" ")
+                        gwdb.giveaways[index].winners = winnerids
                     }else{
                         let winner = await client.users.get(randomChoice(gw.users))
                         if(winner == undefined){
                             winner = await client.users.resolve(randomChoice(gw.users))
                         }
                         if(winner != undefined){
-                            if(channel.isText()){
-                                channel.send({
-                                    embeds:[
-                                        {
-                                            "title": winner?.username,
-                                            "description": `***Glückwunsch! ***\nDu hast **${gw.preis}** gewonnen!`,
-                                            "color": 44469,
-                                            "author": {
-                                                "name": "Verlosungs-Ende",
-                                                "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
-                                            },
-                                            "footer": {
-                                                "text": "⇢ Zetrox von Folizza Studios",
-                                                "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
-                                            }
-                                        }
-                                    ],
-                                    content:winner?.mention
-                                })
-                                gwdb.giveaways.splice(index)
-                                Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
-                            }
+                            embed.setTitle(winner.username)
+                            embed.setDescription(`***Glückwunsch! ***\nDu hast **${gw.preis}** gewonnen!`)
+                            content = winner.mention
+                            gwdb.giveaways[index].winners = [winner.id]
                         }else{
-                            if(channel.isText()){
-                                channel.send({
-                                    embeds:[
+                            embed.setTitle("Kein gewinner!")
+                            embed.setDescription(`Niemand hat teilgenommen.\nDer Preis war ${gw.preis}!`)
+                            gwdb.giveaways[index].winners = []
+                        }
+                    }
+                    if(channel.isText()){
+                        if(gw.claimtime != undefined && gw.claimtime > Date.now() && gwdb.giveaways[index].winners.length > 0){
+                            const controls: harmony.MessageComponentData[] = [
+                                {
+                                    type: harmony.MessageComponentType.ACTION_ROW,
+                                    components: [
                                         {
-                                            "title": "Kein gewinner!",
-                                            "description": `Niemand hat teilgenommen.\nDer Preis war ${gw.preis}!`,
-                                            "color": 14233679,
-                                            "author": {
-                                                "name": "Verlosungs-Ende",
-                                                "icon_url": "https://cdn.discordapp.com/emojis/714392829362831401.gif?size=96&quality=lossless"
-                                            },
-                                            "footer": {
-                                                "text": "⇢ Zetrox von Folizza Studios",
-                                                "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
-                                            }
+                                            type: harmony.MessageComponentType.BUTTON,
+                                            style: harmony.ButtonStyle.BLURPLE,
+                                            customID: 'gw-claim',
+                                            label: "Claimen",
+                                            emoji: {name:"✅"}
                                         }
                                     ]
-                                })
-                                gwdb.giveaways.splice(index)
-                                Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
-                            }
+                                },
+                            ]
+                            let claimmsg = await channel.send({
+                                embeds:[
+                                    embed
+                                ],
+                                content:content,
+                                components:controls
+                            })
+                            gwdb.giveaways[index].claimmsg = claimmsg.id
+                        }else{
+                            channel.send({
+                                embeds:[
+                                    embed
+                                ],
+                                content:content
+                            })
                         }
+                        gwdb.giveaways[index].ended = true
+                        Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
+                    }
+                }
+            }
+            if(gw.winners.length > 0 && gwdb.giveaways[index].claimtimeraw != undefined && gw.claimtime && gw.claimtime < Date.now() && (gw.sendclaimmsg == undefined || gw.sendclaimmsg == false)){
+                let channel = await client.channels.get(gw.channel)
+                if(channel == undefined){
+                    channel = await client.channels.resolve(gw.channel)
+                }
+                if(channel != undefined && channel.isText()){
+                    let msg = await channel.messages.fetch(gw.msgid)
+                    if(msg){
+                        const controls: harmony.MessageComponentData[] = [
+                            {
+                                type: harmony.MessageComponentType.ACTION_ROW,
+                                components: [
+                                    {
+                                        type: harmony.MessageComponentType.BUTTON,
+                                        style: harmony.ButtonStyle.BLURPLE,
+                                        customID: 'gw-reroll',
+                                        label: "Rerollen",
+                                        emoji: {name:"🎲"}
+                                    }
+                                ]
+                            },
+                        ]
+                        let aclaimmsg  = await msg.reply({content:":timer: Die Claimzeit ist um. Soll ich rerollen? :timer:",components:controls})
+                        gwdb.giveaways[index].aclaimmsg = aclaimmsg.id
+                        gwdb.giveaways[index].sendclaimmsg = true
+                        // @ts-ignore
+                        gwdb.giveaways[index].claimtime = Date.now() + gwdb.giveaways[index].claimtimeraw
+                        Deno.writeTextFileSync("./databases/giveaways.json", JSON.stringify(gwdb))
                     }
                 }
             }
             index++
         }
     }catch(err){
-        console.log(err)
     }
 }
 setInterval(checkGW, 10000)
