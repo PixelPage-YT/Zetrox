@@ -28,6 +28,12 @@ import {updateStats} from "./loops/updateStats.ts"
 import {checkGW} from "./loops/checkGW.ts"
 import {guildMemberRemove} from "./listeners/guildMemberRemove.ts"
 
+window.addEventListener("error", (err) => {
+    if(Deno.args[0] == undefined || Deno.args[0] == "dev"){
+        console.log("[Fehler] " + err)
+    }
+})
+
 class Zetrox extends harmony.Client {
     oinvites=[]
     @harmony.slash()
