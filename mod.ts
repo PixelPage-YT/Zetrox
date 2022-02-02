@@ -233,7 +233,7 @@ if(Deno.args[0] != undefined && Deno.args[0] == "prod"){
     setInterval(checkSlash,15000)
 }
 
-setInterval(checkGW, 10000, client)
+setInterval(checkGW, 3000, client)
 setInterval(updateStats,60000, client)
 
 client.interactions.on("interactionError", (err) => {

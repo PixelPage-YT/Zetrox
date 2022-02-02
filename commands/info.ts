@@ -14,7 +14,7 @@ export async function info(i:harmony.Interaction,client:harmony.Client) {
                   },
                   {
                     "name": "Online seit dem",
-                    "value": client.upSince?.toString()
+                    "value": "<t:" + Math.floor(client.upSince?.getTime()/1000) + ":R>"
                   },
                   {
                     "name": "Serveranzahl",
@@ -26,7 +26,7 @@ export async function info(i:harmony.Interaction,client:harmony.Client) {
                   },
                   {
                     "name": "Gesammelte Daten",
-                    "value": "Du kannst [hier](https://zetrox.neocities.org/home/datenschutz.html) sehen, welche Daten Zetrox sammelt.\nDu kannst Deine Daten auch unten verwalten."
+                    "value": "Du kannst [hier](https://zetrox.neocities.org/home/datenschutz.html) sehen, welche Daten Zetrox sammelt."
                   },
                   {
                     "name": "Programmiersprache und Bibliotheken",
