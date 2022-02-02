@@ -322,14 +322,13 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                 }
                                                 content += "\n"
                                             }
-                                            if(content == ""){
-                                                content = "*Keine*"
+                                            if(content != ""){
+                                                embed.addField({
+                                                    "name": "Bedinguen",
+                                                    "value": content,
+                                                    "inline": true
+                                                },)
                                             }
-                                            embed.addField({
-                                                "name": "Bedinguen",
-                                                "value": content,
-                                                "inline": true
-                                            },)
                                             const controls: harmony.MessageComponentData[] = [
                                                 {
                                                     type: harmony.MessageComponentType.ACTION_ROW,
@@ -401,7 +400,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     return
                                                 }
                                             }
-                                            let bcontent = "Keiner"
+                                            let bcontent = ""
                                             if(bypass.type == "role"){
                                                 let role = await i.guild.roles.get(bypass.value)
                                                 if(role == undefined){
@@ -411,130 +410,76 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     bcontent = `Rolle: ${role.name}`
                                                 }
                                             }
-                                            embed.addField({name:"Bypass",inline:true,value:bcontent})
-                                            msg.editResponse({embeds:[embed],content:"**Wie lange haben Mitglieder Zeit, den Preis anzunehmen?**",components:[]})
-                                            answer = undefined
-                                            let answer1 = await client.waitFor("messageCreate", (message) => {
-                                                return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                                            }, 10000)
-                                            if(answer1[0]){
-                                                answer = answer1[0]
+                                            if(bcontent != ""){
+                                                embed.addField({name:"Bypass",inline:true,value:bcontent})
                                             }
-                                            let claimtime:Date = new Date();
-                                            let claimtimeraw = 3600000;
-                                            if(answer != undefined){
-                                                const match = answer.content.match(/((?<days1>\d+)d)?((?<hours1>\d+)h)?((?<minutes1>\d+)m)?((?<seconds1>\d+)s)?/);
-                                                if(match?.groups){
-                                                    let days = 0;
-                                                    let hours = 0;
-                                                    let minutes = 0;
-                                                    let seconds = 0;
-                                                    let { days1, hours1, minutes1, seconds1 } = match.groups;
-                                                    if(days1){
-                                                        days = parseInt(days1.replace("d",""))
-                                                    }
-                                                    if(hours1){
-                                                        hours = parseInt(hours1.replace("h",""))
-                                                    }
-                                                    if(minutes1){
-                                                        minutes = parseInt(minutes1.replace("m",""))
-                                                    }
-                                                    if(seconds1){
-                                                        seconds = parseInt(seconds1.replace("s",""))
-                                                    }
-                                                    if(days != NaN && days != undefined && hours != NaN && hours != undefined && minutes != NaN && minutes != undefined && seconds != NaN && seconds != undefined ){
-                                                        let sekunden:number = 0
-                                                        sekunden += days * 86400
-                                                        sekunden += hours * 3600
-                                                        sekunden += minutes * 60
-                                                        sekunden += seconds
-                                                        if(sekunden > 0 && sekunden < 1814400 && gewinneranzahl > 0){
-                                                            let millisekunden:number = sekunden * 1000
-                                                            claimtimeraw = millisekunden
-                                                            claimtime = new Date(ende.getTime() + millisekunden)
-                                                        }else{
-                                                            answer.channel.send({content:":x: Die Claimzeit muss mindestens 1 Sekunde und maximal 3 Wochen lang sein! :x:"})
-                                                            return
-                                                        }
-                                                    }else{
-                                                        answer.channel.send({content:":x: Bitte gebe etwas gültiges ein! :x:"})
-                                                        return
-                                                    }
-                                                        
-                                                }else{
-                                                    answer.channel.send({content:":x: Bitte gebe etwas gültiges ein! :x:"})
-                                                    return
-                                                }
+                                            msg.editResponse({embeds:[embed],content:":white_check_mark: **Erfolgreich!** :white_check_mark:",components:[]})
+                                            // FERTIG
+                                            let channel = await client.channels.get(i.option<harmony.InteractionChannel>("channel").id)
+                                            let description = `
+<a:info:938064837680979988> __Infos__ <a:info:938064837680979988>
+\`🙋\` | **Hoster**: ${i.member?.user.mention}
+\`🗓\` | **Endet**: <t:${Math.floor(ende.getTime()/1000)}:R>
+\`🔢\` | **Gewinneranzahl**: ${gewinneranzahl.toString()}
+                                            `
+                                            if(content != ""){
+                                                description += "\n<a:772192040145911849:938065752378990612> __Bedingungen__ <a:772192040145911849:938065752378990612>\n"
+                                                description += content
                                             }
-                                            if(claimtime != undefined && ende.getTime() < claimtime.getTime()){
-                                                embed.addField({name:"Claimzeit", value:"<t:" + Math.floor(claimtime.getTime()/1000) + ":F>",inline:true})
-                                                msg.editResponse({embeds:[embed],content:":white_check_mark: **Erfolgreich!** :white_check_mark:",components:[]})
-                                                // FERTIG
-                                                let channel = await client.channels.get(i.option<harmony.InteractionChannel>("channel").id)
-                                                if(channel != undefined && channel.isText()){
-                                                    let controls: harmony.MessageComponentData[] = [
-                                                        {
-                                                            type: harmony.MessageComponentType.ACTION_ROW,
-                                                            components: [
-                                                                {
-                                                                    type: harmony.MessageComponentType.BUTTON,
-                                                                    style: harmony.ButtonStyle.BLURPLE,
-                                                                    customID: 'gw-teilnehmen',
-                                                                    label: "Teilnehmen",
-                                                                    emoji: {name:"🎁"}
-                                                                }
-                                                            ]
-                                                        },
-                                                    ]
-
-                                                    let msg = await channel.send({
-                                                        embeds:[{
-                                                            "title": preis,
-                                                            "description": `
-    Reagiere mit 🎁 , um teilzunehmen.
-    **Hoster**: ${i.member?.user.mention}
-    **Endet**: <t:${Math.floor(ende.getTime()/1000)}:R>
-    **Gewinneranzahl**: ${gewinneranzahl.toString()}
-    **Bedingungen**:
-    ${content}
-    **Bypass**: ${bcontent}
-                                                            `,
-                                                            "color": 44469,
-                                                            "author": {
-                                                                "name": "Neue Verlosung",
-                                                                "icon_url": "https://emoji.gg/assets/emoji/3461-giveaway.gif"
-                                                            },
-                                                            "footer": {
-                                                                "text": "⇢ Zetrox von Folizza Studios",
-                                                                "icon_url": "https://images-ext-2.discordapp.net/external/Bz1kDlXLtgMdIMxKgKx1i-8i-wXOSEKFY48ouCl1hPM/https/sph-download.neocities.org/share/GoDaddyStudioPage-0%25202.png"
+                                            if(bcontent != ""){
+                                                description += "`⚡️` | **ByPass:** " + bcontent
+                                            }
+                                            if(channel != undefined && channel.isText()){
+                                                let controls: harmony.MessageComponentData[] = [
+                                                    {
+                                                        type: harmony.MessageComponentType.ACTION_ROW,
+                                                        components: [
+                                                            {
+                                                                type: harmony.MessageComponentType.BUTTON,
+                                                                style: harmony.ButtonStyle.BLURPLE,
+                                                                customID: 'gw-teilnehmen',
+                                                                label: "Teilnehmen",
+                                                                emoji: {name:"🎁"}
                                                             }
-                                                        }],
-                                                        components:controls
-                                                    })
-                                                    let giveawaydb = database("giveaways.json")
-                                                    giveawaydb.giveaways.push({
-                                                        guild:i.guild.id,
-                                                        channel:channel.id,
-                                                        end:ende.getTime(),
-                                                        hoster:i.member.id,
-                                                        preis:preis,
-                                                        users:[],
-                                                        msgid: msg.id,
-                                                        winnercount: gewinneranzahl,
-                                                        reqs:reqs,
-                                                        claimtime: claimtime.getTime(),
-                                                        bypass:bypass,
-                                                        claimtimeraw:claimtimeraw
-                                                    })
-                                                    saveDatabase("giveaways.json",giveawaydb)
-                                                    let donemsg = await i.channel.send({content:":white_check_mark: Giveaway erstellt! :white_check_mark:"})
-                                                    setTimeout(() => {donemsg.delete()}, 3000)
-                                                }else{
-                                                    i.channel.send({content:":x: Dieser Kanal ist kein Textkanal! :x:"})
-                                                    return
-                                                }
+                                                        ]
+                                                    },
+                                                ]
+
+                                                let msg = await channel.send({
+                                                    embeds:[{
+                                                        "title": preis,
+                                                        "description": description + "\n\nReagiere mit 🎁 , um teilzunehmen.",
+                                                        "color": 44469,
+                                                        "author": {
+                                                            "name": "Neue Verlosung",
+                                                            "icon_url": "https://emoji.gg/assets/emoji/3461-giveaway.gif"
+                                                        },
+                                                        "footer": {
+                                                            "text": "⇢ Zetrox von Folizza Studios",
+                                                            "icon_url": "https://images-ext-2.discordapp.net/external/Bz1kDlXLtgMdIMxKgKx1i-8i-wXOSEKFY48ouCl1hPM/https/sph-download.neocities.org/share/GoDaddyStudioPage-0%25202.png"
+                                                        }
+                                                    }],
+                                                    components:controls
+                                                })
+                                                let giveawaydb = database("giveaways.json")
+                                                giveawaydb.giveaways.push({
+                                                    guild:i.guild.id,
+                                                    channel:channel.id,
+                                                    end:ende.getTime(),
+                                                    hoster:i.member.id,
+                                                    preis:preis,
+                                                    users:[],
+                                                    msgid: msg.id,
+                                                    winnercount: gewinneranzahl,
+                                                    reqs:reqs,
+                                                    bypass:bypass,
+                                                    winners:[]
+                                                })
+                                                saveDatabase("giveaways.json",giveawaydb)
+                                                let donemsg = await i.channel.send({content:":white_check_mark: Giveaway erstellt! :white_check_mark:"})
+                                                setTimeout(() => {donemsg.delete()}, 3000)
                                             }else{
-                                                i.channel.send({content:":x: Bitte gebe etwas gültiges ein! :x:"})
+                                                i.channel.send({content:":x: Dieser Kanal ist kein Textkanal! :x:"})
                                                 return
                                             }
                                         }

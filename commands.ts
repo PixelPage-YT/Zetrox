@@ -277,6 +277,14 @@ export const commands: harmony.SlashCommandPartial[] = [
       ]
     },
     {
+      "type":"MESSAGE",
+      "name":"Rerollen"
+    },
+    {
+      "type":"MESSAGE",
+      "name":"Enden lassen"
+    },
+    {
       "name": "info",
       "description": "Erhalte Infos über Zetrox!"
     },
