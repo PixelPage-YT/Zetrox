@@ -11,7 +11,7 @@ export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
     try{
         if(i.member){
             if(i.guild){
-                const emojis = database("emojiquiz.json").data;
+                const emojis = JSON.parse(Deno.readTextFileSync("./data/emojiquiz.json")).data;
                 const solution:{emojis:string,points:number,solutions:string[]} = random.choice(emojis)
                 let guessed:string
                 let startTime = Date.now()
