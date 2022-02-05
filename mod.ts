@@ -188,50 +188,19 @@ class Zetrox extends harmony.Client {
 const client = new Zetrox();
 const config:{devtoken:string,token:string} = JSON.parse(Deno.readTextFileSync("config.json"));
 let token:string = config.devtoken
-
+let devmode = true;
 if(Deno.args[0] == undefined || Deno.args[0] == "dev"){
     console.log("[Info] Der Bot wird im DEV Modus gestartet. (Zetrox PTB)")
     token = config.devtoken
 }else if(Deno.args[0] == "prod"){
     token = config.token
     console.log("[Info] Der Bot wird im PRODUCTION Modus gestartet. (Zetrox)")
+    devmode = false;
 }
 
 
 
-async function checkSlash(){
-    commands.forEach(command => {
-        // If you want to create command globally, just remove 'Your Server/Guild ID' part
-        // I recommend making it for only one guild for now because Global Slash Commands can take max 1 hour to come live.
-        client.guilds.array().then((guilds) => {
-            guilds.forEach((guild) => {
-                guild.commands.all().then((existingcommands) => {
-                    var excommandarray = existingcommands.array()
-                    let check = false;
-                    for(let i in excommandarray){
-                        if(excommandarray[i].name == command.name){
-                            check = true;
-                        }
-                    }
-                    if(check == false){
-                        client.interactions.commands.create(command,guild.id)
-                            .then((cmd) => console.log(`[Info] Slash Command ${cmd.name} in ${guild.name} erstellt`))
-                            .catch((err) => console.log(`[Info] Es ist fehlgeschlagen, den Slash Command ${command.name} in ${guild.name} einzurichten, weil: ${err}`));
-                    }
-                })
-            })
-        })
-    })
-}
-if(Deno.args[0] != undefined && Deno.args[0] == "prod"){
-    commands.forEach(command => {
-        client.interactions.commands.create(command)
-            .then((cmd) => console.log(`[Info] Slash Command ${cmd.name} erstellt`))
-            .catch((err) => console.log(`[Info] Es ist fehlgeschlagen, den Slash Command ${command.name} einzurichten, weil: ${err}`));
-    })
-}else{
-    setInterval(checkSlash,15000)
-}
+
 
 setInterval(checkGW, 3000, client)
 setInterval(updateStats,60000, client)
