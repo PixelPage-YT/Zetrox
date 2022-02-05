@@ -207,7 +207,7 @@ client.on("messageCreate", (message) => {
 })
 client.on("guildMemberAdd", async (member:harmony.Member) => {
     //const channel = member.guild.channels.resolve('');
-    guildMemberAdd(member)
+    guildMemberAdd(member,client)
 })
 client.on("inviteCreate", (invite:harmony.Invite) => {
     // @ts-ignore

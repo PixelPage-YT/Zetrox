@@ -1,6 +1,6 @@
 import * as harmony from "https://code.harmony.rocks/main"
 
-export async function guildMemberAdd(member:harmony.Member){
+export async function guildMemberAdd(member:harmony.Member,client:harmony.Client){
     try{
         let guildInvites = await member.guild.invites.fetchAll()
         guildInvites.forEach(async invite => { //basically a for loop over the invites
