@@ -44,6 +44,71 @@
             ],
             "solution": 1,
             "points": 20
+        },
+        {
+            "frage": "Welches Metall leitet Wärme am besten?",
+            "possible": [
+                "Silber",
+                "Kupfer",
+                "Gold",
+                "Aluminium"
+            ],
+            "solution": 0,
+            "points": 23
+        },
+        {
+            "frage": "Wie vielen Zeitzonen gehört Russland an?",
+            "possible": [
+                "5",
+                "9",
+                "7",
+                "11"
+            ],
+            "solution": 3,
+            "points": 45
+        },
+        {
+            "frage": "Wo herrscht kein Linksverkehr?",
+            "possible": [
+                "Irland",
+                "Indien",
+                "Island",
+                "Großbritannien"
+            ],
+            "solution": 2,
+            "points": 31
+        },
+        {
+            "frage": "In welchem Jahr wurde der Euro als Bargeld eingeführt?",
+            "possible": [
+                "2001",
+                "2002",
+                "2003",
+                "2004"
+            ],
+            "solution": 0,
+            "points": 20
+        },
+        {
+            "frage": "Wer wählt den Bundespräsidenten?",
+            "possible": [
+                "Bundeskanzler",
+                "Bundestag",
+                "Bürger",
+                "Bundesversammlung"
+            ],
+            "solution": 3,
+            "points": 37
+        },
+        {
+            "frage": "Wie wollte sich Discord früher nicht nennen?",
+            "possible": [
+                "Wyvern",
+                "Bonfire",
+                "Panton"
+            ],
+            "solution": 2,
+            "points": 25
         }
     ]
 }

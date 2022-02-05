@@ -49,6 +49,61 @@
             "emojis": "🐊 🩴",
             "points": 34,
             "solutions": ["Croc", "Crocs"]
+        },
+        {
+            "emojis": "🍫 🔥",
+            "points": 20,
+            "solutions": ["Heiße Schokolade", "Heisse Schokolade"]
+        },
+        {
+            "emojis": "💶 🐷 🔒",
+            "points": 21,
+            "solutions": ["Sparschwein"]
+        },
+        {
+            "emojis": "🌲 🐻 👦 🐍",
+            "points": 41,
+            "solutions": ["Dschungelbuch", "Das Dschungelbuch"]
+        },
+        {
+            "emojis": "🌎 🔴",
+            "points": 34,
+            "solutions": ["Mars"]
+        },
+        {
+            "emojis": "👓 ☀️",
+            "points": 29,
+            "solutions": ["Sonnenbrille"]
+        },
+        {
+            "emojis": "🏬 📔",
+            "points":  37,
+            "solutions": ["Bücherei", "Buecherei"]
+        },
+        {
+            "emojis": "🧑‍🦱 💰",
+            "points": 34,
+            "solutions": ["Kopfgeld"]
+        },
+        {
+            "emojis": "🐇 🍫 🥚",
+            "points": 23,
+            "solutions": ["Osterhase"]
+        },
+        {
+            "emojis": "🧔‍♂️ ✂️ 🌳",
+            "points": 31,
+            "solutions": ["Gärtner", "Geartner"]
+        },
+        {
+            "emojis": "👵 🪄",
+            "points": 34,
+            "solutions": ["Hexe"]
+        },
+        {
+            "emojis": "✉️ 💻",
+            "points": 35,
+            "solutions": ["E-Mail","email"]
         }
     ]
 }
