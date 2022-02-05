@@ -93,7 +93,6 @@ export async function checkGW(client:harmony.Client){
             index++
         }
     }catch(err){
-        console.log(err)
     }
 }
 

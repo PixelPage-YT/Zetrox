@@ -1,7 +1,7 @@
 import * as harmony from "https://code.harmony.rocks/main"
 import {isAuthorized} from "../util/isAuthorized.ts"
 import {database,saveDatabase} from "../util/database.ts"
-
+import {noPerms} from "../util/noPerms.ts"
 export async function giveaway(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.guild && i.member && i.channel && i.isApplicationCommand()){
@@ -506,7 +506,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        i.channel?.send({content:":x: Hmm, da gab es einen Fehler. :x:\n*Wenn dies häufig ohne Grund passiert, kontaktiere uns Bitte: https://discord.gg/SReeMSY829*"})
+        noPerms(i);
     }
 }
 

@@ -1,43 +1,48 @@
 import * as harmony from "https://code.harmony.rocks/main"
-
+import {noPerms} from "../util/noPerms.ts"
 export async function help(i:harmony.Interaction,client:harmony.Client){
-    const controls: harmony.MessageComponentData[] = [
-        {
-            type: harmony.MessageComponentType.ACTION_ROW,
-            components: [
-                {
-                    type: harmony.MessageComponentType.BUTTON,
-                    style: harmony.ButtonStyle.LINK,
-                    label: "Bot einladen",
-                    url:"https://discord.com/api/oauth2/authorize?client_id=706526290181619775&permissions=8&scope=bot%20applications.commands"
-                },
-                {
-                    type: harmony.MessageComponentType.BUTTON,
-                    style: harmony.ButtonStyle.LINK,
-                    label: "Support Server",
-                    url:"https://discord.gg/aDmQrwUBmE"
-                },
-            ]
-        },
-        {
-            type: harmony.MessageComponentType.ACTION_ROW,
-            components: [
-                {
-                    type: harmony.MessageComponentType.SELECT,
-                    customID: 'help-select',
-                    options: [{label:"Gewinnspiele erstellen",value:"help-giveaways"},{label:"Minigames spielen",value:"help-minigames"},{label:"Einladungen zählen",value:"help-invites"},{label:"Nachrichten zählen",value:"help-messages"},{label:"Statistik-Nachrichten erstellen",value:"help-stats"}]
-                }
-            ]
-        }
-    ]
-    // {label:"Eigene Commands erstellen",value:"help-commands"}
-    i.respond({
-        content: "Hey! Du brauchst Hilfe bei Zetrox? Kein Problem. \nWähle eine Kategorie und wir erklären dir mehr!\nMit /info kannst du dir weitere Infos geben lassen.",
-        components: controls
-    })
+    try{
+      const controls: harmony.MessageComponentData[] = [
+          {
+              type: harmony.MessageComponentType.ACTION_ROW,
+              components: [
+                  {
+                      type: harmony.MessageComponentType.BUTTON,
+                      style: harmony.ButtonStyle.LINK,
+                      label: "Bot einladen",
+                      url:"https://discord.com/api/oauth2/authorize?client_id=706526290181619775&permissions=8&scope=bot%20applications.commands"
+                  },
+                  {
+                      type: harmony.MessageComponentType.BUTTON,
+                      style: harmony.ButtonStyle.LINK,
+                      label: "Support Server",
+                      url:"https://discord.gg/aDmQrwUBmE"
+                  },
+              ]
+          },
+          {
+              type: harmony.MessageComponentType.ACTION_ROW,
+              components: [
+                  {
+                      type: harmony.MessageComponentType.SELECT,
+                      customID: 'help-select',
+                      options: [{label:"Gewinnspiele erstellen",value:"help-giveaways"},{label:"Minigames spielen",value:"help-minigames"},{label:"Einladungen zählen",value:"help-invites"},{label:"Nachrichten zählen",value:"help-messages"},{label:"Statistik-Nachrichten erstellen",value:"help-stats"}]
+                  }
+              ]
+          }
+      ]
+      // {label:"Eigene Commands erstellen",value:"help-commands"}
+      i.respond({
+          content: "Hey! Du brauchst Hilfe bei Zetrox? Kein Problem. \nWähle eine Kategorie und wir erklären dir mehr!\nMit /info kannst du dir weitere Infos geben lassen.",
+          components: controls
+      })
+    }catch(err){
+      noPerms(i);
+    }
 }
 
 export async function helpselect(i:harmony.Interaction, client:harmony.Client){
+  try{
     if(i.message){
         if(i.isMessageComponent()){
             if(i.values[0]){
@@ -210,4 +215,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
             }
         }
     }
+  }catch(err){
+    noPerms(i);
+}
 }
