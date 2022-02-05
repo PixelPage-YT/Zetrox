@@ -44,11 +44,14 @@ export async function checkGW(client:harmony.Client){
                             winnercount--
                         }
                         embed.setTitle(winnernames.join(", "))
-                        embed.setDescription(`***Glückwunsch! ***\nDu/Ihr habt **${gw.preis}** gewonnen!`)
+                        embed.setDescription(`***Glückwunsch! ***\nIhr habt **${gw.preis}** gewonnen!`)
                         content = winnermentions.join(" ")
                         if(winnernames.length == 0){
                             embed.setTitle("Kein gewinner!")
                             embed.setDescription(`Niemand hat teilgenommen.\nDer Preis war ${gw.preis}!`)
+                        }
+                        if(winnernames.length == 1){
+                            embed.setDescription(`***Glückwunsch! ***\nDu hast **${gw.preis}** gewonnen!`)
                         }
                         gwdb.giveaways[index].winners = winnerids
                     }

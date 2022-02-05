@@ -32,26 +32,27 @@ export async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                 let sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
                     return b.count - a.count
                 })
-                for(let index in sorted){
-                    if(parseInt(index)+1 == 10){
+                let index = 0;
+                for(let element of sorted){
+                    if(index+1 == 10){
                         break;
                     }
-                    let element = sorted[index]
                     let currentuser: harmony.User|undefined
                     currentuser = await i.client.users.get(element.member)
                     if(currentuser == undefined){
                         currentuser = await i.client.users.resolve(element.member)
                     }
-                    if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
-                        if(parseInt(index)+1 == 1){
+                    if(currentuser != undefined && currentuser.id != client._id){
+                        if(index+1 == 1){
                             content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                        }else if(parseInt(index)+1 == 2){
+                        }else if(index+1 == 2){
                             content+="🥈 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                        }else if(parseInt(index)+1 == 3){
+                        }else if(index+1 == 3){
                             content+="🥉 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                         }else{
-                            content += (parseInt(index)+1).toString() + " **" + currentuser.username + "** | " + element.count.toString() + "\n"
+                            content += (index+1).toString() + " **" + currentuser.username + "** | " + element.count.toString() + "\n"
                         }
+                        index++
                     }
                 }
             }

@@ -4,6 +4,7 @@ import {database,saveDatabase} from "../util/database.ts"
 import {noPerms} from "../util/noPerms.ts"
 export async function giveaway(i:harmony.Interaction,client:harmony.Client){
     try{
+        let answertime = 60 * 1000;
         if(i.guild && i.member && i.channel && i.isApplicationCommand()){
             if(!(await isAuthorized(i.member))){
                 i.respond({
@@ -23,7 +24,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
             let msg = await i.respond({content:"**Was ist der Preis dieser Verlosung?**", embeds:[embed]})
             let answer1 = await client.waitFor("messageCreate", (message) => {
                 return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-            }, 10000)
+            }, answertime)
             let answer: harmony.Message | undefined;
             if(answer1[0]){
                 answer = answer1[0]
@@ -41,7 +42,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                 answer = undefined
                 let answer1 = await client.waitFor("messageCreate", (message) => {
                     return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                }, 10000)
+                }, answertime)
                 if(answer1[0]){
                     answer = answer1[0]
                 }
@@ -66,7 +67,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                         answer = undefined
                         let answer1 = await client.waitFor("messageCreate", (message) => {
                             return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                        }, 10000)
+                        }, answertime)
                         if(answer1[0]){
                             answer = answer1[0]
                         }
@@ -136,7 +137,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                             return message.member.id == i.member?.id && message.channel.id == i.channel?.id
                                         }
                                         return false
-                                    }, 20000)
+                                    }, answertime)
                                     let answerI = undefined
                                     if(answerI1[0]){
                                         answerI = answerI1[0]
@@ -156,7 +157,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
 
                                                     let answer1 = await client.waitFor("messageCreate", (message) => {
                                                         return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                                                    }, 20000)
+                                                    }, answertime)
                                                     if(answer1[0]){
                                                         answer = answer1[0]
                                                     }
@@ -174,7 +175,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -184,7 +185,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     answer = undefined;
                                                     let answer1 = await client.waitFor("messageCreate", (message) => {
                                                         return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                                                    }, 20000)
+                                                    }, answertime)
                                                     if(answer1[0]){
                                                         answer = answer1[0]
                                                     }
@@ -202,7 +203,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -212,7 +213,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     answer = undefined;
                                                     let answer1 = await client.waitFor("messageCreate", (message) => {
                                                         return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                                                    }, 20000)
+                                                    }, answertime)
                                                     if(answer1[0]){
                                                         answer = answer1[0]
                                                     }
@@ -230,7 +231,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -240,7 +241,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     answer = undefined;
                                                     let answer1 = await client.waitFor("messageCreate", (message) => {
                                                         return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                                                    }, 20000)
+                                                    }, answertime)
                                                     if(answer1[0]){
                                                         answer = answer1[0]
                                                     }
@@ -268,7 +269,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -277,7 +278,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     answer = undefined;
                                                     let answer1 = await client.waitFor("messageCreate", (message) => {
                                                         return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                                                    }, 20000)
+                                                    }, answertime)
                                                     if(answer1[0]){
                                                         answer = answer1[0]
                                                     }
@@ -289,7 +290,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             question.delete()
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -351,7 +352,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                         return message.member.id == i.member?.id && message.channel.id == i.channel?.id
                                                     }
                                                     return false
-                                                }, 20000)
+                                                }, answertime)
                                                 if(answerI1[0]){
                                                     answerI = answerI1[0]
                                                 }
@@ -363,7 +364,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             answer = undefined;
                                                             let answer1 = await client.waitFor("messageCreate", (message) => {
                                                                 return message.author.id == i.member?.id && message.channel.id == i.channel?.id
-                                                            }, 20000)
+                                                            }, answertime)
                                                             if(answer1[0]){
                                                                 answer = answer1[0]
                                                             }
@@ -389,14 +390,14 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                                     return
                                                                 }
                                                             }else{
-                                                                i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                                                i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                                 return
                                                             }
                                                         }
                                                     }
                                                     
                                                 }else{
-                                                    i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                                    i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                     return
                                                 }
                                             }
@@ -476,15 +477,13 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     winners:[]
                                                 })
                                                 saveDatabase("giveaways.json",giveawaydb)
-                                                let donemsg = await i.channel.send({content:":white_check_mark: Giveaway erstellt! :white_check_mark:"})
-                                                setTimeout(() => {donemsg.delete()}, 3000)
                                             }else{
                                                 i.channel.send({content:":x: Dieser Kanal ist kein Textkanal! :x:"})
                                                 return
                                             }
                                         }
                                     }else{
-                                        i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                         return
                                     }
                                 }else{
@@ -493,16 +492,16 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                 }
                             }
                         }else{
-                            i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                            i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                         }
                     }else{
                         i.channel.send({content:":x: Es muss mindestens einen Gewinner geben! :x:"})
                     }
                 }else{
-                    i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                    i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                 }
             }else{
-                i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
             }
         }
     }catch(err){
