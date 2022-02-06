@@ -6,6 +6,11 @@ export const commands: harmony.SlashCommandPartial[] = [
         options: [],
     },
     {
+      name: "verifypanel",
+      description: "Erstelle ein Verifizierungssystem!",
+      options: [],
+    },
+    {
         name: "messages",
         description: "Zeigt die Nachrichtenanzahl eines Benutzers",
         options: [

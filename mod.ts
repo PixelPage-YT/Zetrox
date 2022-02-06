@@ -1,6 +1,7 @@
 import * as harmony from "https://code.harmony.rocks/main"
 import { commands } from "./commands.ts"
 import {help, helpselect} from "./commands/help.ts"
+import {verifypanel} from "./commands/verifypanel.ts"
 import {messages} from "./commands/messages.ts"
 import {invites} from "./commands/invites.ts"
 import {gamePoints} from "./commands/gamePoints.ts"
@@ -176,6 +177,10 @@ class Zetrox extends harmony.Client {
     @harmony.slash("giveaway")
     giveaway(i:harmony.Interaction){
         giveaway(i,this)
+    }
+    @harmony.slash("verifypanel")
+    verifypanel(i:harmony.Interaction){
+        verifypanel(i,this)
     }
 }
 
