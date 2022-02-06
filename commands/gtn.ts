@@ -4,7 +4,7 @@ import {
     randomNumber,
     randomNumberGenerator,
     randomNumberList,
-} from "https://deno.land/x/random_number/mod.ts";
+} from "https://deno.land/x/random_number@v0.1.0/mod.ts";
 import {noPerms} from "../util/noPerms.ts"
 export async function gtn(i:harmony.Interaction,client:harmony.Client) {
     try{

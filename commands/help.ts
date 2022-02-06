@@ -26,7 +26,7 @@ export async function help(i:harmony.Interaction,client:harmony.Client){
                   {
                       type: harmony.MessageComponentType.SELECT,
                       customID: 'help-select',
-                      options: [{label:"Gewinnspiele erstellen",value:"help-giveaways"},{label:"Minigames spielen",value:"help-minigames"},{label:"Einladungen zählen",value:"help-invites"},{label:"Nachrichten zählen",value:"help-messages"},{label:"Statistik-Nachrichten erstellen",value:"help-stats"}]
+                      options: [{label:"Gewinnspiele erstellen",value:"help-giveaways",emoji:{name:"🎉"}},{label:"Minigames spielen",value:"help-minigames",emoji:{name:"🎮"}},{label:"Einladungen zählen",value:"help-invites",emoji:{name:"✉️"}},{label:"Nachrichten zählen",value:"help-messages",emoji:{name:"💬"}},{label:"Statistik-Nachrichten erstellen",value:"help-stats",emoji:{name:"📊"}},{label:"Verifizierungssystem einrichten",value:"help-verify",emoji:{name:"🔒"}}]
                   }
               ]
           }
@@ -75,31 +75,6 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                         ]
                     })
                 }
-                // if(i.values[0] == "help-commands"){
-                //     i.respond({
-                //         embeds:[
-                //             {
-                //                 "title": ":keyboard: Eigene Commands erstellen :keyboard:",
-                //                 "description": "Mit Zetrox kannst du ganz einfach deine eigenen Commands\nerstellen!",
-                //                 "color": 44469,
-                //                 "fields": [
-                //                   {
-                //                     "name": "Erstellen",
-                //                     "value": "Um einen eigenen Befehl zu erstellen musst du nur `/customcommand <Name> <Antwort>` ausführen."
-                //                   },
-                //                   {
-                //                     "name": "Variablen",
-                //                     "value": "Du kannst auch Variablen verwenden!\n{author.name} Name des Nutzers\n{guild.membercount} Anzahl der Leute, die auf dem Server sind\n*Du kannst neue Variablen auf unserem Support Server anfragen*"
-                //                   }
-                //                 ],
-                //                 "footer": {
-                //                   "text": "⇢ Zetrox von Folizza Studios",
-                //                   "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
-                //                 }
-                //             }
-                //         ]
-                //     })
-                // }
                 if(i.values[0] == "help-minigames"){
                     i.respond({
                         embeds:[
@@ -211,6 +186,31 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                               }
                         ]
                     })
+                }
+                if(i.values[0] == "help-verify"){
+                  i.respond({
+                    embeds:[
+                      {
+                        "title": ":lock: Verifizierungssystem einrichten :lock:",
+                        "description": "Mit einem Verifizierungssystem kannst du sicherstellen,\ndass keine Bots auf deinen Server kommen und deinen Server angreifen.",
+                        "color": 44469,
+                        "fields": [
+                          {
+                            "name": "Einrichten",
+                            "value": "Richte das Verifizierungssystem ganz einfach mit dem Befehl\n`/verifypanel` ein."
+                          },
+                          {
+                            "name": "Löschen",
+                            "value": "Wenn du das System eingerichtet hast und unzufrieden bist,\nkannst du es jederzeit mit dem erneuten ausführen von `/verifypanel` löschen."
+                          }
+                        ],
+                        "footer": {
+                          "text": "⇢ Zetrox von Folizza Studios",
+                          "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                        }
+                      }
+                    ]
+                })
                 }
             }
         }

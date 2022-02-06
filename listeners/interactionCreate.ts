@@ -4,7 +4,7 @@ import {gwClaim} from "../interactions/gw-claim.ts"
 import {gwReroll} from "../interactions/gw-reroll.ts"
 import {gwEnd} from "../interactions/gw-end.ts"
 import {helpselect} from "../commands/help.ts"
-
+import {gwSeeMembers} from "../interactions/gw-seemembers.ts"
 
 import {verifyVerify} from "../interactions/verify-verify.ts"
 export async function interactionCreate(i:harmony.Interaction,client:harmony.Client) {
@@ -24,5 +24,8 @@ export async function interactionCreate(i:harmony.Interaction,client:harmony.Cli
     }
     if(i.isApplicationCommand() && i.targetMessage){
         gwEnd(i,client)
+    }
+    if(i.isApplicationCommand() && i.targetMessage && i.name == "Teilnehmer anzeigen"){
+        gwSeeMembers(i,client)
     }
 }

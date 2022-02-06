@@ -28,6 +28,7 @@ import {guildMemberAdd} from "./listeners/guildMemberAdd.ts"
 import {updateStats} from "./loops/updateStats.ts"
 import {checkGW} from "./loops/checkGW.ts"
 import {guildMemberRemove} from "./listeners/guildMemberRemove.ts"
+import {achtball} from "./commands/8ball.ts"
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -181,6 +182,11 @@ class Zetrox extends harmony.Client {
     @harmony.slash("verifypanel")
     verifypanel(i:harmony.Interaction){
         verifypanel(i,this)
+    }
+
+    @harmony.slash("8ball")
+    achtball(i:harmony.Interaction){
+        achtball(i,this)
     }
 }
 

@@ -290,6 +290,10 @@ export const commands: harmony.SlashCommandPartial[] = [
       "name":"Enden lassen"
     },
     {
+      "type":"MESSAGE",
+      "name":"Teilnehmer anzeigen"
+    },
+    {
       "name": "info",
       "description": "Erhalte Infos über Zetrox!"
     },
@@ -402,6 +406,18 @@ export const commands: harmony.SlashCommandPartial[] = [
           "name": "tage",
           "description": "Die Anzahl der Tage, wie lang das Gewinnspiel läuft",
           "choices": []
+        }
+      ]
+    },
+    {
+      "name": "8ball",
+      "description": "Frage den bot eine Ja/Nein Frage!",
+      "options": [
+        {
+          "type": 3,
+          "name": "frage",
+          "description": "Die Frage, die du stellst.",
+          "required": true
         }
       ]
     }
