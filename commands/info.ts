@@ -9,7 +9,7 @@ export async function info(i:harmony.Interaction,client:harmony.Client) {
       }
     }
     if(client.upSince){
-      i.respond({
+      await i.respond({
           embeds:[
               {
                   "title": ":information_source: Infos über Zetrox :information_source:",
@@ -48,7 +48,7 @@ export async function info(i:harmony.Interaction,client:harmony.Client) {
           ]
       })
     }else{
-      i.respond({
+      await await i.respond({
         embeds:[
             {
                 "title": ":information_source: Infos über Zetrox :information_source:",

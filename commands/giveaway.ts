@@ -7,7 +7,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
         let answertime = 60 * 1000;
         if(i.guild && i.member && i.channel && i.isApplicationCommand()){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -52,7 +52,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                     try{
                         gewinneranzahl = parseInt(answer.content)
                     }catch(err){
-                        i.channel.send({content:":x: Bitte gebe eine Zahl an! :x:"})
+                        await i.channel.send({content:":x: Bitte gebe eine Zahl an! :x:"})
                         return
                     }
                     if(gewinneranzahl != undefined && gewinneranzahl > 0){
@@ -103,11 +103,11 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                         let millisekunden:number = sekunden * 1000
                                         ende = new Date(Date.now() + millisekunden)
                                     }else{
-                                        answer.channel.send({content:":x: Ein Gewinnspiel muss mindestens 1 Sekunde und maximal 3 Wochen lang sein! :x:"})
+                                        await answer.channel.send({content:":x: Ein Gewinnspiel muss mindestens 1 Sekunde und maximal 3 Wochen lang sein! :x:"})
                                         return
                                     }
                                 }else{
-                                    answer.channel.send({content:":x: Bitte gebe etwas gültiges ein! :x:"})
+                                    await answer.channel.send({content:":x: Bitte gebe etwas gültiges ein! :x:"})
                                     return
                                 }
                                 if(ende != undefined && ende.getTime() > Date.now()){
@@ -175,7 +175,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -203,7 +203,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -231,7 +231,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -269,7 +269,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             return
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -290,7 +290,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             question.delete()
                                                         }
                                                     }else{
-                                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                         return
                                                     }
                                                 }
@@ -390,14 +390,14 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                                     return
                                                                 }
                                                             }else{
-                                                                i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                                await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                                 return
                                                             }
                                                         }
                                                     }
                                                     
                                                 }else{
-                                                    i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                    await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                                     return
                                                 }
                                             }
@@ -478,30 +478,30 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                 })
                                                 saveDatabase("giveaways.json",giveawaydb)
                                             }else{
-                                                i.channel.send({content:":x: Dieser Kanal ist kein Textkanal! :x:"})
+                                                await i.channel.send({content:":x: Dieser Kanal ist kein Textkanal! :x:"})
                                                 return
                                             }
                                         }
                                     }else{
-                                        i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                                         return
                                     }
                                 }else{
-                                    i.channel.send({content:":x: Das Ende dieser Verlosung ist ungültig! :x:"})
+                                    await i.channel.send({content:":x: Das Ende dieser Verlosung ist ungültig! :x:"})
                                     return
                                 }
                             }
                         }else{
-                            i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                            await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                         }
                     }else{
-                        i.channel.send({content:":x: Es muss mindestens einen Gewinner geben! :x:"})
+                        await i.channel.send({content:":x: Es muss mindestens einen Gewinner geben! :x:"})
                     }
                 }else{
-                    i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                    await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
                 }
             }else{
-                i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
             }
         }
     }catch(err){

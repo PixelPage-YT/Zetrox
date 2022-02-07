@@ -3,7 +3,7 @@ import * as harmony from "https://code.harmony.rocks/main"
 export async function noPerms(i:harmony.Interaction){
     try{
         if(i){
-            i.channel?.send({
+            await i.channel?.send({
                 embeds: [
                     {
                         "title": ":warning: Da ist etwas schiefgelaufen! :warning:",

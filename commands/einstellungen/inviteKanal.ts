@@ -6,7 +6,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.member){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -22,7 +22,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
                             const invChanneldb = JSON.parse(Deno.readTextFileSync("./databases/invites/inviteChannels.json"))
                             if(invChanneldb[i.guild.id] && invChanneldb[i.guild.id] == channel.id){
                                 invChanneldb[i.guild.id] = "0"
-                                i.respond({
+                                await i.respond({
                                     embeds:[
                                         {
                                             "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
@@ -40,7 +40,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
                             }
                             invChanneldb[i.guild.id] = channel.id
                             Deno.writeTextFileSync("./databases/invites/inviteChannels.json", JSON.stringify(invChanneldb))
-                            i.respond({
+                            await i.respond({
                                 embeds:[
                                     {
                                         "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
@@ -54,7 +54,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
                                 ]
                             })
                         }else{
-                            i.respond({
+                            await i.respond({
                                 content: ":x: Dieser Kanal existiert nicht oder es ist kein __TextKanal__! :x:",
                                 ephemeral:true
                             })

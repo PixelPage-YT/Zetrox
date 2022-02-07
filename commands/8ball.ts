@@ -15,7 +15,7 @@ export async function achtball(i:harmony.Interaction,client:harmony.Client) {
                 "Weiß nicht"
             ]
             let antwort = randomChoice(antworten)
-            i.respond({embeds:[
+            await i.respond({embeds:[
                 {
                     "title": ":8ball: 8ball :8ball:",
                     "description": "Deine Frage: " + i.option<string>("frage") + "\n```yaml\n" + antwort + "\n```",

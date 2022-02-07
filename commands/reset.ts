@@ -11,7 +11,7 @@ export async function resetInvites(i:harmony.Interaction, client:harmony.Client)
     try{
         if(i.member){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -21,7 +21,7 @@ export async function resetInvites(i:harmony.Interaction, client:harmony.Client)
                 let invitedb = database("invites/invites.json")
                 invitedb[i.guild.id] = undefined
                 Deno.writeTextFileSync("./databases/invites/invites.json", JSON.stringify(invitedb))
-                i.respond({
+                await i.respond({
                     embeds: [
                         {
                             "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
@@ -49,7 +49,7 @@ export async function resetMessages(i:harmony.Interaction, client:harmony.Client
     try{
         if(i.member){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -59,7 +59,7 @@ export async function resetMessages(i:harmony.Interaction, client:harmony.Client
                 let invitedb = database("messages.json")
                 invitedb[i.guild.id] = undefined
                 Deno.writeTextFileSync("./databases/messages.json", JSON.stringify(invitedb))
-                i.respond({
+                await i.respond({
                     embeds: [
                         {
                             "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
@@ -87,7 +87,7 @@ export async function resetGamePoints(i:harmony.Interaction, client:harmony.Clie
     try{
         if(i.member){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -97,7 +97,7 @@ export async function resetGamePoints(i:harmony.Interaction, client:harmony.Clie
                 let invitedb = database("gamePoints.json")
                 invitedb[i.guild.id] = undefined
                 Deno.writeTextFileSync("./databases/gamePoints.json", JSON.stringify(invitedb))
-                i.respond({
+                await i.respond({
                     embeds: [
                         {
                             "title": ":white_check_mark: Erfolgreich! :white_check_mark:",

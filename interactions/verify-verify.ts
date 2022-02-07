@@ -44,7 +44,7 @@ export async function verifyVerify(i:harmony.Interaction,client:harmony.Client){
                             ]
                         },
                     ]
-                    let resmsg = await i.respond({embeds:[
+                    let resmsg = await await i.respond({embeds:[
                         {
                             "title": `Was ist ${r1} + ${r2}?`,
                             "color": 44469,
@@ -100,7 +100,7 @@ export async function verifyVerify(i:harmony.Interaction,client:harmony.Client){
                         }
                         if(role != undefined){
                             i.member.roles.add(role)
-                            await i.respond({content:i.member.user.mention + ", :white_check_mark: Verifiziert! :white_check_mark:",ephemeral:true})
+                            await await i.respond({content:i.member.user.mention + ", :white_check_mark: Verifiziert! :white_check_mark:",ephemeral:true})
                         }
                     }
                 }

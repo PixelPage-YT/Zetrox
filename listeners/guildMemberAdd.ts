@@ -26,7 +26,7 @@ export async function guildMemberAdd(member:harmony.Member,client:harmony.Client
                                 let channel = await member.guild.channels.resolve(invChanneldb[member.guild.id])
                             }
                             if(channel != undefined && channel.isText()){
-                                channel.send({
+                                await channel.send({
                                     embeds: [
                                         {
                                             "title": member.user.username,

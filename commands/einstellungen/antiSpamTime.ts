@@ -6,7 +6,7 @@ export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client)
     try{
         if(i.member){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -22,7 +22,7 @@ export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client)
                             const invChanneldb = JSON.parse(Deno.readTextFileSync("./databases/antiSpamTime.json"))
                             invChanneldb[i.guild.id] = time
                             Deno.writeTextFileSync("./databases/antiSpamTime.json", JSON.stringify(invChanneldb))
-                            i.respond({
+                            await i.respond({
                                 embeds:[
                                     {
                                         "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
@@ -36,7 +36,7 @@ export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client)
                                 ]
                             })
                         }else{
-                            i.respond({
+                            await i.respond({
                                 content: ":x: Die Zeit in Sekunden muss über 0 und unter 100 Sekunden sein! :x:",
                                 ephemeral:true
                             })

@@ -6,7 +6,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.member){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -22,7 +22,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
                             const teamRoledb = JSON.parse(Deno.readTextFileSync("./databases/teamRole.json"))
                             if(teamRoledb[i.guild.id] && teamRoledb[i.guild.id] == role.id){
                                 teamRoledb[i.guild.id] = "0"
-                                i.respond({
+                                await i.respond({
                                     embeds:[
                                         {
                                             "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
@@ -40,7 +40,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
                             }
                             teamRoledb[i.guild.id] = role.id
                             Deno.writeTextFileSync("./databases/teamRole.json", JSON.stringify(teamRoledb))
-                            i.respond({
+                            await i.respond({
                                 embeds:[
                                     {
                                         "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
@@ -54,7 +54,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
                                 ]
                             })
                         }else{
-                            i.respond({
+                            await i.respond({
                                 content: ":x: Diese Rolle existiert nicht! :x:",
                                 ephemeral:true
                             })

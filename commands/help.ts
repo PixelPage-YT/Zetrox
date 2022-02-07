@@ -32,7 +32,7 @@ export async function help(i:harmony.Interaction,client:harmony.Client){
           }
       ]
       // {label:"Eigene Commands erstellen",value:"help-commands"}
-      i.respond({
+      await i.respond({
           content: "Hey! Du brauchst Hilfe bei Zetrox? Kein Problem. \nWähle eine Kategorie und wir erklären dir mehr!\nMit /info kannst du dir weitere Infos geben lassen.",
           components: controls
       })
@@ -47,7 +47,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
         if(i.isMessageComponent()){
             if(i.values[0]){
                 if(i.values[0] == "help-giveaways"){
-                    i.respond({
+                    await i.respond({
                         embeds:[
                             {
                                 "title": ":gift: Giveaways erstellen :gift:",
@@ -76,7 +76,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                     })
                 }
                 if(i.values[0] == "help-minigames"){
-                    i.respond({
+                    await i.respond({
                         embeds:[
                             {
                                 "title": ":game_die: Spiele spielen :game_die:",
@@ -109,7 +109,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                     })
                 }
                 if(i.values[0] == "help-invites"){
-                    i.respond({
+                    await i.respond({
                         embeds:[
                             {
                                 "title": ":link: Einladungen zählen :link:",
@@ -138,7 +138,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                     })
                 }
                 if(i.values[0] == "help-messages"){
-                    i.respond({
+                    await i.respond({
                         embeds:[
                             {
                                 "title": ":link: Nachrichten zählen :link:",
@@ -163,7 +163,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                     })
                 }
                 if(i.values[0] == "help-stats"){
-                    i.respond({
+                    await i.respond({
                         embeds:[
                             {
                                 "title": ":chart_with_upwards_trend: Statistik Nachricht erstellen :chart_with_upwards_trend:",
@@ -188,7 +188,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                     })
                 }
                 if(i.values[0] == "help-verify"){
-                  i.respond({
+                  await i.respond({
                     embeds:[
                       {
                         "title": ":lock: Verifizierungssystem einrichten :lock:",

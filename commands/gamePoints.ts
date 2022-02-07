@@ -19,7 +19,7 @@ export async function gamePoints(i:harmony.Interaction, client:harmony.Client){
                 if(i.guild){
                     if(i.member) {
                         let messagecount = getGamePoints(member)
-                        i.respond({
+                        await i.respond({
                             embeds: [{
                                 "title": member.user.username,
                                 "description": `Dieser Benutzer hat ${messagecount} GamePoints <:ZetroCoin:935256569984208917>.`,

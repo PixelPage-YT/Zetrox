@@ -40,7 +40,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                 ]
                             },
                         ]
-                        let question = await i.respond({
+                        let question = await await i.respond({
                             embeds:[
                                 {
                                     "title": ":game_die: Schere Stein Papier (Single-Player) :game_die:",
@@ -166,7 +166,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                 }
                             }
                         }else{
-                            i.channel?.send({
+                            await i.channel?.send({
                                 content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
                             })
                         }
@@ -191,7 +191,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                         ]
                                     },
                                 ]
-                                let question = await i.respond({
+                                let question = await await i.respond({
                                     content: member.user.mention + "\n**" + i.member.user.username + "** sendet dir eine Anfrage zum Spielen von __Schere, Stein, Papier__.\nNimmst du de Herausforderung an?",
                                     components:controls
                                 })
@@ -452,20 +452,20 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                             }
                                                         }
                                                     }else{
-                                                        i.channel?.send({
+                                                        await i.channel?.send({
                                                             content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
                                                         })
                                                     }
                                                 }
                                             }else{
-                                                i.channel?.send({
+                                                await i.channel?.send({
                                                     content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
                                                 })
                                             }
                                         }
                                     }
                                 }else{
-                                    i.channel?.send({content:":x: **" + member.user.username + "** hat die Herausforderung nicht angenommen."})
+                                    await i.channel?.send({content:":x: **" + member.user.username + "** hat die Herausforderung nicht angenommen."})
                                 }     
                                 if(question.message){
                                     question.deleteMessage(question.message)

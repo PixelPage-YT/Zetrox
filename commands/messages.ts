@@ -23,7 +23,7 @@ export async function messages(i:harmony.Interaction, client:harmony.Client){
                             messagecount = messagedb[i.guild.id][member.id].count
                         }
                     }
-                    i.respond({
+                    await i.respond({
                         embeds: [{
                             "title": member.user.username,
                             "description": `Dieser Benutzer hat ${messagecount} \nNachrichten gesendet.`,

@@ -28,7 +28,7 @@ export async function invites(i:harmony.Interaction, client:harmony.Client){
                             allinvs = invitedb[i.guild.id][member.id].count
                         }
                     }
-                    i.respond({
+                    await i.respond({
                         embeds: [{
                             "title": member.user.username,
                             "description": `<:verified_server:756591613525885119> **Dieser Benutzer hat __${invitecount.toString()}__ Mitglieder eingeladen.**\n**${allinvs}** ohne Abzüge\n **${leaves}** Mitglieder haben nach der Einladung verlassen`,

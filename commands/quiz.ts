@@ -46,7 +46,7 @@ export async function quiz(i:harmony.Interaction, client:harmony.Client){
                         ]
                     },
                 ]
-                i.respond({
+                await i.respond({
                     embeds:[
                         {
                             "title": ":game_die: Quiz :game_die:",
@@ -115,7 +115,7 @@ export async function quiz(i:harmony.Interaction, client:harmony.Client){
                         }
                     }
                 }else{
-                    i.channel?.send({
+                    await i.channel?.send({
                         content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
                     })
                 }

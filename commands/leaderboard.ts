@@ -60,7 +60,7 @@ async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                 content = "*Hier hat noch niemand eine Nachricht geschrieben...*"
             }
             embed.setDescription(content)
-            i.respond({
+            await i.respond({
                 embeds: [embed]
             })
         }
@@ -127,7 +127,7 @@ async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
             content = "*Hier hat noch niemand jemanden eingeladen...*"
         }
         embed.setDescription(content)
-        i.respond({
+        await i.respond({
             embeds: [embed]
         })
     }catch(err){
@@ -192,7 +192,7 @@ async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
             content = "*Hier hat noch niemand einen GamePoint...*"
         }
         embed.setDescription(content)
-        i.respond({
+        await i.respond({
             embeds: [embed]
         })
     }catch(err){

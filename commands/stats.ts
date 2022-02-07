@@ -12,7 +12,7 @@ import {noPerms} from "../util/noPerms.ts"
 export async function serverStats(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
-            i.respond({
+            await i.respond({
                 content: ":x: Du hast dazu keine Rechte! :x:",
                 ephemeral: true
             })
@@ -48,13 +48,13 @@ export async function serverStats(i:harmony.Interaction,client:harmony.Client){
                     if(msg && i.channel){
                         statdb.data.push({guild:i.guild.id,type:"server",msg:msg.id,channel:i.channel.id})
                         saveDatabase("stats.json",statdb)
-                        i.respond({content:":white_check_mark: Erfolgreich eingerichtet! :white_check_mark:",ephemeral:true})
+                        await i.respond({content:":white_check_mark: Erfolgreich eingerichtet! :white_check_mark:",ephemeral:true})
                     }
                 }catch(err){
                     
                 }
             }else{
-                i.respond({content:":x: Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
+                await i.respond({content:":x: Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
             }
         }
     }catch(err){
@@ -65,7 +65,7 @@ export async function serverStats(i:harmony.Interaction,client:harmony.Client){
 export async function minecraftStats(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
-            i.respond({
+            await i.respond({
                 content: ":x: Du hast dazu keine Rechte! :x:",
                 ephemeral: true
             })
@@ -103,13 +103,13 @@ export async function minecraftStats(i:harmony.Interaction,client:harmony.Client
                         if(msg && i.channel){
                             statdb.data.push({guild:i.guild.id,type:"minecraft",ip:ip,msg:msg.id,channel:i.channel.id})
                             saveDatabase("stats.json",statdb)
-                            i.respond({content:":white_check_mark: Erfolgreich eingerichtet! :white_check_mark:",ephemeral:true})
+                            await i.respond({content:":white_check_mark: Erfolgreich eingerichtet! :white_check_mark:",ephemeral:true})
                         }
                     }catch(err){
                         
                     }
                 }else{
-                    i.respond({content:":x: Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
+                    await i.respond({content:":x: Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
                 }
             }
         }

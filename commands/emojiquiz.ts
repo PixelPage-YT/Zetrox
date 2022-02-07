@@ -15,7 +15,7 @@ export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
                 const solution:{emojis:string,points:number,solutions:string[]} = random.choice(emojis)
                 let guessed:string
                 let startTime = Date.now()
-                i.respond({
+                await i.respond({
                     embeds:[
                         {
                             "title": ":game_die: Emojiquiz :game_die:",
@@ -40,7 +40,7 @@ export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
                     if(answer instanceof harmony.Message){
                         guessed = answer.content
                         if(guessed == "abbrechen"){
-                            i.channel?.send({content:":x: Abgebrochen. :x:"})
+                            await i.channel?.send({content:":x: Abgebrochen. :x:"})
                             break;
                         }
                         if(solution.solutions.findIndex(index => index.toLowerCase() === answer?.content.toLocaleLowerCase()) == -1){
@@ -54,7 +54,7 @@ export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
                             let seconds = difference / 1000
 
                             let belohnung:number = solution.points
-                            i.channel?.send({
+                            await i.channel?.send({
                                 embeds:[
                                     {
                                         "title": ":game_die: Spiel abgeschlossen! :game_die:",
@@ -84,7 +84,7 @@ export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
                             break;
                         }
                     }else{
-                        i.channel?.send({
+                        await i.channel?.send({
                             content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
                         })
                         break;

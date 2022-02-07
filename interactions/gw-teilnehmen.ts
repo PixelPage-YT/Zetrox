@@ -93,24 +93,24 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                                         },
                                     ]
                                     i.message.edit({components:controls})
-                                    i.respond({
+                                    await i.respond({
                                         content:"✅ Du hast erfolgreich teilgenommen! ✅",
                                         ephemeral: true
                                     })
                                 }else{
-                                    i.respond({
+                                    await i.respond({
                                         content:"⛔️  Du erfüllst die Bedingungen nicht! ⛔️",
                                         ephemeral: true
                                     })
                                 }
                             }else{
-                                i.respond({
+                                await i.respond({
                                     content:"⛔️ Du hast bereits teilgenommen! ⛔️",
                                     ephemeral: true
                                 })
                             }
                         }else{
-                            i.respond({
+                            await i.respond({
                                 content:"⛔️ Die Verlosung hat noch nicht gestartet! ⛔️",
                                 ephemeral: true
                             })
@@ -121,7 +121,7 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                 index++
             }
             if(isthere == 0){
-                i.respond({
+                await i.respond({
                     content:"⛔️ Diese Verlosung existiert nicht! ⛔️",
                     ephemeral: true
                 })

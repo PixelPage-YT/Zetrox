@@ -12,7 +12,7 @@ import {noPerms} from "../util/noPerms.ts"
 export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
-            i.respond({
+            await i.respond({
                 content: ":x: Du hast dazu keine Rechte! :x:",
                 ephemeral: true
             })
@@ -42,7 +42,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                         ]
                     },
                 ]
-                let question = await i.respond({
+                let question = await await i.respond({
                     embeds: [
                         {
                             "title": ":x: Du hast bereits ein Verifizierungssystem :x:",
@@ -110,7 +110,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                         }
                     }
                 }else{
-                    i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                    await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
                 }
                 return
             }
@@ -125,7 +125,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                     "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
                 }
             })
-            let msg = await i.respond({content:"**In welchen Kanal soll die Nachricht gesendet werden?**\n*Bitte erwähne den jeweiligen Kanal.*",embeds:[embed]})
+            let msg = await await i.respond({content:"**In welchen Kanal soll die Nachricht gesendet werden?**\n*Bitte erwähne den jeweiligen Kanal.*",embeds:[embed]})
             let answer1 = await client.waitFor("messageCreate", (message) => {
                 return message.author.id == i.member?.id && message.channel.id == i.channel?.id
             }, 10000)
@@ -254,17 +254,17 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                     saveDatabase("verify.json", verifydb)
                                 }
                             }else{
-                                i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                                await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
                             }
                         }
                     }else{
-                        i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                        await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
                     }
                 }else{
-                    i.channel.send({content:":x: Diesen Kanal habe ich nicht gefunden. :x:"})
+                    await i.channel.send({content:":x: Diesen Kanal habe ich nicht gefunden. :x:"})
                 }
             }else{
-                i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
             }
         }
     }catch(err){

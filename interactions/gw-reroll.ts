@@ -6,7 +6,7 @@ export async function gwReroll(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.isApplicationCommand() && i.name == "Rerollen" && i.targetMessage){
             if(!await isAuthorized(i.member)){
-                i.respond({content:":x: Du hast dazu keine Rechte! :x:",ephemeral:true})
+                await i.respond({content:":x: Du hast dazu keine Rechte! :x:",ephemeral:true})
                 return
             }
             let gwdb:{giveaways: {claimmsg:string|undefined,msgid:string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
@@ -61,7 +61,7 @@ export async function gwReroll(i:harmony.Interaction,client:harmony.Client){
                             if(gwdb.giveaways[index].winners.length > 0){
                                 gwdb.giveaways[index].ended = true
                                 check = true
-                                let waitmsg = await i.respond({content:":game_die: Rerollen... :game_die:"})
+                                let waitmsg = await await i.respond({content:":game_die: Rerollen... :game_die:"})
                                 const controls: harmony.MessageComponentData[] = [
                                     {
                                         type: harmony.MessageComponentType.ACTION_ROW,
@@ -95,7 +95,7 @@ export async function gwReroll(i:harmony.Interaction,client:harmony.Client){
                 index++
             }
             if(check == false){
-                i.respond({content:":x: Dies ist keine Verlosung oder alle Gewinner stehen schon fest! :x:",ephemeral:true})
+                await i.respond({content:":x: Dies ist keine Verlosung oder alle Gewinner stehen schon fest! :x:",ephemeral:true})
                 return
             }
         }

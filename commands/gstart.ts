@@ -6,7 +6,7 @@ export async function gstart(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.guild && i.member && i.channel && i.isApplicationCommand()){
             if(!(await isAuthorized(i.member))){
-                i.respond({
+                await i.respond({
                     content: ":x: Du hast dazu keine Rechte! :x:",
                     ephemeral: true
                 })
@@ -73,9 +73,9 @@ export async function gstart(i:harmony.Interaction,client:harmony.Client){
                         winnercount: gewinneranzahl
                     })
                     saveDatabase("giveaways.json",giveawaydb)
-                    i.respond({content:":white_check_mark: Giveaway erstellt! :white_check_mark:",ephemeral:true})
+                    await i.respond({content:":white_check_mark: Giveaway erstellt! :white_check_mark:",ephemeral:true})
                 }else{
-                    i.respond({content:":x: Ein Gewinnspiel muss mindestens 1 Sekunde und maximal 3 Wochen lang sein! :x:"})
+                    await i.respond({content:":x: Ein Gewinnspiel muss mindestens 1 Sekunde und maximal 3 Wochen lang sein! :x:"})
                 }
             }
         }

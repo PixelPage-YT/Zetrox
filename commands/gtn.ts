@@ -13,7 +13,7 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
                 let zahl = randomNumber({ integer: true, max: 100 });
                 let guessed:number;
                 let startTime = Date.now()
-                i.respond({
+                await i.respond({
                     embeds:[
                         {
                             "title": ":game_die: Guess The Number :game_die:",
@@ -38,10 +38,10 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
                     if(answer instanceof harmony.Message){
                         guessed = parseInt(answer.content)
                         if(guessed < zahl){
-                            i.channel?.send({content:":game_die: Die gesuchte Zahl ist **größer** :game_die:"})
+                            await i.channel?.send({content:":game_die: Die gesuchte Zahl ist **größer** :game_die:"})
                         }
                         if(guessed > zahl){
-                            i.channel?.send({content:":game_die: Die gesuchte Zahl ist **kleiner** :game_die:"})
+                            await i.channel?.send({content:":game_die: Die gesuchte Zahl ist **kleiner** :game_die:"})
                         }
                         if(guessed == zahl){
                             let endtime = Date.now()
@@ -55,7 +55,7 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
                             if(!((realdifference / 300) > 99)){
                                 belohnung = Math.floor(100 - (realdifference / 300))
                             }
-                            i.channel?.send({
+                            await i.channel?.send({
                                 embeds:[
                                     {
                                         "title": ":game_die: Spiel abgeschlossen! :game_die:",
@@ -85,7 +85,7 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
                             break;
                         }
                     }else{
-                        i.channel?.send({
+                        await i.channel?.send({
                             content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
                         })
                         break;
