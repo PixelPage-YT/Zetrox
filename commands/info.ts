@@ -2,6 +2,12 @@ import * as harmony from "https://code.harmony.rocks/main"
 import {noPerms} from "../util/noPerms.ts"
 export async function info(i:harmony.Interaction,client:harmony.Client) {
   try{
+    let members = 0;
+    for(let guild of (await client.guilds.array())){
+      if(guild.memberCount){
+        members += guild.memberCount
+      }
+    }
     if(client.upSince){
       i.respond({
           embeds:[
@@ -23,7 +29,7 @@ export async function info(i:harmony.Interaction,client:harmony.Client) {
                     },
                     {
                       "name": "Benutzeranzahl",
-                      "value": (await client.users.array()).length.toString()
+                      "value": members.toString()
                     },
                     {
                       "name": "Gesammelte Daten",
