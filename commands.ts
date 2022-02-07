@@ -126,131 +126,76 @@ export const commands: harmony.SlashCommandPartial[] = [
         ]
     },
     {
-      "name": "bonus",
-      "description": "Verwalte die Bonuspunkte eines Mitgliedes.",
+      "name": "add",
+      "description": "Füge jemandem bestimmte Dinge hinzu!",
       "options": [
         {
-          "type": 2,
-          "name": "add",
-          "description": "Füge jemandem Bonuspunkte hinzu.",
-          "options": [
+          "type": 3,
+          "name": "type",
+          "description": "Das, was hinzugefügt werden soll.",
+          "required": true,
+          "choices": [
             {
-              "type": 1,
-              "name": "messages",
-              "description": "Füge jemandem Nachrichten hinzu.",
-              "options": [
-                {
-                  "type": 4,
-                  "name": "anzahl",
-                  "description": "Die Anzahl der Nachrichten.",
-                  "required": true
-                },
-                {
-                  "type": 6,
-                  "name": "user",
-                  "description": "Der Benutzer, dem die Nachrichten hinzugefügt werden."
-                }
-              ]
-            },
-            {
-              "type": 1,
               "name": "invites",
-              "description": "Füge jemandem Einladungen hinzu.",
-              "options": [
-                {
-                  "type": 4,
-                  "name": "anzahl",
-                  "description": "Die Anzahl der Einladungen.",
-                  "required": true
-                },
-                {
-                  "type": 6,
-                  "name": "user",
-                  "description": "Der Benutzer, dem die Einladungen hinzugefügt werden."
-                }
-              ]
+              "value": "addinvs"
             },
             {
-              "type": 1,
+              "name": "messages",
+              "value": "addmsgs"
+            },
+            {
               "name": "gamepoints",
-              "description": "Füge jemandem Spielpunkte hinzu.",
-              "options": [
-                {
-                  "type": 4,
-                  "name": "anzahl",
-                  "description": "Die Anzahl der Spielpunkte.",
-                  "required": true,
-                  "choices": []
-                },
-                {
-                  "type": 6,
-                  "name": "user",
-                  "description": "Der Benutzer, dem die SpielPunkte hinzugefügt werden."
-                }
-              ]
+              "value": "addgps"
             }
           ]
         },
         {
-          "type": 2,
-          "name": "remove",
-          "description": "Entferne jemandem BonusPunkte.",
-          "options": [
+          "type": 4,
+          "name": "anzahl",
+          "description": "Wie viel hinzugefügt werden soll.",
+          "required": true
+        },
+        {
+          "type": 6,
+          "name": "user",
+          "description": "Der Benutzer, dem etwas hinzugefügt werden soll."
+        }
+      ]
+    },
+    {
+      "name": "remove",
+      "description": "Entferne jemandem bestimmte Dinge!",
+      "options": [
+        {
+          "type": 3,
+          "name": "type",
+          "description": "Das, was entfernt werden soll.",
+          "required": true,
+          "choices": [
             {
-              "type": 1,
-              "name": "messages",
-              "description": "Entferne jemandem Nachrichten.",
-              "options": [
-                {
-                  "type": 4,
-                  "name": "anzahl",
-                  "description": "Die Anzahl der Nachrichten.",
-                  "required": true
-                },
-                {
-                  "type": 6,
-                  "name": "user",
-                  "description": "Der Benutzer, dem die Nachrichten entfernt werden."
-                }
-              ]
-            },
-            {
-              "type": 1,
               "name": "invites",
-              "description": "Entferne jemandem Einladungen.",
-              "options": [
-                {
-                  "type": 4,
-                  "name": "anzahl",
-                  "description": "Die Anzahl der Einladungen.",
-                  "required": true
-                },
-                {
-                  "type": 6,
-                  "name": "user",
-                  "description": "Der Benutzer, dem die Einladungen entfernt werden."
-                }
-              ]
+              "value": "removeinvs"
             },
             {
-              "type": 1,
+              "name": "messages",
+              "value": "removemsgs"
+            },
+            {
               "name": "gamepoints",
-              "description": "Entferne jemandem Spielpunkte.",
-              "options": [
-                {
-                  "type": 4,
-                  "name": "anzahl",
-                  "description": "Die Anzahl der Spielpunkte.",
-                  "required": true
-                },
-                {
-                  "type": 6,
-                  "name": "user",
-                  "description": "Der Benutzer, dem die SpielPunkte entfernt werden."
-                }
-              ]
+              "value": "removegps"
             }
           ]
+        },
+        {
+          "type": 4,
+          "name": "anzahl",
+          "description": "Wie viel entfernt werden soll.",
+          "required": true
+        },
+        {
+          "type": 6,
+          "name": "user",
+          "description": "Der Benutzer, dem etwas entfernt werden soll."
         }
       ]
     },

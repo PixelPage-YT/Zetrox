@@ -1,6 +1,5 @@
 import * as harmony from "https://code.harmony.rocks/main"
-import { commands } from "./commands.ts"
-import {help, helpselect} from "./commands/help.ts"
+import {help} from "./commands/help.ts"
 import {verifypanel} from "./commands/verifypanel.ts"
 import {messages} from "./commands/messages.ts"
 import {invites} from "./commands/invites.ts"
@@ -11,9 +10,6 @@ import {lbInvites,lbMessages,lbGamepoints} from "./commands/leaderboard.ts"
 import{eInviteKanal} from "./commands/einstellungen/inviteKanal.ts"
 import{eAntiSpamTime} from "./commands/einstellungen/antiSpamTime.ts"
 import{eTeamRole} from "./commands/einstellungen/teamRole.ts"
-import{bonusAddMessages,bonusRemoveMessages} from "./commands/bonus/messages.ts"
-import{bonusAddInvites,bonusRemoveInvites} from "./commands/bonus/invites.ts"
-import{bonusAddGamePoints,bonusRemoveGamePoints} from "./commands/bonus/gamepoints.ts"
 import {gtn} from "./commands/gtn.ts"
 import {info} from "./commands/info.ts"
 import {emojiquiz} from "./commands/emojiquiz.ts"
@@ -29,6 +25,8 @@ import {updateStats} from "./loops/updateStats.ts"
 import {checkGW} from "./loops/checkGW.ts"
 import {guildMemberRemove} from "./listeners/guildMemberRemove.ts"
 import {achtball} from "./commands/8ball.ts"
+import {add} from "./commands/add.ts"
+import {remove} from "./commands/remove.ts"
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -72,32 +70,14 @@ class Zetrox extends harmony.Client {
         eTeamRole(i, this)
     }
 
-    @harmony.groupslash("bonus", "add", "messages")
-    bonusAddMessages(i:harmony.Interaction){
-        bonusAddMessages(i, this);
-    }
-    
-    @harmony.groupslash("bonus", "remove", "messages")
-    bonusRemoveMessages(i:harmony.Interaction){
-        bonusRemoveMessages(i, this);
+    @harmony.slash("add")
+    add(i:harmony.Interaction){
+        add(i,this)
     }
 
-    @harmony.groupslash("bonus", "add", "invites")
-    bonusAddInvites(i:harmony.Interaction){
-        bonusAddInvites(i, this);
-    }
-
-    @harmony.groupslash("bonus", "remove", "invites")
-    bonusRemoveInvites(i:harmony.Interaction){
-        bonusRemoveInvites(i, this);
-    }
-    @harmony.groupslash("bonus", "add", "gamepoints")
-    bonusAddGamePoints(i:harmony.Interaction){
-        bonusAddGamePoints(i, this);
-    }
-    @harmony.groupslash("bonus", "remove", "gamepoints")
-    bonusRemoveGamePoints(i:harmony.Interaction){
-        bonusRemoveGamePoints(i, this);
+    @harmony.slash("remove")
+    remove(i:harmony.Interaction){
+        remove(i,this)
     }
 
     @harmony.subslash("leaderboard","invites")

@@ -6,27 +6,40 @@ export async function ready(client:harmony.Client) {
     console.log(`[Info] Client-ID: ${client.user?.id}`)
     if(Deno.args[1] != undefined){
         if(Deno.args[1] == "newSlash"){
-            let customCommand = Deno.args[2]
-            if(customCommand != undefined){
-                console.log("[Info] Slash Command " + customCommand + " wird gelöscht")
-                const clguilds = await client.guilds.array()
-                for(let guild of clguilds){
-                    let commands = await guild.commands.all()
-                    for(let command of commands.array()){
+            if(Deno.args[0] != undefined && Deno.args[0] == "prod"){
+                let customCommand = Deno.args[2]
+                if(customCommand != undefined){
+                    console.log("[Info] Slash Command " + customCommand + " wird gelöscht")
+                    for(let command of (await client.interactions.commands.all()).array()){
                         if(command.name == customCommand){
-                            command.delete()
-                            console.info("[Info] Slash Command " + command.name + " in dem Server " + command.guild?.name + " gelöscht.")
+                            await command.delete()
+                            console.log("[Info] Slash Command " + customCommand + " gelöscht")
                         }
                     }
                 }
             }else{
-                console.log("[Info] Alle Slash Commands werden gelöscht")
-                const clguilds = await client.guilds.array()
-                for(let guild of clguilds){
-                    let commands = await guild.commands.all()
-                    for(let command of commands.array()){
-                        command.delete()
-                        console.info("[Info] Slash Command " + command.name + " in dem Server " + command.guild?.name + " gelöscht.")
+                let customCommand = Deno.args[2]
+                if(customCommand != undefined){
+                    console.log("[Info] Slash Command " + customCommand + " wird gelöscht")
+                    const clguilds = await client.guilds.array()
+                    for(let guild of clguilds){
+                        let commands = await guild.commands.all()
+                        for(let command of commands.array()){
+                            if(command.name == customCommand){
+                                command.delete()
+                                console.info("[Info] Slash Command " + command.name + " in dem Server " + command.guild?.name + " gelöscht.")
+                            }
+                        }
+                    }
+                }else{
+                    console.log("[Info] Alle Slash Commands werden gelöscht")
+                    const clguilds = await client.guilds.array()
+                    for(let guild of clguilds){
+                        let commands = await guild.commands.all()
+                        for(let command of commands.array()){
+                            command.delete()
+                            console.info("[Info] Slash Command " + command.name + " in dem Server " + command.guild?.name + " gelöscht.")
+                        }
                     }
                 }
             }
