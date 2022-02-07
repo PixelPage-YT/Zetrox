@@ -27,6 +27,9 @@ import {guildMemberRemove} from "./listeners/guildMemberRemove.ts"
 import {achtball} from "./commands/8ball.ts"
 import {add} from "./commands/add.ts"
 import {remove} from "./commands/remove.ts"
+import Aqua from "https://deno.land/x/aqua@v1.3.3/mod.ts";
+
+const app = new Aqua(3100);
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -193,6 +196,11 @@ client.on("guildMemberRemove", (member:harmony.Member) => {
 })
 client.on("interactionCreate", (i:harmony.Interaction) => {
     interactionCreate(i, client)
+})
+
+app.get("/topggwebhook", (req) => {
+    console.log(req.body)
+    return "Silence..."
 })
 client.setPresence({ type: "LISTENING", name: " /help" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
