@@ -27,9 +27,10 @@ import {guildMemberRemove} from "./listeners/guildMemberRemove.ts"
 import {achtball} from "./commands/8ball.ts"
 import {add} from "./commands/add.ts"
 import {remove} from "./commands/remove.ts"
-import Aqua from "https://deno.land/x/aqua@v1.3.3/mod.ts";
-
-const app = new Aqua(3100);
+import {
+    database,
+    saveDatabase
+} from "./util/database.ts"
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -198,9 +199,42 @@ client.on("interactionCreate", (i:harmony.Interaction) => {
     interactionCreate(i, client)
 })
 
-app.get("/topggwebhook", (req) => {
-    console.log(req.body)
-    return "Silence..."
-})
+
+const listener = Deno.listen({ port: 8000 });
+
+
 client.setPresence({ type: "LISTENING", name: " /help" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
+
+let votechannel = await client.channels.resolve("940206959951482890")
+
+
+for await(const conn of listener) {
+    for await(const {request: req, respondWith: res} of Deno.serveHttp(conn)) {
+        let data = await req.json()
+        let user = await client.users.get(data.user)
+        if(user == undefined){
+            user = await client.users.resolve(data.user)
+        }
+        if(user != undefined && votechannel != undefined && votechannel.isText()){
+            let votedb = database("votes.json")
+            if(!votedb[user.id]){
+                votedb[user.id] = 0
+            }
+            votedb[user.id]++
+            await votechannel.send({content:user.mention,embeds:[
+                {
+                    "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
+                    "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + votedb[user.id].toString() + " vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
+                    "color": 5588753
+                }
+            ]})
+            saveDatabase("votes.json",votedb)
+        }
+        res(new Response("Silence...", {
+            headers: {
+                'content-type': 'text/plain'
+            }
+        }));
+    }
+}
