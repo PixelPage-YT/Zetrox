@@ -47,6 +47,10 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
         if(i.isMessageComponent()){
             if(i.values[0]){
                 if(i.values[0] == "help-giveaways"){
+                  /* {
+                    "name": "Drops",
+                    "value": "Wenn du einen Drop erstellen willst (der Erste der auf das Giveaway klickt, kriegt den Preis), musst du `/drop <Preis> <Optional: Gewinneranzahl>` ausführen."
+                  } */
                     await i.respond({
                         embeds:[
                             {
@@ -62,10 +66,6 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                                     "name": "Schnelle Erstellung",
                                     "value": "Möchtest du schnellstmöglich und einfach ein Giveaway erstellen, führe `/gstart <Zeit> <Gewinneranzahl> <Preis>` aus!"
                                   },
-                                  {
-                                    "name": "Drops",
-                                    "value": "Wenn du einen Drop erstellen willst (der Erste der auf das Giveaway klickt, kriegt den Preis), musst du `/drop <Preis> <Optional: Gewinneranzahl>` ausführen."
-                                  }
                                 ],
                                 "footer": {
                                   "text": "⇢ Zetrox von Folizza Studios",
