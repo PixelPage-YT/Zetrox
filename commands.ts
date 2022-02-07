@@ -33,50 +33,54 @@ export const commands: harmony.SlashCommandPartial[] = [
         ]
     },
     {
-      "name": "leaderboard",
-      "description": "Zeigt Nachrichten/Invites oder GamePoints in einer Rangliste",
+      "name": "lb",
+      "description": "Zeigt eine Bestenliste.",
       "options": [
         {
-          "type": 1,
-          "name": "messages",
-          "description": "Zeigt Nachrichten in einer Rangliste",
-          "options": []
-        },
-        {
-          "type": 1,
-          "name": "invites",
-          "description": "Zeigt Invites in einer Rangliste",
-          "options": []
-        },
-        {
-          "type": 1,
-          "name": "gamepoints",
-          "description": "Zeigt GamePoints in einer Rangliste",
-          "options": []
+          "type": 3,
+          "name": "type",
+          "description": "Welche Bestenliste angezeigt werden soll.",
+          "required": true,
+          "choices": [
+            {
+              "name": "invites",
+              "value": "lbinvs"
+            },
+            {
+              "name": "messages",
+              "value": "lbmsgs"
+            },
+            {
+              "name": "gamepoints",
+              "value": "lbgps"
+            }
+          ]
         }
       ]
     },
     {
-      "name": "lb",
-      "description": "Zeigt Nachrichten/Invites oder GamePoints in einer Rangliste",
+      "name": "leaderboard",
+      "description": "Zeigt eine Bestenliste.",
       "options": [
         {
-          "type": 1,
-          "name": "messages",
-          "description": "Zeigt Nachrichten in einer Rangliste",
-          "options": []
-        },
-        {
-          "type": 1,
-          "name": "invites",
-          "description": "Zeigt Invites in einer Rangliste",
-          "options": []
-        },
-        {
-          "type": 1,
-          "name": "gamepoints",
-          "description": "Zeigt GamePoints in einer Rangliste",
-          "options": []
+          "type": 3,
+          "name": "type",
+          "description": "Welche Bestenliste angezeigt werden soll.",
+          "required": true,
+          "choices": [
+            {
+              "name": "invites",
+              "value": "lbinvs"
+            },
+            {
+              "name": "messages",
+              "value": "lbmsgs"
+            },
+            {
+              "name": "gamepoints",
+              "value": "lbgps"
+            }
+          ]
         }
       ]
     },

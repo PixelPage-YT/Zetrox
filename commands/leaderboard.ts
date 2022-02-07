@@ -1,6 +1,6 @@
 import * as harmony from "https://code.harmony.rocks/main"
 import {noPerms} from "../util/noPerms.ts"
-export async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
+async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
     try{
         if(i.isApplicationCommand()){
             let messagedb = JSON.parse(Deno.readTextFileSync("./databases/messages.json"));
@@ -69,7 +69,7 @@ export async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
     }
 }
 
-export async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
+async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
     try{
         let invitedb = JSON.parse(Deno.readTextFileSync("./databases/invites/invites.json"));
         let content = "";
@@ -134,7 +134,7 @@ export async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
         noPerms(i);
     }
 }
-export async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
+async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
     try{
         let invitedb = JSON.parse(Deno.readTextFileSync("./databases/gamePoints.json"));
         let content = "";
@@ -197,5 +197,26 @@ export async function lbGamepoints(i:harmony.Interaction, client:harmony.Client)
         })
     }catch(err){
         noPerms(i);
+    }
+}
+
+export async function leaderboard(i:harmony.Interaction,client:harmony.Client){
+    try{
+        if(i.isApplicationCommand()){
+            if(i.option<string>("type")){
+                let type = i.option<string>("type");
+                if(type == "lbmsg"){
+                    lbMessages(i,client)
+                }
+                if(type == "lbinvs"){
+                    lbInvites(i,client)
+                }
+                if(type == "lbgps"){
+                    lbGamepoints(i,client)
+                }
+            }
+        }
+    }catch(err){
+        noPerms(i)
     }
 }
