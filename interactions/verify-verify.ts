@@ -80,7 +80,7 @@ export async function verifyVerify(i:harmony.Interaction,client:harmony.Client){
                                             role = await i.guild.roles.resolve(dbentry.role)
                                         }
                                         if(role != undefined){
-                                            i.member.roles.add(role)
+                                            await i.member.roles.add(role)
                                             await answer.respond({content:i.member.user.mention + ", :white_check_mark: Verifiziert! :white_check_mark:",ephemeral:true})
                                         }
                                     }

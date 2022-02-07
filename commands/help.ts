@@ -10,7 +10,7 @@ export async function help(i:harmony.Interaction,client:harmony.Client){
                       type: harmony.MessageComponentType.BUTTON,
                       style: harmony.ButtonStyle.LINK,
                       label: "Bot einladen",
-                      url:"https://discord.com/api/oauth2/authorize?client_id=706526290181619775&permissions=8&scope=bot%20applications.commands"
+                      url:"https://discord.com/api/oauth2/authorize?client_id=706526290181619775&permissions=2953145441&scope=bot%20applications.commands"
                   },
                   {
                       type: harmony.MessageComponentType.BUTTON,
