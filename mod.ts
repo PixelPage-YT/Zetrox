@@ -206,7 +206,7 @@ const listener = Deno.listen({ port: 8000 });
 client.setPresence({ type: "LISTENING", name: " /help" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
 
-let votechannel = await client.channels.resolve("940206959951482890")
+
 
 
 for await(const conn of listener) {
@@ -215,6 +215,10 @@ for await(const conn of listener) {
         let user = await client.users.get(data.user)
         if(user == undefined){
             user = await client.users.resolve(data.user)
+        }
+        let votechannel = await client.channels.get("940206959951482890")
+        if(votechannel == undefined){
+            votechannel = await client.channels.resolve("940206959951482890")
         }
         if(user != undefined && votechannel != undefined && votechannel.isText()){
             let votedb = database("votes.json")
