@@ -24,7 +24,7 @@ export async function updateStats(client:harmony.Client){
                             try{
                                 let data = await (await fetch("https://api.mcsrvstat.us/2/" + stat.ip)).json()
                                 let motd:string = ""
-                                if(data.motd.raw[0]){
+                                if(data.motd && data.motd.raw[0]){
                                     motd += data.motd.raw[0]
                                 }
                                 if(data.motd.raw[1]){
