@@ -241,7 +241,7 @@ try{
                 ]})
                 saveDatabase("votes.json",votedb)
             }
-            res(new Response("Silence...", {
+            await res(new Response("Silence...", {
                 headers: {
                     'content-type': 'text/plain'
                 }

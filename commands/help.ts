@@ -219,8 +219,9 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                       }
                     ]
                 })
-                }else if(i.customID == "help-ticket"){
-                  i.respond({
+              }
+              if(i.customID == "help-ticket"){
+                  await i.respond({
                     "embeds": [
                       {
                         "title": ":mailbox: Supportsystem erstellen :mailbox:",

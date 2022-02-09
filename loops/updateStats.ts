@@ -27,7 +27,7 @@ export async function updateStats(client:harmony.Client){
                                 if(data.motd && data.motd.raw[0]){
                                     motd += data.motd.raw[0]
                                 }
-                                if(data.motd.raw[1]){
+                                if(data.motd && data.motd.raw[1]){
                                     motd += data.motd.raw[1]
                                 }
                                 let embed = new harmony.Embed({
