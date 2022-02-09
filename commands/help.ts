@@ -26,7 +26,15 @@ export async function help(i:harmony.Interaction,client:harmony.Client){
                   {
                       type: harmony.MessageComponentType.SELECT,
                       customID: 'help-select',
-                      options: [{label:"Gewinnspiele erstellen",value:"help-giveaways",emoji:{name:"🎉"}},{label:"Minigames spielen",value:"help-minigames",emoji:{name:"🎮"}},{label:"Einladungen zählen",value:"help-invites",emoji:{name:"✉️"}},{label:"Nachrichten zählen",value:"help-messages",emoji:{name:"💬"}},{label:"Statistik-Nachrichten erstellen",value:"help-stats",emoji:{name:"📊"}},{label:"Verifizierungssystem einrichten",value:"help-verify",emoji:{name:"🔒"}}]
+                      options: [
+                        {label:"Gewinnspiele erstellen",value:"help-giveaways",emoji:{name:"🎉"},description:"Erstelle deine Gewinnspiele mit Bedinguen, Bypass & co."},
+                        {label:"Minigames spielen",value:"help-minigames",emoji:{name:"🎮"}, description:"Spiele lustige Minispiele (auch Multiplayer)"},
+                        {label:"Einladungen zählen",value:"help-invites",emoji:{name:"✉️"}, description:"Zähle die Einladungen von Mitgliedern"},
+                        {label:"Nachrichten zählen",value:"help-messages",emoji:{name:"💬"}, description:"Zähle die Nachrichten von Mitgliedern"},
+                        {label:"Statistik-Nachrichten erstellen",value:"help-stats",emoji:{name:"📊"}, description:"Erstelle Statistik-Nachrichten, die sich immer updaten"},
+                        {label:"Verifizierungssystem einrichten",value:"help-verify",emoji:{name:"🔒"}, description:"Halte deinen Server mit Zetrox sicher"},
+                        {label:"TicketSystem erstellen",value:"help-ticket",emoji:{name:"📬"}, description:"Gebe Mitgliedern Hilfe, wenn sie diese brauchen"}
+                      ]
                   }
               ]
           }
@@ -55,7 +63,7 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                         embeds:[
                             {
                                 "title": ":gift: Giveaways erstellen :gift:",
-                                "description": "Mit Zetrox kannst du ganz einfach komplizierte Giveaways\nerstellen und verwalten!",
+                                "description": "Mit Zetrox kannst du ganz einfach komplexe Giveaways\nerstellen und verwalten!",
                                 "color": 44469,
                                 "fields": [
                                   {
@@ -211,6 +219,30 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                       }
                     ]
                 })
+                }else if(i.customID == "help-ticket"){
+                  i.respond({
+                    "embeds": [
+                      {
+                        "title": ":mailbox: Supportsystem erstellen :mailbox:",
+                        "description": "Mit Zetrox kannst du deinen Mitgliedern ganz einfach direkten Support geben.",
+                        "color": 44469,
+                        "fields": [
+                          {
+                            "name": "Einrichten",
+                            "value": "Richte das Supportsystem ganz einfach mit dem Befehl\n`/ticketpanel` ein."
+                          },
+                          {
+                            "name": "Teamrolle setzen",
+                            "value": "Alle Leute, die diese Rolle haben, können Tickets sehen.\nProbiere dazu `/einstellungen teamrole <Rolle>`"
+                          }
+                        ],
+                        "footer": {
+                          "text": "⇢ Zetrox von Folizza Studios",
+                          "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                        }
+                      }
+                    ]
+                  })
                 }
             }
         }
