@@ -28,6 +28,7 @@ import {guildMemberRemove} from "./listeners/guildMemberRemove.ts"
 import {achtball} from "./commands/8ball.ts"
 import {add} from "./commands/add.ts"
 import {remove} from "./commands/remove.ts"
+import {vote} from "./commands/vote.ts"
 import {
     database,
     saveDatabase
@@ -161,6 +162,11 @@ class Zetrox extends harmony.Client {
     @harmony.slash("ticketpanel")
     ticketpanel(i:harmony.Interaction){
         ticketpanel(i,client)
+    }
+
+    @harmony.slash("vote")
+    vote(i:harmony.Interaction){
+        vote(i,client)
     }
 }
 

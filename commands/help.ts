@@ -219,32 +219,34 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                       }
                     ]
                 })
+                
               }
-              if(i.customID == "help-ticket"){
-                  await i.respond({
-                    "embeds": [
-                      {
-                        "title": ":mailbox: Supportsystem erstellen :mailbox:",
-                        "description": "Mit Zetrox kannst du deinen Mitgliedern ganz einfach direkten Support geben.",
-                        "color": 44469,
-                        "fields": [
-                          {
-                            "name": "Einrichten",
-                            "value": "Richte das Supportsystem ganz einfach mit dem Befehl\n`/ticketpanel` ein."
-                          },
-                          {
-                            "name": "Teamrolle setzen",
-                            "value": "Alle Leute, die diese Rolle haben, können Tickets sehen.\nProbiere dazu `/einstellungen teamrole <Rolle>`"
-                          }
-                        ],
-                        "footer": {
-                          "text": "⇢ Zetrox von Folizza Studios",
-                          "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+              if(i.values[0] == "help-ticket"){
+                await i.respond({
+                  "embeds": [
+                    {
+                      "title": ":mailbox: Supportsystem erstellen :mailbox:",
+                      "description": "Mit Zetrox kannst du deinen Mitgliedern ganz einfach direkten Support geben.",
+                      "color": 44469,
+                      "fields": [
+                        {
+                          "name": "Einrichten",
+                          "value": "Richte das Supportsystem ganz einfach mit dem Befehl\n`/ticketpanel` ein."
+                        },
+                        {
+                          "name": "Teamrolle setzen",
+                          "value": "Alle Leute, die diese Rolle haben, können Tickets sehen.\nProbiere dazu `/einstellungen teamrole <Rolle>`"
                         }
+                      ],
+                      "footer": {
+                        "text": "⇢ Zetrox von Folizza Studios",
+                        "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
                       }
-                    ]
-                  })
-                }
+                    }
+                  ]
+                })
+              }
+              
             }
         }
     }

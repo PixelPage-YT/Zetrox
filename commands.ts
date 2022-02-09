@@ -373,5 +373,9 @@ export const commands: harmony.SlashCommandPartial[] = [
     {
       "name": "ticketpanel",
       "description": "Erstelle ein Ticket-System für deinen Server!"
+    },
+    {
+      "name": "vote",
+      "description": "Vote für Zetrox!"
     }
 ];
