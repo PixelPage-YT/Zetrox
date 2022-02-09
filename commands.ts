@@ -369,5 +369,9 @@ export const commands: harmony.SlashCommandPartial[] = [
           "required": true
         }
       ]
+    },
+    {
+      "name": "ticketpanel",
+      "description": "Erstelle ein Ticket-System für deinen Server!"
     }
 ];

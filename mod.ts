@@ -1,6 +1,7 @@
 import * as harmony from "https://code.harmony.rocks/main"
 import {help} from "./commands/help.ts"
 import {verifypanel} from "./commands/verifypanel.ts"
+import {ticketpanel} from "./commands/ticketpanel.ts"
 import {messages} from "./commands/messages.ts"
 import {invites} from "./commands/invites.ts"
 import {gamePoints} from "./commands/gamePoints.ts"
@@ -156,6 +157,11 @@ class Zetrox extends harmony.Client {
     achtball(i:harmony.Interaction){
         achtball(i,this)
     }
+
+    @harmony.slash("ticketpanel")
+    ticketpanel(i:harmony.Interaction){
+        ticketpanel(i,client)
+    }
 }
 
 const client = new Zetrox();
@@ -226,7 +232,7 @@ try{
                     votedb[user.id] = 0
                 }
                 votedb[user.id]++
-                await votechannel.send({content:user.mention,embeds:[
+                await votechannel.send({content:user.username,embeds:[
                     {
                         "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
                         "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + votedb[user.id].toString() + " vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
@@ -243,5 +249,5 @@ try{
         }
     }
 }catch(err){
-    
+    console.log(err)
 }

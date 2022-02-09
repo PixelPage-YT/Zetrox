@@ -5,6 +5,12 @@ import {gwReroll} from "../interactions/gw-reroll.ts"
 import {gwEnd} from "../interactions/gw-end.ts"
 import {helpselect} from "../commands/help.ts"
 import {gwSeeMembers} from "../interactions/gw-seemembers.ts"
+import {ticketCreate} from "../interactions/ticket-create.ts"
+import {ticketClose} from "../interactions/ticket-close.ts"
+import {ticketOpen} from "../interactions/ticket-open.ts"
+import {ticketDelete} from "../interactions/ticket-delete.ts"
+import {ticketTranscript} from "../interactions/ticket-transcript.ts"
+
 
 import {verifyVerify} from "../interactions/verify-verify.ts"
 export async function interactionCreate(i:harmony.Interaction,client:harmony.Client) {
@@ -17,6 +23,16 @@ export async function interactionCreate(i:harmony.Interaction,client:harmony.Cli
             helpselect(i, client)
         }else if(i.customID == "verify-verify"){
             verifyVerify(i, client)
+        }else if(i.customID == "ticket-create"){
+            ticketCreate(i,client)
+        }else if(i.customID == "ticket-close"){
+            ticketClose(i,client)
+        }else if(i.customID == "ticket-open"){
+            ticketOpen(i,client)
+        }else if(i.customID == "ticket-delete"){
+            ticketDelete(i,client)
+        }else if(i.customID == "ticket-transcript"){
+            ticketTranscript(i,client)
         }
     }
     if(i.isApplicationCommand() && i.targetMessage){

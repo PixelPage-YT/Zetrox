@@ -63,7 +63,7 @@ export async function verifyVerify(i:harmony.Interaction,client:harmony.Client){
                             return i.member.id == i2.member.id && i2.channel.id == i.channel.id
                         }
                         return false
-                    }, 10000)
+                    }, 30000)
                     let answer: harmony.Interaction | undefined;
                     if(answer1[0]){
                         answer = answer1[0]

@@ -42,7 +42,7 @@ async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                     if(currentuser == undefined){
                         currentuser = await i.client.users.resolve(element.member)
                     }
-                    if(currentuser != undefined && currentuser.id != client._id){
+                    if(currentuser != undefined && currentuser.bot == false){
                         if(index+1 == 1){
                             content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                         }else if(index+1 == 2){
@@ -110,7 +110,7 @@ async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
                 if(currentuser == undefined){
                     currentuser = await i.client.users.resolve(element.member)
                 }
-                if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
+                if(currentuser != undefined && currentuser.bot == false){
                     if(parseInt(index)+1 == 1){
                         content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                     }else if(parseInt(index)+1 == 2){
@@ -175,7 +175,7 @@ async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
                 if(currentuser == undefined){
                     currentuser = await i.client.users.resolve(element.member)
                 }
-                if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
+                if(currentuser != undefined && currentuser.bot == false){
                     if(parseInt(index)+1 == 1){
                         content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                     }else if(parseInt(index)+1 == 2){
@@ -205,7 +205,7 @@ export async function leaderboard(i:harmony.Interaction,client:harmony.Client){
         if(i.isApplicationCommand()){
             if(i.option<string>("type")){
                 let type = i.option<string>("type");
-                if(type == "lbmsg"){
+                if(type == "lbmsgs"){
                     lbMessages(i,client)
                 }
                 if(type == "lbinvs"){

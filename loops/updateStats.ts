@@ -65,7 +65,7 @@ export async function updateStats(client:harmony.Client){
                                         "inline": true
                                     },)
                                 }
-                                message.edit({
+                                await message.edit({
                                     embeds: [embed]
                                 })
                             }catch(err){
@@ -126,24 +126,25 @@ export async function updateStats(client:harmony.Client){
                             sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
                                 return b.count - a.count
                             })
-                            for(let index in sorted){
-                                if(parseInt(index)+1 == 4){
+                            let index = 0;
+                            for(let element of sorted){
+                                if(index+1 == 4){
                                     break;
                                 }
-                                let element = sorted[index]
                                 let currentuser: harmony.User|undefined
                                 currentuser = await client.users.get(element.member)
                                 if(currentuser == undefined){
                                     currentuser = await client.users.resolve(element.member)
                                 }
-                                if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
-                                    if(parseInt(index)+1 == 1){
+                                if(currentuser != undefined && currentuser.bot == false){
+                                    if(index+1 == 1){
                                         messagecontent+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                                    }else if(parseInt(index)+1 == 2){
+                                    }else if(index+1 == 2){
                                         messagecontent+="🥈 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                                    }else if(parseInt(index)+1 == 3){
+                                    }else if(index+1 == 3){
                                         messagecontent+="🥉 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                                     }
+                                    index++
                                 }
                             }
                             if(messagecontent == ""){
@@ -232,7 +233,7 @@ export async function updateStats(client:harmony.Client){
                                     "inline": true
                                 })
                             }
-                            message.edit({embeds:[embed]})
+                            await message.edit({embeds:[embed]})
                         }
                     }else{
                         let db2 = database("stats.json")
