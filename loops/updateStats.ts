@@ -124,24 +124,25 @@ export async function updateStats(client:harmony.Client){
                             let sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
                                 return b.count - a.count
                             })
-                            for(let index in sorted){
-                                if(parseInt(index)+1 == 4){
+                            let index = 0;
+                            for(let element of sorted){
+                                if(index+1 == 4){
                                     break;
                                 }
-                                let element = sorted[index]
                                 let currentuser: harmony.User|undefined
                                 currentuser = await client.users.get(element.member)
                                 if(currentuser == undefined){
                                     currentuser = await client.users.resolve(element.member)
                                 }
-                                if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
-                                    if(parseInt(index)+1 == 1){
+                                if(currentuser != undefined && currentuser.bot != true){
+                                    if(index+1 == 1){
                                         invitecontent+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                                    }else if(parseInt(index)+1 == 2){
+                                    }else if(index+1 == 2){
                                         invitecontent+="🥈 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                                    }else if(parseInt(index)+1 == 3){
+                                    }else if(index+1 == 3){
                                         invitecontent+="🥉 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                                     }
+                                    index++
                                 }
                             }
                             if(invitecontent == ""){
@@ -162,7 +163,7 @@ export async function updateStats(client:harmony.Client){
                             sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
                                 return b.count - a.count
                             })
-                            let index = 0;
+                            index = 0;
                             for(let element of sorted){
                                 if(index+1 == 4){
                                     break;
@@ -191,10 +192,10 @@ export async function updateStats(client:harmony.Client){
                             let gamePointcontent = "";
                             let nocontent = "";
                             points = []
-                            if(!(invitedb[guild.id])){
-                                invitedb[guild.id] = {}
+                            if(!(gamePointdb[guild.id])){
+                                gamePointdb[guild.id] = {}
                             }
-                            guilddb = invitedb[guild.id]
+                            guilddb = gamePointdb[guild.id]
                             for(let member1 of Object.entries(guilddb)){
                                 // @ts-ignore
                                 points.push({member:member1[0],count:member1[1].count})
@@ -202,24 +203,25 @@ export async function updateStats(client:harmony.Client){
                             sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
                                 return b.count - a.count
                             })
-                            for(let index in sorted){
-                                if(parseInt(index)+1 == 10){
+                            index = 0
+                            for(let element of sorted){
+                                if(index+1 == 4){
                                     break;
                                 }
-                                let element = sorted[index]
                                 let currentuser: harmony.User|undefined
                                 currentuser = await client.users.get(element.member)
                                 if(currentuser == undefined){
                                     currentuser = await client.users.resolve(element.member)
                                 }
-                                if(currentuser != undefined && currentuser.username.indexOf("Zetrox") == -1){
-                                    if(parseInt(index)+1 == 1){
+                                if(currentuser != undefined && currentuser.bot != true){
+                                    if(index+1 == 1){
                                         gamePointcontent+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                                    }else if(parseInt(index)+1 == 2){
+                                    }else if(index+1 == 2){
                                         gamePointcontent+="🥈 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
-                                    }else if(parseInt(index)+1 == 3){
+                                    }else if(index+1 == 3){
                                         gamePointcontent+="🥉 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                                     }
+                                    index++
                                 }
                             }
                             if(gamePointcontent == nocontent){
