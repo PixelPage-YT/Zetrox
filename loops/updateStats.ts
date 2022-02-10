@@ -249,13 +249,14 @@ export async function updateStats(client:harmony.Client){
                                     },
                                 ],
                                 "footer": {
-                                "text": "⇢ Zetrox von Folizza Studios",
-                                "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                    "text": "⇢ Zetrox von Folizza Studios | Letztes update ",
+                                    "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
                                 },
                                 "thumbnail": {
                                     "url": guild.iconURL()
                                 }
                             })
+                            embed.setTimestamp(Date.now())
                             if(guild.memberCount){
                                 embed.addField({
                                     "name": "MitgliederAnzahl",

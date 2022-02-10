@@ -219,10 +219,10 @@ client.setPresence({ type: "LISTENING", name: " /help" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
 
 
-async function waitVote(){
-    try{
-        for await(const conn of listener) {
-            for await(const {request: req, respondWith: res} of Deno.serveHttp(conn)) {
+try{
+    for await(const conn of listener) {
+        for await(const {request: req, respondWith: res} of Deno.serveHttp(conn)) {
+            try{
                 let data = await req.json()
                 let user = await client.users.get(data.user)
                 if(user == undefined){
@@ -252,11 +252,11 @@ async function waitVote(){
                         'content-type': 'text/plain'
                     }
                 }));
+            }catch(err){
+                console.log(err)
             }
         }
-    }catch(err){
-        console.log(err)
-        waitVote()
     }
+}catch(err){
+    console.log(err)
 }
-waitVote()
