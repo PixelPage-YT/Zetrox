@@ -38,11 +38,11 @@ async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                         break;
                     }
                     let currentuser: harmony.User|undefined
-                    currentuser = await i.client.users.get(element.member)
+                    currentuser = await client.users.get(element.member)
                     if(currentuser == undefined){
-                        currentuser = await i.client.users.resolve(element.member)
+                        currentuser = await client.users.resolve(element.member)
                     }
-                    if(currentuser != undefined && currentuser.bot == false){
+                    if(currentuser != undefined && currentuser.bot != true){
                         if(index+1 == 1){
                             content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                         }else if(index+1 == 2){
@@ -106,11 +106,11 @@ async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
                 }
                 let element = sorted[index]
                 let currentuser: harmony.User|undefined
-                currentuser = await i.client.users.get(element.member)
+                currentuser = await client.users.get(element.member)
                 if(currentuser == undefined){
-                    currentuser = await i.client.users.resolve(element.member)
+                    currentuser = await client.users.resolve(element.member)
                 }
-                if(currentuser != undefined && currentuser.bot == false){
+                if(currentuser != undefined && currentuser.bot != true){
                     if(parseInt(index)+1 == 1){
                         content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                     }else if(parseInt(index)+1 == 2){
@@ -171,11 +171,11 @@ async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
                 }
                 let element = sorted[index]
                 let currentuser: harmony.User|undefined
-                currentuser = await i.client.users.get(element.member)
+                currentuser = await client.users.get(element.member)
                 if(currentuser == undefined){
-                    currentuser = await i.client.users.resolve(element.member)
+                    currentuser = await client.users.resolve(element.member)
                 }
-                if(currentuser != undefined && currentuser.bot == false){
+                if(currentuser != undefined && currentuser.bot != true){
                     if(parseInt(index)+1 == 1){
                         content+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                     }else if(parseInt(index)+1 == 2){

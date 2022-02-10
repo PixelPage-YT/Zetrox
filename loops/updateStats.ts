@@ -34,21 +34,7 @@ export async function updateStats(client:harmony.Client){
                                     "title": stat.ip,
                                     "color": 44469,
                                     "fields": [
-                                        {
-                                            "name": "Nachricht des Tages (MOTD)",
-                                            "value": motd,
-                                            "inline": true
-                                        },
-                                        {
-                                            "name": "Spieleranzahl",
-                                            "value": data.players.online + "/" + data.players.max,
-                                            "inline": true
-                                        },
-                                        {
-                                            "name": "Minecraft Versionen",
-                                            "value": data.version,
-                                            "inline": true
-                                        }
+                                        
                                     ],
                                     "footer": {
                                         "text": "⇢ Zetrox von Folizza Studios",
@@ -58,18 +44,68 @@ export async function updateStats(client:harmony.Client){
                                         "url": "https://emoji.gg/assets/emoji/1532-iron.png"
                                     }
                                 })
-                                if(data.hostname){
-                                    embed.addField({
-                                        "name": "Hostname",
-                                        "value": data.hostname,
-                                        "inline": true
-                                    },)
+                                if(data){
+                                    if(data.online && data.online == false){
+                                        embed = new harmony.Embed({
+                                            "title": stat.ip,
+                                            "color": 44469,
+                                            "fields": [
+                                                {
+                                                    "name": "Status",
+                                                    "value": "Offline",
+                                                    "inline": true
+                                                }
+                                            ],
+                                            "footer": {
+                                                "text": "⇢ Zetrox von Folizza Studios",
+                                                "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                            },
+                                            "thumbnail": {
+                                                "url": "https://emoji.gg/assets/emoji/1532-iron.png"
+                                            }
+                                        })
+                                    }else{
+                                        embed = new harmony.Embed({
+                                            "title": stat.ip,
+                                            "color": 44469,
+                                            "fields": [
+                                                {
+                                                    "name": "Nachricht des Tages (MOTD)",
+                                                    "value": motd,
+                                                    "inline": true
+                                                },
+                                                {
+                                                    "name": "Spieleranzahl",
+                                                    "value": data.players.online + "/" + data.players.max,
+                                                    "inline": true
+                                                },
+                                                {
+                                                    "name": "Minecraft Versionen",
+                                                    "value": data.version,
+                                                    "inline": true
+                                                }
+                                            ],
+                                            "footer": {
+                                                "text": "⇢ Zetrox von Folizza Studios",
+                                                "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                            },
+                                            "thumbnail": {
+                                                "url": "https://emoji.gg/assets/emoji/1532-iron.png"
+                                            }
+                                        })
+                                    }
+                                    if(data.hostname){
+                                        embed.addField({
+                                            "name": "Hostname",
+                                            "value": data.hostname,
+                                            "inline": true
+                                        },)
+                                    }
+                                    await message.edit({
+                                        embeds: [embed]
+                                    })
                                 }
-                                await message.edit({
-                                    embeds: [embed]
-                                })
                             }catch(err){
-                                console.log(err)
                             }
                         }else if (stat.type == "server"){
                             // invites
@@ -136,7 +172,7 @@ export async function updateStats(client:harmony.Client){
                                 if(currentuser == undefined){
                                     currentuser = await client.users.resolve(element.member)
                                 }
-                                if(currentuser != undefined && currentuser.bot == false){
+                                if(currentuser != undefined && currentuser.bot != true){
                                     if(index+1 == 1){
                                         messagecontent+="🥇 **" + currentuser.username + "**" + " | " + element.count.toString() + "\n"
                                     }else if(index+1 == 2){

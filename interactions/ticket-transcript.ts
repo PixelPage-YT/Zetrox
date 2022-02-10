@@ -12,7 +12,7 @@ export async function ticketTranscript(i:harmony.Interaction,client:harmony.Clie
             `
             messages = messages.reverse()
             messages.forEach(message => {
-                if(message.author.bot == false){
+                if(message.author.bot != true){
                     content += "<p>[" + message.author.username + "] " + message.content + "</p>"
                 }
             });
