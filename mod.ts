@@ -223,29 +223,31 @@ try{
     for await(const conn of listener) {
         for await(const {request: req, respondWith: res} of Deno.serveHttp(conn)) {
             try{
-                let data = await req.json()
-                let user = await client.users.get(data.user)
-                if(user == undefined){
-                    user = await client.users.resolve(data.user)
-                }
-                let votechannel = await client.channels.get("940206959951482890")
-                if(votechannel == undefined){
-                    votechannel = await client.channels.resolve("940206959951482890")
-                }
-                if(user != undefined && votechannel != undefined && votechannel.isText()){
-                    let votedb = database("votes.json")
-                    if(!votedb[user.id]){
-                        votedb[user.id] = 0
+                if(req.headers.get("authorization") == "alsiudhPAIWUZZDPiuasgdhaIUDDHPAISUdzh"){
+                    let data = await req.json()
+                    let user = await client.users.get(data.user)
+                    if(user == undefined){
+                        user = await client.users.resolve(data.user)
                     }
-                    votedb[user.id]++
-                    await votechannel.send({content:user.username,embeds:[
-                        {
-                            "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
-                            "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + votedb[user.id].toString() + " vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
-                            "color": 5588753
+                    let votechannel = await client.channels.get("940206959951482890")
+                    if(votechannel == undefined){
+                        votechannel = await client.channels.resolve("940206959951482890")
+                    }
+                    if(user != undefined && votechannel != undefined && votechannel.isText()){
+                        let votedb = database("votes.json")
+                        if(!votedb[user.id]){
+                            votedb[user.id] = 0
                         }
-                    ]})
-                    saveDatabase("votes.json",votedb)
+                        votedb[user.id]++
+                        await votechannel.send({content:user.username,embeds:[
+                            {
+                                "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
+                                "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + votedb[user.id].toString() + " vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
+                                "color": 5588753
+                            }
+                        ]})
+                        saveDatabase("votes.json",votedb)
+                    }
                 }
                 await res(new Response("Silence...", {
                     headers: {
