@@ -223,7 +223,6 @@ try{
     for await(const conn of listener) {
         for await(const {request: req, respondWith: res} of Deno.serveHttp(conn)) {
             try{
-                console.log(req.headers.get("authorization"))
                 if(req.headers.get("authorization") == "alsiudhPAIWUZZDPiuasgdhaIUDDHPAISUdzh"){
                     let data = await req.json()
                     let user = await client.users.get(data.user)

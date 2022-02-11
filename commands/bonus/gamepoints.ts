@@ -80,7 +80,7 @@ export async function bonusRemoveGamePoints(i:harmony.Interaction,client:harmony
                                 member = member1
                             }
                         }
-                        modifyGamePoints(i.member,0 - anzahl)
+                        modifyGamePoints(member,0 - anzahl)
                         await i.respond({embeds: [{
                             "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
                             "description": `Du hast ${member.user.username} **${anzahl}** GamePoints <:ZetroCoin:935256569984208917> entfernt.`,
