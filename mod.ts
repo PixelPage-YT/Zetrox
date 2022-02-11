@@ -212,53 +212,40 @@ client.on("interactionCreate", (i:harmony.Interaction) => {
 })
 
 
-const listener = Deno.listen({ port: 8000 });
-
-
 client.setPresence({ type: "LISTENING", name: " /help" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
+import { serve } from "https://deno.land/std@0.125.0/http/server.ts";
 
-
-try{
-    for await(const conn of listener) {
-        for await(const {request: req, respondWith: res} of Deno.serveHttp(conn)) {
-            try{
-                if(req.headers.get("authorization") == "alsiudhPAIWUZZDPiuasgdhaIUDDHPAISUdzh"){
-                    let data = await req.json()
-                    let user = await client.users.get(data.user)
-                    if(user == undefined){
-                        user = await client.users.resolve(data.user)
-                    }
-                    let votechannel = await client.channels.get("940206959951482890")
-                    if(votechannel == undefined){
-                        votechannel = await client.channels.resolve("940206959951482890")
-                    }
-                    if(user != undefined && votechannel != undefined && votechannel.isText()){
-                        let votedb = database("votes.json")
-                        if(!votedb[user.id]){
-                            votedb[user.id] = 0
-                        }
-                        votedb[user.id]++
-                        await votechannel.send({content:user.username,embeds:[
-                            {
-                                "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
-                                "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + votedb[user.id].toString() + " vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
-                                "color": 5588753
-                            }
-                        ]})
-                        saveDatabase("votes.json",votedb)
-                    }
+serve(async (req) => {
+    try{
+        if(req.headers.get("authorization") == "alsiudhPAIWUZZDPiuasgdhaIUDDHPAISUdzh"){
+            let data = await req.json()
+            let user = await client.users.get(data.user)
+            if(user == undefined){
+                user = await client.users.resolve(data.user)
+            }
+            let votechannel = await client.channels.get("940206959951482890")
+            if(votechannel == undefined){
+                votechannel = await client.channels.resolve("940206959951482890")
+            }
+            if(user != undefined && votechannel != undefined && votechannel.isText()){
+                let votedb = database("votes.json")
+                if(!votedb[user.id]){
+                    votedb[user.id] = 0
                 }
-                await res(new Response("Silence...", {
-                    headers: {
-                        'content-type': 'text/plain'
+                votedb[user.id]++
+                await votechannel.send({content:user.username,embeds:[
+                    {
+                        "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
+                        "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + votedb[user.id].toString() + " vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
+                        "color": 5588753
                     }
-                }));
-            }catch(err){
-                console.log(err)
+                ]})
+                saveDatabase("votes.json",votedb)
             }
         }
+    }catch(err){
+        console.log(err)
     }
-}catch(err){
-    console.log(err)
-}
+    return new Response("Silence...")
+});
