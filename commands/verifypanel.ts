@@ -9,6 +9,8 @@ import {
     isAuthorized
 } from "../util/isAuthorized.ts"
 import {noPerms} from "../util/noPerms.ts"
+import { askInteraction } from "../util/askInteraction.ts"
+import { askMessage } from "../util/askMessage.ts"
 export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
@@ -143,12 +145,12 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                     }
                 }
                 if(rchannel != undefined && rchannel.isText()){
+                    await answer.delete()
                     embed.addField({name:"Kanal",value:rchannel.mention,inline:true})
                     msg.editResponse({content:"**Welche Rolle sollen Mitglieder bekommen?**\n*Bitte schreibe den jeweiligen Namen der Rolle*",embeds:[embed]})
                     let answer1 = await client.waitFor("messageCreate", (message) => {
                         return message.author.id == i.member?.id && message.channel.id == i.channel?.id
                     }, 10000)
-                    let answer: harmony.Message | undefined;
                     if(answer1[0]){
                         answer = answer1[0]
                     }
@@ -161,7 +163,89 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                 rrole = role
                             }
                         }
+                        await answer.delete()
                         if(rrole != undefined){
+                            embed.addField({name:"Rolle",value:rrole.name,inline:true})
+                            let votedb = database("votes.json")
+                            let panelem = new harmony.Embed({
+                                "title": "Bitte verifiziere dich!",
+                                "description": "Um den Server vor Bots und Angriffen zu schützen,\nmusst du dich verifizieren. Drücke dazu auf den Button \"Verifizieren\".",
+                                "color": 44469,
+                                "author": {
+                                    "name": "Verifizieren",
+                                    "icon_url": "https://vectorified.com/images/white-lock-icon-png-9.png"
+                                },
+                                "footer": {
+                                    "text": "⇢ Zetrox von Folizza Studios",
+                                    "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
+                                }
+                            })
+                            if(votedb[i.user.id] && votedb[i.user.id] > 9){
+                                const controls: harmony.MessageComponentData[] = [
+                                    {
+                                        type: harmony.MessageComponentType.ACTION_ROW,
+                                        components: [
+                                            {
+                                                type: harmony.MessageComponentType.BUTTON,
+                                                style: harmony.ButtonStyle.DANGER,
+                                                customID: 'vp-yes',
+                                                emoji: {name:"✅"},
+                                                label:"Ja"
+                                            },
+                                            {
+                                                type: harmony.MessageComponentType.BUTTON,
+                                                style: harmony.ButtonStyle.SECONDARY,
+                                                customID: 'vp-no',
+                                                emoji: {name:"🚫"},
+                                                label:"Nein"
+                                            },
+                                        ]
+                                    },
+                                ]
+                                await msg.editResponse({components: controls,content:"**Möchtest du deine eigene Nachricht nutzen?**", embeds:[embed]})
+                                let answer = undefined;
+                                let answerI = await askInteraction(client,i,20000, ["vp-yes", "vp-no"])
+                                if( answerI != undefined ){
+                                    if(answerI.isMessageComponent()){
+                                        if(answerI.customID == "vp-yes"){
+                                            await msg.editResponse({components: [],content:"**Welchen Inhalt soll die Nachricht haben?**", embeds:[embed]})
+                                            answer = undefined
+                                            answer = await askMessage(client,i,60000)
+                                            if(answer != undefined){
+                                                panelem.setDescription(answer.content)
+                                                await msg.editResponse({components: [],content:"**Welchen Banner soll die Nachricht haben?**\n*Bitte gebe eine **URL** an!*", embeds:[embed]})
+                                                await answer.delete()
+                                                answer = undefined
+                                                answer = await askMessage(client,i,60000)
+                                                if(answer != undefined){
+                                                    if(isURL(answer.content)){
+                                                        panelem.setThumbnail(answer.content)
+                                                        await msg.editResponse({components: [],content:"**Welchen Titel soll die Nachricht haben?**", embeds:[embed]})
+                                                        await answer.delete()
+                                                        answer = undefined
+                                                        answer = await askMessage(client,i,60000)
+                                                        if(answer != undefined){
+                                                            panelem.setTitle(answer.content)
+                                                        }else{
+                                                            await i.channel.send({content:":x: Bitte antworte innerhalb 1 Minute! :x:"})
+                                                            return
+                                                        }
+                                                    }else{
+                                                        await i.channel.send({content:":x: Das ist keine URL! :x:"})
+                                                        return
+                                                    }
+                                                }else{
+                                                    await i.channel.send({content:":x: Bitte antworte innerhalb 1 Minute! :x:"})
+                                                    return
+                                                }
+                                            }else{
+                                                await i.channel.send({content:":x: Bitte antworte innerhalb 1 Minute! :x:"})
+                                                return
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             const controls: harmony.MessageComponentData[] = [
                                 {
                                     type: harmony.MessageComponentType.ACTION_ROW,
@@ -183,7 +267,6 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                     ]
                                 },
                             ]
-                            embed.addField({name:"Rolle",value:rrole.name,inline:true})
                             msg.editResponse({
                                 content:"**Müssen Mitglieder eine einfache Rechnung lösen bevor sie die Rolle bekommen?**\n*Dies gewährt extra Schutz vor Bots*",
                                 embeds: [
@@ -229,19 +312,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                     ]
                                     let vmessage = await rchannel.send({
                                         embeds: [
-                                            {
-                                                "title": "Bitte verifiziere dich!",
-                                                "description": "Um den Server vor Bots und Angriffen zu schützen,\nmusst du dich verifizieren. Drücke dazu auf den Button \"Verifizieren\".",
-                                                "color": 44469,
-                                                "author": {
-                                                    "name": "Verifizieren",
-                                                    "icon_url": "https://vectorified.com/images/white-lock-icon-png-9.png"
-                                                },
-                                                "footer": {
-                                                    "text": "⇢ Zetrox von Folizza Studios",
-                                                    "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
-                                                }
-                                            }
+                                            panelem
                                         ],
                                         components: controls
                                     })
@@ -256,6 +327,8 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                             }else{
                                 await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
                             }
+                        }else{
+                            await i.channel.send({content:":x: Diese Rolle existiert nicht... Schreibe den **exakten** Namen! :x:"})
                         }
                     }else{
                         await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
@@ -270,4 +343,14 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
     }catch(err){
         noPerms(i);
     }
+}
+
+function isURL(str:string) {
+    const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
 }

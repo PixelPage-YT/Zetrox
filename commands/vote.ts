@@ -22,6 +22,11 @@ export async function vote(i:harmony.Interaction,client:harmony.Client){
                     "name": "Eigene Embeds für das Ticket System",
                     "value": "Du kannst deinen Server noch mehr personalisieren, indem du einfach deine eigenen Embeds verwendest!",
                     "inline": true
+                  },
+                  {
+                    "name": "Eigene Embeds für das Verify System",
+                    "value": "Du kannst deinen Server noch mehr personalisieren, indem du einfach deine eigenen Embeds verwendest!",
+                    "inline": true
                   }
                 ],
                 "footer": {

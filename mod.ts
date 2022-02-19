@@ -34,6 +34,9 @@ import {
     saveDatabase
 } from "./util/database.ts"
 
+let startDate = Date.now()
+export {startDate}
+
 class Zetrox extends harmony.Client {
     oinvites=[]
     @harmony.slash()
