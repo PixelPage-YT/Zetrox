@@ -1,3 +1,4 @@
+import { supabaseClient } from "https://deno.land/x/supabase_deno@v1.0.5/mod.ts"
 import * as harmony from "https://code.harmony.rocks/main"
 import {help} from "./commands/help.ts"
 import {verifypanel} from "./commands/verifypanel.ts"
@@ -36,6 +37,9 @@ import {
 
 let startDate = Date.now()
 export {startDate}
+
+const sbclient:supabaseClient = new supabaseClient("https://lvqcvchccfkvuihmdbiu.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2cWN2Y2hjY2ZrdnVpaG1kYml1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDUyODcwNTUsImV4cCI6MTk2MDg2MzA1NX0.rr8wnLdwcF99sstojzwkgdgCk6_qMh2tSIq5Bf8EUUE")
+
 
 class Zetrox extends harmony.Client {
     oinvites=[]
@@ -232,19 +236,25 @@ serve(async (req) => {
                 votechannel = await client.channels.resolve("940206959951482890")
             }
             if(user != undefined && votechannel != undefined && votechannel.isText()){
-                let votedb = database("votes.json")
-                if(!votedb[user.id]){
-                    votedb[user.id] = 0
+                let table = sbclient.tables().get("votes")
+                type vote = {
+                    id:string,
+                    votes:number
                 }
-                votedb[user.id]++
+                let item:vote = {id:user.id,votes:0}
+                let nitem: vote = (await table.items().get("id", user.id))[0]
+                if(nitem != undefined){
+                    item = nitem
+                }
+                item.votes++
+                await table.items().edit("id", user.id, item)
                 await votechannel.send({content:user.username,embeds:[
                     {
                         "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
-                        "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + votedb[user.id].toString() + " vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
+                        "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + item.votes+1 + ". Vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
                         "color": 5588753
                     }
                 ]})
-                saveDatabase("votes.json",votedb)
             }
         }
     }catch(err){

@@ -1,13 +1,16 @@
+import { supabaseClient } from "https://deno.land/x/supabase_deno@v1.0.5/mod.ts"
 import * as harmony from "https://code.harmony.rocks/main"
 
 export async function isAuthorized(member:harmony.Member|undefined){
     if(member == undefined){
         return false
     }
-    let teamRoledb = JSON.parse(Deno.readTextFileSync("./databases/teamRole.json"))
-    let role = await member.guild.roles.get(teamRoledb[member.guild.id])
+    const sbclient:supabaseClient = new supabaseClient("https://lvqcvchccfkvuihmdbiu.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2cWN2Y2hjY2ZrdnVpaG1kYml1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDUyODcwNTUsImV4cCI6MTk2MDg2MzA1NX0.rr8wnLdwcF99sstojzwkgdgCk6_qMh2tSIq5Bf8EUUE")
+    let table = sbclient.tables().get("guild_settings")
+    let item = (await table.items().get("id", member.guild.id))[0]
+    let role = await member.guild.roles.get(item.teamRole)
     if(role == undefined){
-        role = await member.guild.roles.resolve(teamRoledb[member.guild.id])
+        role = await member.guild.roles.resolve(item.teamRole)
     }
     if(role != undefined){
         if((await member.roles.array()).findIndex(index => index === role)){

@@ -8,6 +8,7 @@ import {
 import {
     isAuthorized
 } from "../util/isAuthorized.ts"
+import { supabaseClient } from "https://deno.land/x/supabase_deno@v1.0.5/mod.ts"
 import {noPerms} from "../util/noPerms.ts"
 import { askInteraction } from "../util/askInteraction.ts"
 import { askMessage } from "../util/askMessage.ts"
@@ -166,7 +167,13 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                         await answer.delete()
                         if(rrole != undefined){
                             embed.addField({name:"Rolle",value:rrole.name,inline:true})
-                            let votedb = database("votes.json")
+                            const sbclient:supabaseClient = new supabaseClient("https://lvqcvchccfkvuihmdbiu.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2cWN2Y2hjY2ZrdnVpaG1kYml1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDUyODcwNTUsImV4cCI6MTk2MDg2MzA1NX0.rr8wnLdwcF99sstojzwkgdgCk6_qMh2tSIq5Bf8EUUE")
+                            let table = sbclient.tables().get("votes")
+                            let item = (await table.items().get("id", i.user.id))[0]
+                            let votes = 0;
+                            if(item != undefined){
+                            votes = item.votes
+                            }
                             let panelem = new harmony.Embed({
                                 "title": "Bitte verifiziere dich!",
                                 "description": "Um den Server vor Bots und Angriffen zu schützen,\nmusst du dich verifizieren. Drücke dazu auf den Button \"Verifizieren\".",
@@ -180,7 +187,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                     "icon_url": "https://sph-download.neocities.org/share/GoDaddyStudioPage-0%202.png"
                                 }
                             })
-                            if(votedb[i.user.id] && votedb[i.user.id] > 9){
+                            if(votes > 9){
                                 const controls: harmony.MessageComponentData[] = [
                                     {
                                         type: harmony.MessageComponentType.ACTION_ROW,
