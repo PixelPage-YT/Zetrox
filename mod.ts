@@ -251,7 +251,7 @@ serve(async (req) => {
                 await votechannel.send({content:user.username,embeds:[
                     {
                         "title": "<:topggBROTM:940288324000694365> Danke für deinen Vote! <:topggBROTM:940288324000694365>",
-                        "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + item.votes+1 + ". Vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
+                        "description": "**Vielen Dank** für deinen Vote!\nDies ist nun " + user.username + "'s " + item.votes + ". Vote!\n\n:link: [Selber Voten](https://top.gg/bot/706526290181619775/vote) :link:",
                         "color": 5588753
                     }
                 ]})
