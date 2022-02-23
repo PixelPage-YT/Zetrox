@@ -2,6 +2,7 @@ import * as harmony from "https://code.harmony.rocks/main"
 import {database ,saveDatabase} from "../util/database.ts"
 import {isAuthorized} from "../util/isAuthorized.ts"
 import {noPerms} from "../util/noPerms.ts"
+import { supabaseClient } from "https://deno.land/x/supabase_deno@v1.0.5/mod.ts"
 export async function ticketOpen(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.member && i.channel && i.guild && i.isMessageComponent()){
@@ -24,11 +25,14 @@ export async function ticketOpen(i:harmony.Interaction,client:harmony.Client){
                     if(i.channel.isGuildText()){
                         if(i.member){
                             if(user){
-                                let teamroledb = database("teamRole.json")
-                                if(teamroledb[i.guild.id]){
-                                    let role = await i.guild.roles.get(teamroledb[i.guild.id])
+                                let ticketdb = database("tickets.json")
+                                const sbclient:supabaseClient = new supabaseClient("https://lvqcvchccfkvuihmdbiu.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx2cWN2Y2hjY2ZrdnVpaG1kYml1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDUyODcwNTUsImV4cCI6MTk2MDg2MzA1NX0.rr8wnLdwcF99sstojzwkgdgCk6_qMh2tSIq5Bf8EUUE")
+                                let table = sbclient.tables().get("guild_settings")
+                                let item = (await table.items().get("id", i.guild.id))[0]
+                                if(item != undefined){
+                                    let role = await i.guild.roles.get(item.teamRole)
                                     if(role == undefined){
-                                        role = await i.guild.roles.resolve(teamroledb[i.guild.id])
+                                        role = await i.guild.roles.resolve(item.teamRole)
                                     }
                                     if(role != undefined){
                                         await i.channel.edit({parentID:catopen.id,permissionOverwrites:[{id:i.guild.id,type:harmony.OverwriteType.ROLE,allow:"0",deny:"68608"},{id:user.id,type:harmony.OverwriteType.USER,allow:"68608",deny:"0"},{id:role.id,type:harmony.OverwriteType.ROLE,allow:"68608",deny:"0"}]})
