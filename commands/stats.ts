@@ -9,6 +9,7 @@ import {
     isAuthorized
 } from "../util/isAuthorized.ts"
 import {noPerms} from "../util/noPerms.ts"
+import {askInteraction} from "../util/askInteraction.ts"
 export async function serverStats(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
@@ -114,6 +115,57 @@ export async function minecraftStats(i:harmony.Interaction,client:harmony.Client
             }
         }
     }catch(err){
+        noPerms(i);
+    }
+}
+
+export async function deleteStats(i:harmony.Interaction, client:harmony.Client){
+    try{
+        if(i.guild && i.member && i.channel){
+            const controls: harmony.MessageComponentData[] = [
+                {
+                    type: harmony.MessageComponentType.ACTION_ROW,
+                    components: [
+                        {
+                            type: harmony.MessageComponentType.BUTTON,
+                            style: harmony.ButtonStyle.DANGER,
+                            customID: 'st-yes',
+                            emoji: {name:"✅"},
+                            label:"Ja"
+                        },
+                        {
+                            type: harmony.MessageComponentType.BUTTON,
+                            style: harmony.ButtonStyle.SECONDARY,
+                            customID: 'st-no',
+                            emoji: {name:"🚫"},
+                            label:"Nein"
+                        },
+                    ]
+                },
+            ]
+            await i.respond({content:"** :question: Bist du dir sicher? :question: **\n*Dies wird alle deine Statistik Nachrichten ungeupdatet lassen!*", components: controls})
+            let answer = await askInteraction(client,i,10000,["st-yes", "st-no"])
+            if(answer != undefined){
+                if(answer.isMessageComponent() && answer.customID == "st-yes"){
+                    let statdb = database("stats.json")
+                    let index = 0;
+                    for(let stat of statdb.data){
+                        if(stat.guild == i.guild?.id){
+                            statdb.data.splice(index)
+                        }
+                        index++
+                    }
+                    saveDatabase("stats.json", statdb)
+                    await answer.respond({content:"✅ **Erfolgreich gelöscht** ✅"})
+                }else{
+                    await answer.respond({content:"✅ **Abgebrochen** ✅"})
+                }
+            }else{
+                await i.channel.send({content:"✅ **Abgebrochen** ✅"})
+            }
+        }
+    }catch(err){
+        console.log(err)
         noPerms(i);
     }
 }

@@ -274,11 +274,6 @@ export async function updateStats(client:harmony.Client){
                             }
                             await message.edit({embeds:[embed]})
                         }
-                    }else{
-                        let db2 = database("stats.json")
-                        // @ts-ignore
-                        db2.data.splice(db2.data.findIndex(index => index === stat))
-                        saveDatabase("stats.json",db2)
                     }
                 }
             }

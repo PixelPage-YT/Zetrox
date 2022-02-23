@@ -185,6 +185,10 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
                                   {
                                     "name": "Minecraft Server",
                                     "value": "In der Nachricht werden hilfreiche \nInformationen zu einem Minecraft Server zusammengefasst.\n`/stats minecraft <IP>` zum hinzufügen.\nDie Nachricht einfach löschen zum entfernen.\n"
+                                  },
+                                  {
+                                    "name": "Löschen",
+                                    "value": "Möchtest du die Statistik Nachrichten löschen, so führe `/stats delete` aus!\n"
                                   }
                                 ],
                                 "footer": {

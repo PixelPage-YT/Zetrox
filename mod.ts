@@ -18,7 +18,7 @@ import {emojiquiz} from "./commands/emojiquiz.ts"
 import {quiz} from "./commands/quiz.ts"
 import {ssp} from "./commands/ssp.ts"
 import {resetGamePoints,resetInvites,resetMessages} from "./commands/reset.ts"
-import {minecraftStats,serverStats} from "./commands/stats.ts"
+import {minecraftStats,serverStats,deleteStats} from "./commands/stats.ts"
 import {gstart} from "./commands/gstart.ts"
 import {giveaway} from "./commands/giveaway.ts"
 import {interactionCreate} from "./listeners/interactionCreate.ts"
@@ -173,7 +173,12 @@ class Zetrox extends harmony.Client {
 
     @harmony.slash("vote")
     vote(i:harmony.Interaction){
-        vote(i,client)
+        vote(i,this)
+    }
+
+    @harmony.subslash("stats", "delete")
+    deleteStats(i:harmony.Interaction){
+        deleteStats(i,this)
     }
 }
 

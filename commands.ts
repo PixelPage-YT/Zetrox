@@ -301,6 +301,11 @@ export const commands: harmony.SlashCommandPartial[] = [
         },
         {
           "type": 1,
+          "name": "delete",
+          "description": "Löscht alle Statistik Nachrichten auf dem Server",
+          "options": []
+        },        {
+          "type": 1,
           "name": "minecraft",
           "description": "Statistiken für einen Minecraft Server",
           "options": [
