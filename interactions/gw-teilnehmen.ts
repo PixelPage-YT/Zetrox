@@ -92,22 +92,58 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                                             ]
                                         },
                                     ]
-                                    i.message.edit({components:controls})
+                                    await i.message.edit({components:controls})
                                     await i.respond({
                                         content:"✅ Du hast erfolgreich teilgenommen! ✅",
                                         ephemeral: true
                                     })
                                 }else{
+                                    giveaway.users.splice(giveaway.users.findIndex(index => index === i.user.id))
+                                    saveDatabase("giveaways.json", giveawaydb)
+                                    let controls: harmony.MessageComponentData[] = [
+                                        {
+                                            type: harmony.MessageComponentType.ACTION_ROW,
+                                            components: [
+                                                {
+                                                    type: harmony.MessageComponentType.BUTTON,
+                                                    style: harmony.ButtonStyle.BLURPLE,
+                                                    customID: 'gw-teilnehmen',
+                                                    label: "(" + giveaway.users.length.toString() + ") Teilnehmen",
+                                                    emoji: {name:"🎁"}
+                                                }
+                                            ]
+                                        },
+                                    ]
+                                    await i.message.edit({components:controls})
                                     await i.respond({
-                                        content:"⛔️  Du erfüllst die Bedingungen nicht! ⛔️",
+                                        content:"✅ Du hast dich erfolgreich ausgetragen! ✅",
                                         ephemeral: true
                                     })
+                                    return
                                 }
                             }else{
+                                giveaway.users.splice(giveaway.users.findIndex(index => index === i.user.id))
+                                saveDatabase("giveaways.json", giveawaydb)
+                                let controls: harmony.MessageComponentData[] = [
+                                    {
+                                        type: harmony.MessageComponentType.ACTION_ROW,
+                                        components: [
+                                            {
+                                                type: harmony.MessageComponentType.BUTTON,
+                                                style: harmony.ButtonStyle.BLURPLE,
+                                                customID: 'gw-teilnehmen',
+                                                label: "(" + giveaway.users.length.toString() + ") Teilnehmen",
+                                                emoji: {name:"🎁"}
+                                            }
+                                        ]
+                                    },
+                                ]
+                                await i.message.edit({components:controls})
                                 await i.respond({
-                                    content:"⛔️ Du hast bereits teilgenommen! ⛔️",
+                                    content:"✅ Du hast dich erfolgreich ausgetragen! ✅",
                                     ephemeral: true
                                 })
+                                return
                             }
                         }else{
                             await i.respond({
