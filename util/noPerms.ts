@@ -1,4 +1,4 @@
-import * as harmony from "https://code.harmony.rocks/main"
+import * as harmony from "https://code.harmony.rocks/main/mod.ts"
 
 export async function noPerms(i:harmony.Interaction){
     try{

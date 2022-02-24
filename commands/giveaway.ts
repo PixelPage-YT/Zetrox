@@ -1,4 +1,4 @@
-import * as harmony from "https://code.harmony.rocks/main"
+import * as harmony from "https://code.harmony.rocks/main/mod.ts"
 import {isAuthorized} from "../util/isAuthorized.ts"
 import {database,saveDatabase} from "../util/database.ts"
 import {noPerms} from "../util/noPerms.ts"

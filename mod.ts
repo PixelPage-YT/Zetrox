@@ -1,5 +1,5 @@
 import { supabaseClient } from "https://deno.land/x/supabase_deno@v1.0.5/mod.ts"
-import * as harmony from "https://code.harmony.rocks/main"
+import * as harmony from "https://code.harmony.rocks/main/mod.ts"
 import {help} from "./commands/help.ts"
 import {verifypanel} from "./commands/verifypanel.ts"
 import {ticketpanel} from "./commands/ticketpanel.ts"

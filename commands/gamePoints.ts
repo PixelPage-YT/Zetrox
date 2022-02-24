@@ -1,4 +1,4 @@
-import * as harmony from "https://code.harmony.rocks/main"
+import * as harmony from "https://code.harmony.rocks/main/mod.ts"
 import {getGamePoints} from "./bonus/gamepoints.ts"
 import {noPerms} from "../util/noPerms.ts"
 export async function gamePoints(i:harmony.Interaction, client:harmony.Client){
