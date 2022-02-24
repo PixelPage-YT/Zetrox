@@ -98,31 +98,17 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                                         ephemeral: true
                                     })
                                 }else{
-                                    giveaway.users.splice(giveaway.users.findIndex(index => index === i.user.id))
-                                    saveDatabase("giveaways.json", giveawaydb)
-                                    let controls: harmony.MessageComponentData[] = [
-                                        {
-                                            type: harmony.MessageComponentType.ACTION_ROW,
-                                            components: [
-                                                {
-                                                    type: harmony.MessageComponentType.BUTTON,
-                                                    style: harmony.ButtonStyle.BLURPLE,
-                                                    customID: 'gw-teilnehmen',
-                                                    label: "(" + giveaway.users.length.toString() + ") Teilnehmen",
-                                                    emoji: {name:"🎁"}
-                                                }
-                                            ]
-                                        },
-                                    ]
-                                    await i.message.edit({components:controls})
-                                    await i.respond({
-                                        content:"✅ Du hast dich erfolgreich ausgetragen! ✅",
-                                        ephemeral: true
-                                    })
+                                    await i.respond({content:":x: **Du erfüllst die Anforderungen nicht! :x:"})
                                     return
                                 }
                             }else{
-                                giveaway.users.splice(giveaway.users.findIndex(index => index === i.user.id))
+                                let index5 = 0;
+                                for(let user of giveaway.users){
+                                    if(user == i.user.id){
+                                        giveawaydb.giveaways[index].users.splice(index5)
+                                    }
+                                    index5++
+                                }
                                 saveDatabase("giveaways.json", giveawaydb)
                                 let controls: harmony.MessageComponentData[] = [
                                     {
