@@ -104,19 +104,29 @@ export async function ticketpanel(i:harmony.Interaction,client:harmony.Client){
                                 if( answerI != undefined ){
                                     if(answerI.isMessageComponent()){
                                         if(answerI.customID == "tp-yes"){
-                                            await msg.editResponse({components: [],content:"**Welchen Inhalt soll die Nachricht haben?**", embeds:[embed]})
+                                            await msg.editResponse({components: [],content:"**Welchen Inhalt soll die Nachricht haben?**\n*Tipp: Du kannst hier auch eine DiscoHook URL, wie z.B. https://share.discohook.app/go/p9gfwfxo, hereinschreiben.*", embeds:[embed]})
                                             answer = undefined
                                             answer = await askMessage(client,i,60000)
                                             if(answer != undefined){
-                                                panelmsg.setDescription(answer.content)
-                                                await msg.editResponse({components: [],content:"**Welchen Banner soll die Nachricht haben?**\n*Bitte gebe eine **URL** an!*", embeds:[embed]})
-                                                answer = undefined
-                                                answer = await askMessage(client,i,60000)
-                                                if(answer != undefined){
-                                                    if(isURL(answer.content)){
-                                                        panelmsg.setThumbnail(answer.content)
+                                                if(isURL(answer.content)){
+                                                    let dat = await getDataFromDiscoLink(answer.content);
+                                                    if(dat){
+                                                        panelmsg = new harmony.Embed(dat.data.embeds[0])
                                                     }else{
-                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Das ist keine URL! <:icons_Wrong:947468536492752906>"})
+                                                        noPerms(i);
+                                                        return
+                                                    }
+                                                }else{
+                                                    panelmsg.setDescription(answer.content)
+                                                    await msg.editResponse({components: [],content:"**Welchen Banner soll die Nachricht haben?**\n*Bitte gebe eine **URL** an!*", embeds:[embed]})
+                                                    answer = undefined
+                                                    answer = await askMessage(client,i,60000)
+                                                    if(answer != undefined){
+                                                        if(isURL(answer.content)){
+                                                            panelmsg.setThumbnail(answer.content)
+                                                        }else{
+                                                            await i.channel.send({content:"<:icons_Wrong:947468536492752906> Das ist keine URL! <:icons_Wrong:947468536492752906>"})
+                                                        }
                                                     }
                                                 }
                                             }else{
@@ -223,4 +233,15 @@ function isURL(str:string) {
       '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
       '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return !!pattern.test(str);
+}
+
+async function getDataFromDiscoLink(url:string){
+    let req = await fetch(url);
+    let txt = req.url.split("?data=").pop()
+    if(txt){
+        let json = JSON.parse((atob(txt)))
+        let msg = json.messages[0]
+        return msg
+    }
+    return undefined;
 }

@@ -215,35 +215,45 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                 if( answerI != undefined ){
                                     if(answerI.isMessageComponent()){
                                         if(answerI.customID == "vp-yes"){
-                                            await msg.editResponse({components: [],content:"**Welchen Inhalt soll die Nachricht haben?**", embeds:[embed]})
+                                            await msg.editResponse({components: [],content:"**Welchen Inhalt soll die Nachricht haben?**\n*Tipp: Du kannst hier auch eine DiscoHook URL, wie z.B. https://share.discohook.app/go/p9gfwfxo, hereinschreiben.*", embeds:[embed]})
                                             answer = undefined
                                             answer = await askMessage(client,i,60000)
                                             if(answer != undefined){
-                                                panelem.setDescription(answer.content)
-                                                await msg.editResponse({components: [],content:"**Welchen Banner soll die Nachricht haben?**\n*Bitte gebe eine **URL** an!*", embeds:[embed]})
-                                                await answer.delete()
-                                                answer = undefined
-                                                answer = await askMessage(client,i,60000)
-                                                if(answer != undefined){
-                                                    if(isURL(answer.content)){
-                                                        panelem.setThumbnail(answer.content)
-                                                        await msg.editResponse({components: [],content:"**Welchen Titel soll die Nachricht haben?**", embeds:[embed]})
-                                                        await answer.delete()
-                                                        answer = undefined
-                                                        answer = await askMessage(client,i,60000)
-                                                        if(answer != undefined){
-                                                            panelem.setTitle(answer.content)
-                                                        }else{
-                                                            await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
-                                                            return
-                                                        }
+                                                if(isURL(answer.content)){
+                                                    let dat = await getDataFromDiscoLink(answer.content);
+                                                    if(dat){
+                                                        panelem = new harmony.Embed(dat.data.embeds[0])
                                                     }else{
-                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Das ist keine URL! <:icons_Wrong:947468536492752906>"})
+                                                        noPerms(i);
                                                         return
                                                     }
                                                 }else{
-                                                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
-                                                    return
+                                                    panelem.setDescription(answer.content)
+                                                    await msg.editResponse({components: [],content:"**Welchen Banner soll die Nachricht haben?**\n*Bitte gebe eine **URL** an!*", embeds:[embed]})
+                                                    await answer.delete()
+                                                    answer = undefined
+                                                    answer = await askMessage(client,i,60000)
+                                                    if(answer != undefined){
+                                                        if(isURL(answer.content)){
+                                                            panelem.setThumbnail(answer.content)
+                                                            await msg.editResponse({components: [],content:"**Welchen Titel soll die Nachricht haben?**", embeds:[embed]})
+                                                            await answer.delete()
+                                                            answer = undefined
+                                                            answer = await askMessage(client,i,60000)
+                                                            if(answer != undefined){
+                                                                panelem.setTitle(answer.content)
+                                                            }else{
+                                                                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
+                                                                return
+                                                            }
+                                                        }else{
+                                                            await i.channel.send({content:"<:icons_Wrong:947468536492752906> Das ist keine URL! <:icons_Wrong:947468536492752906>"})
+                                                            return
+                                                        }
+                                                    }else{
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
+                                                        return
+                                                    }
                                                 }
                                             }else{
                                                 await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
@@ -274,7 +284,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                     ]
                                 },
                             ]
-                            msg.editResponse({
+                            await msg.editResponse({
                                 content:"**Müssen Mitglieder eine einfache Rechnung lösen bevor sie die Rolle bekommen?**\n*Dies gewährt extra Schutz vor Bots*",
                                 embeds: [
                                     embed
@@ -360,4 +370,14 @@ function isURL(str:string) {
       '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
       '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
     return !!pattern.test(str);
+}
+async function getDataFromDiscoLink(url:string){
+    let req = await fetch(url);
+    let txt = req.url.split("?data=").pop()
+    if(txt){
+        let json = JSON.parse((atob(txt)))
+        let msg = json.messages[0]
+        return msg
+    }
+    return undefined;
 }
