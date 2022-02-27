@@ -224,7 +224,7 @@ client.on("interactionCreate", (i:harmony.Interaction) => {
 })
 
 
-client.setPresence({ type: "LISTENING", name: " /help" })
+client.setPresence({ type: "PLAYING", name: "/help | 🇺🇦" })
 client.connect(token, [harmony.GatewayIntents.GUILD_MESSAGES,harmony.GatewayIntents.GUILD_INVITES,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILDS]);
 import { serve } from "https://deno.land/std@0.125.0/http/server.ts";
 
