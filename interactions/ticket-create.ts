@@ -70,15 +70,15 @@ export async function ticketCreate(i:harmony.Interaction,client:harmony.Client){
                                     })
                                 }
                             }else{
-                                await i.respond({content:":x: Der Server Administrator hat noch keine Team Rolle festgelegt. :x:\n*(`/einstellungen teamrole <rolle>`)*",ephemeral:true})
+                                await i.respond({content:"<:icons_Wrong:947468536492752906> Der Server Administrator hat noch keine Team Rolle festgelegt. <:icons_Wrong:947468536492752906>\n*(`/einstellungen teamrole <rolle>`)*",ephemeral:true})
                             }
                         }else{
-                            await i.respond({content:":x: Dieses Ticket System ist kaputt. :x: \n*Bitte Frage den Server Administrator ob er das aktuelle löschen und ein neues erstellen kann.*"})
+                            await i.respond({content:"<:icons_Wrong:947468536492752906> Dieses Ticket System ist kaputt. <:icons_Wrong:947468536492752906> \n*Bitte Frage den Server Administrator ob er das aktuelle löschen und ein neues erstellen kann.*"})
                         }
                     }
                 }
             }else{
-                await i.respond({content:":x: Der Server Administrator hat noch keine Team Rolle festgelegt. :x:\n*(`/einstellungen teamrole <rolle>`)*",ephemeral:true,})
+                await i.respond({content:"<:icons_Wrong:947468536492752906> Der Server Administrator hat noch keine Team Rolle festgelegt. <:icons_Wrong:947468536492752906>\n*(`/einstellungen teamrole <rolle>`)*",ephemeral:true,})
             }
         }
     }catch(err){

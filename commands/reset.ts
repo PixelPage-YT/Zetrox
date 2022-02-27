@@ -12,7 +12,7 @@ export async function resetInvites(i:harmony.Interaction, client:harmony.Client)
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -24,7 +24,7 @@ export async function resetInvites(i:harmony.Interaction, client:harmony.Client)
                 await i.respond({
                     embeds: [
                         {
-                            "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
+                            "title": "<:icons_Correct:947467655630164038> Erfolgreich! <:icons_Correct:947467655630164038>",
                             "description": "Alle Einladungen wurden erfolgreich zurückgesetzt!",
                             "color": 44469,
                             "author": {
@@ -50,7 +50,7 @@ export async function resetMessages(i:harmony.Interaction, client:harmony.Client
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -62,7 +62,7 @@ export async function resetMessages(i:harmony.Interaction, client:harmony.Client
                 await i.respond({
                     embeds: [
                         {
-                            "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
+                            "title": "<:icons_Correct:947467655630164038> Erfolgreich! <:icons_Correct:947467655630164038>",
                             "description": "Alle Nachrichten wurden erfolgreich zurückgesetzt!",
                             "color": 44469,
                             "author": {
@@ -88,7 +88,7 @@ export async function resetGamePoints(i:harmony.Interaction, client:harmony.Clie
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -100,7 +100,7 @@ export async function resetGamePoints(i:harmony.Interaction, client:harmony.Clie
                 await i.respond({
                     embeds: [
                         {
-                            "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
+                            "title": "<:icons_Correct:947467655630164038> Erfolgreich! <:icons_Correct:947467655630164038>",
                             "description": "Alle SpielPunkte <:ZetroCoin:935256569984208917> wurden erfolgreich zurückgesetzt!",
                             "color": 44469,
                             "author": {

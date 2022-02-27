@@ -81,11 +81,11 @@ export async function verifyVerify(i:harmony.Interaction,client:harmony.Client){
                                         }
                                         if(role != undefined){
                                             await i.member.roles.add(role)
-                                            await answer.respond({content:i.member.user.mention + ", :white_check_mark: Verifiziert! :white_check_mark:",ephemeral:true})
+                                            await answer.respond({content:i.member.user.mention + ", <:icons_Correct:947467655630164038> Verifiziert! <:icons_Correct:947467655630164038>",ephemeral:true})
                                         }
                                     }
                                 }else{
-                                    answer.respond({ephemeral:true,content:i.user.mention + ", :x: **Das war nicht die richtige Lösung!** :x:"})
+                                    answer.respond({ephemeral:true,content:i.user.mention + ", <:icons_Wrong:947468536492752906> **Das war nicht die richtige Lösung!** <:icons_Wrong:947468536492752906>"})
                                     return
                                 }
                             }
@@ -100,7 +100,7 @@ export async function verifyVerify(i:harmony.Interaction,client:harmony.Client){
                         }
                         if(role != undefined){
                             i.member.roles.add(role)
-                            await await i.respond({content:i.member.user.mention + ", :white_check_mark: Verifiziert! :white_check_mark:",ephemeral:true})
+                            await await i.respond({content:i.member.user.mention + ", <:icons_Correct:947467655630164038> Verifiziert! <:icons_Correct:947467655630164038>",ephemeral:true})
                         }
                     }
                 }

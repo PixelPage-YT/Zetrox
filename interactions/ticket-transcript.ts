@@ -26,7 +26,7 @@ export async function ticketTranscript(i:harmony.Interaction,client:harmony.Clie
             ];
 
             const uploadResult = await api.upload(files);
-            await i.respond({content:":white_check_mark: Transkript erstellt! https://zetrox.neocities.org/tickets/" + r + ".html :white_check_mark:"})
+            await i.respond({content:"<:icons_Correct:947467655630164038> Transkript erstellt! https://zetrox.neocities.org/tickets/" + r + ".html <:icons_Correct:947467655630164038>"})
         }
     }catch(err){
         noPerms(i);

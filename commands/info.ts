@@ -36,6 +36,10 @@ export async function info(i:harmony.Interaction,client:harmony.Client) {
                     "value": "Du kannst [hier](https://zetrox.neocities.org/home/datenschutz.html) sehen, welche Daten Zetrox sammelt."
                   },
                   {
+                    "name": "Icons",
+                    "value": "Der Bot benutzt an verschiedenen Stellen Icons von [diesem](https://discord.gg/h9Huh6Dz7t) Server."
+                  },
+                  {
                     "name": "Programmiersprache und Bibliotheken",
                     "value": "Der Bot ist in TypeScript geschrieben \nund benutzt die TypeScript Runtime Deno.\nDer Discord Client ist Harmony.\n\nTypeScript: https://typescriptlang.org/\nDeno: https://deno.land/\nHarmony: https://deno.land/x/harmony"
                   }

@@ -14,7 +14,7 @@ export async function serverStats(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
             await i.respond({
-                content: ":x: Du hast dazu keine Rechte! :x:",
+                content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                 ephemeral: true
             })
             return
@@ -37,7 +37,7 @@ export async function serverStats(i:harmony.Interaction,client:harmony.Client){
                                 "color": 44469,
                                 "author": {
                                     "name": "Server Statistiken",
-                                    "icon_url": "https://emoji.gg/assets/emoji/5464-discord-new.png"
+                                    "icon_url": "https://cdn.discordapp.com/emojis/866943907698180137.webp?size=128&quality=lossless"
                                 },
                                 "footer": {
                                     "text": "⇢ Zetrox von Folizza Studios",
@@ -49,13 +49,13 @@ export async function serverStats(i:harmony.Interaction,client:harmony.Client){
                     if(msg && i.channel){
                         statdb.data.push({guild:i.guild.id,type:"server",msg:msg.id,channel:i.channel.id})
                         saveDatabase("stats.json",statdb)
-                        await i.respond({content:":white_check_mark: Erfolgreich eingerichtet! :white_check_mark:",ephemeral:true})
+                        await i.respond({content:"<:icons_Correct:947467655630164038> Erfolgreich eingerichtet! <:icons_Correct:947467655630164038>",ephemeral:true})
                     }
                 }catch(err){
                     
                 }
             }else{
-                await i.respond({content:":x: Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
+                await i.respond({content:"<:icons_Wrong:947468536492752906> Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
             }
         }
     }catch(err){
@@ -67,7 +67,7 @@ export async function minecraftStats(i:harmony.Interaction,client:harmony.Client
     try{
         if(!(await isAuthorized(i.member))){
             await i.respond({
-                content: ":x: Du hast dazu keine Rechte! :x:",
+                content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                 ephemeral: true
             })
             return
@@ -104,13 +104,13 @@ export async function minecraftStats(i:harmony.Interaction,client:harmony.Client
                         if(msg && i.channel){
                             statdb.data.push({guild:i.guild.id,type:"minecraft",ip:ip,msg:msg.id,channel:i.channel.id})
                             saveDatabase("stats.json",statdb)
-                            await i.respond({content:":white_check_mark: Erfolgreich eingerichtet! :white_check_mark:",ephemeral:true})
+                            await i.respond({content:"<:icons_Correct:947467655630164038> Erfolgreich eingerichtet! <:icons_Correct:947467655630164038>",ephemeral:true})
                         }
                     }catch(err){
                         
                     }
                 }else{
-                    await i.respond({content:":x: Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
+                    await i.respond({content:"<:icons_Wrong:947468536492752906> Du kannst nur 2 Statistik-Nachrichten pro Server erstellen!"})
                 }
             }
         }

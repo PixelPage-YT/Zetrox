@@ -69,7 +69,7 @@ export async function ticketOpen(i:harmony.Interaction,client:harmony.Client){
                                             components:ticketcontrol
                                         })
                                         await i.respond({
-                                            content:":white_check_mark: Das Ticket wurde wieder eröffnet! :white_check_mark:",
+                                            content:"<:icons_Correct:947467655630164038> Das Ticket wurde wieder eröffnet! <:icons_Correct:947467655630164038>",
                                             ephemeral: true
                                         })
                                     }
@@ -79,7 +79,7 @@ export async function ticketOpen(i:harmony.Interaction,client:harmony.Client){
                     }
                 }
             }else{
-                await i.respond({content:":x: Das hier ist kein Ticket! :x:",ephemeral:true})
+                await i.respond({content:"<:icons_Wrong:947468536492752906> Das hier ist kein Ticket! <:icons_Wrong:947468536492752906>",ephemeral:true})
             }
         }
     }catch(err){

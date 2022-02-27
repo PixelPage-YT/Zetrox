@@ -11,14 +11,14 @@ export async function gwClaim(i:harmony.Interaction,client:harmony.Client){
             for(let gw of gwdb.giveaways){
                 if(gw.claimmsg == i.message.id){
                     if(gw.winners.findIndex(index => index === i.member?.id) != -1){
-                        await i.respond({content:":white_check_mark: " + i.member?.user.mention + " hat seinen Preis geclaimt! :white_check_mark:"})
+                        await i.respond({content:"<:icons_Correct:947467655630164038> " + i.member?.user.mention + " hat seinen Preis geclaimt! <:icons_Correct:947467655630164038>"})
                         gwdb.giveaways[index].winners.splice(gwdb.giveaways[index].winners.findIndex(index => index === i.member?.id))
                         if(gwdb.giveaways[index].winners == []){
                             gwdb.giveaways.splice(index)
                         }
                         saveDatabase("giveaways.json",gwdb)
                     }else{
-                        await i.respond({content:":x: Du bist kein Gewinner dieser Verlosung oder hast deinen Preis schon geclaimt! :x:",ephemeral:true})
+                        await i.respond({content:"<:icons_Wrong:947468536492752906> Du bist kein Gewinner dieser Verlosung oder hast deinen Preis schon geclaimt! <:icons_Wrong:947468536492752906>",ephemeral:true})
                     }
                 }
                 index++

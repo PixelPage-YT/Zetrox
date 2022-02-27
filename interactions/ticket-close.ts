@@ -83,10 +83,10 @@ export async function ticketClose(i:harmony.Interaction,client:harmony.Client){
                         }
                     }
                 }else{
-                    await i.respond({content:":x: Das Ticket ist bereits geschlossen worden! :x:",ephemeral:true})
+                    await i.respond({content:"<:icons_Wrong:947468536492752906> Das Ticket ist bereits geschlossen worden! <:icons_Wrong:947468536492752906>",ephemeral:true})
                 }
             }else{
-                await i.respond({content:":x: Das hier ist kein Ticket! :x:",ephemeral:true})
+                await i.respond({content:"<:icons_Wrong:947468536492752906> Das hier ist kein Ticket! <:icons_Wrong:947468536492752906>",ephemeral:true})
             }
         }
     }catch(err){

@@ -23,7 +23,7 @@ export async function ticketpanel(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
             await i.respond({
-                content: ":x: Du hast dazu keine Rechte! :x:",
+                content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                 ephemeral: true
             })
             return
@@ -116,11 +116,11 @@ export async function ticketpanel(i:harmony.Interaction,client:harmony.Client){
                                                     if(isURL(answer.content)){
                                                         panelmsg.setThumbnail(answer.content)
                                                     }else{
-                                                        await i.channel.send({content:":x: Das ist keine URL! :x:"})
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Das ist keine URL! <:icons_Wrong:947468536492752906>"})
                                                     }
                                                 }
                                             }else{
-                                                await i.channel.send({content:":x: Bitte antworte innerhalb 1 Minute! :x:"})
+                                                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
                                             }
                                         }
                                     }
@@ -183,32 +183,32 @@ export async function ticketpanel(i:harmony.Interaction,client:harmony.Client){
                                                     guild:i.guild.id
                                                 })
                                                 saveDatabase("tickets.json",ticketdb)
-                                                await i.channel.send(":white_check_mark: Erfolgreich! :white_check_mark:\n__Du kannst mit `/einstellungen teamrole` einstellen, wer die Tickets sehen kann.__")
+                                                await i.channel.send("<:icons_Correct:947467655630164038> Erfolgreich! <:icons_Correct:947467655630164038>\n__Du kannst mit `/einstellungen teamrole` einstellen, wer die Tickets sehen kann.__")
                                             }
                                         }else{
-                                            await i.channel.send({content:":x: Dies ist keine gültige Kategorie! :x:"})
+                                            await i.channel.send({content:"<:icons_Wrong:947468536492752906> Dies ist keine gültige Kategorie! <:icons_Wrong:947468536492752906>"})
                                         }
                                     }else{
-                                        await i.channel.send({content:":x: Bitte antworte innerhalb 30 Sekunden :x:"})
+                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 30 Sekunden <:icons_Wrong:947468536492752906>"})
                                     }
                                     
                                 }else{
-                                    await i.channel.send({content:":x: Dies ist keine gültige Kategorie! :x:"})
+                                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Dies ist keine gültige Kategorie! <:icons_Wrong:947468536492752906>"})
                                 }
                             }else{
-                                await i.channel.send({content:":x: Bitte antworte innerhalb 30 Sekunden :x:"})
+                                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 30 Sekunden <:icons_Wrong:947468536492752906>"})
                             }
                         }else{
-                            await i.channel.send(":x: Das ist kein gültiger Kanal! Achte darauf, den Kanal zu **erwähnen**! :x:")
+                            await i.channel.send("<:icons_Wrong:947468536492752906> Das ist kein gültiger Kanal! Achte darauf, den Kanal zu **erwähnen**! <:icons_Wrong:947468536492752906>")
                         }
                     }else{
-                        await i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 20 Sekunden <:icons_Wrong:947468536492752906>"})
                     }
                 }else{
-                    await i.channel.send(":x: Das ist kein gültiger Name! :x:")
+                    await i.channel.send("<:icons_Wrong:947468536492752906> Das ist kein gültiger Name! <:icons_Wrong:947468536492752906>")
                 }
             }else{
-                await i.channel.send({content:":x: Bitte antworte innerhalb 20 Sekunden :x:"})
+                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 20 Sekunden <:icons_Wrong:947468536492752906>"})
             }
         }
     }catch(err){

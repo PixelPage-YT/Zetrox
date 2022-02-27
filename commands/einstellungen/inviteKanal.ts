@@ -10,7 +10,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -39,7 +39,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
                                 await i.respond({
                                     embeds:[
                                         {
-                                            "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
+                                            "title": "<:icons_Correct:947467655630164038> Erfolgreich eingestellt! <:icons_Correct:947467655630164038>",
                                             "description": `Du hast den \`InviteKanal\` erfolgreich gelöscht!`,
                                             "color": 44469,
                                             "footer": {
@@ -56,7 +56,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
                             await i.respond({
                                 embeds:[
                                     {
-                                        "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
+                                        "title": "<:icons_Correct:947467655630164038> Erfolgreich eingestellt! <:icons_Correct:947467655630164038>",
                                         "description": `Du hast die Einstellung \`InviteKanal\` auf ${channel.mention} gesetzt!\n*Setze die Einstellung erneut auf ${channel.mention}, um den Kanal zu löschen.*`,
                                         "color": 44469,
                                         "footer": {
@@ -68,7 +68,7 @@ export async function eInviteKanal(i:harmony.Interaction,client:harmony.Client){
                             })
                         }else{
                             await i.respond({
-                                content: ":x: Dieser Kanal existiert nicht oder es ist kein __TextKanal__! :x:",
+                                content: "<:icons_Wrong:947468536492752906> Dieser Kanal existiert nicht oder es ist kein __TextKanal__! <:icons_Wrong:947468536492752906>",
                                 ephemeral:true
                             })
                         }

@@ -8,7 +8,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
         if(i.guild && i.member && i.channel && i.isApplicationCommand()){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -52,7 +52,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                     try{
                         gewinneranzahl = parseInt(answer.content)
                     }catch(err){
-                        await i.channel.send({content:":x: Bitte gebe eine Zahl an! :x:"})
+                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte gebe eine Zahl an! <:icons_Wrong:947468536492752906>"})
                         return
                     }
                     if(gewinneranzahl != undefined && gewinneranzahl > 0){
@@ -103,11 +103,11 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                         let millisekunden:number = sekunden * 1000
                                         ende = new Date(Date.now() + millisekunden)
                                     }else{
-                                        await answer.channel.send({content:":x: Ein Gewinnspiel muss mindestens 1 Sekunde und maximal 3 Wochen lang sein! :x:"})
+                                        await answer.channel.send({content:"<:icons_Wrong:947468536492752906> Ein Gewinnspiel muss mindestens 1 Sekunde und maximal 3 Wochen lang sein! <:icons_Wrong:947468536492752906>"})
                                         return
                                     }
                                 }else{
-                                    await answer.channel.send({content:":x: Bitte gebe etwas gültiges ein! :x:"})
+                                    await answer.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte gebe etwas gültiges ein! <:icons_Wrong:947468536492752906>"})
                                     return
                                 }
                                 if(ende != undefined && ende.getTime() > Date.now()){
@@ -145,7 +145,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                     let reqs: {type:string,value:string|number}[] = []
                                     if(answerI instanceof harmony.Interaction){
                                         if(answerI.isMessageComponent() && answerI.customID == "gw-reqs"){
-                                            await (await answerI.respond({content:":white_check_mark: Erfolgreich ausgewählt! :white_check_mark:"})).deleteResponse()
+                                            await (await answerI.respond({content:"<:icons_Correct:947467655630164038> Erfolgreich ausgewählt! <:icons_Correct:947467655630164038>"})).deleteResponse()
                                             for(let req of answerI.values){
                                                 if(req == "gw-req-no"){
                                                     break;
@@ -171,11 +171,11 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                                 question.delete()
                                                             }
                                                         }else{
-                                                            answer.reply(":x: Das ist keine Zahl! :x:")
+                                                            answer.reply("<:icons_Wrong:947468536492752906> Das ist keine Zahl! <:icons_Wrong:947468536492752906>")
                                                             return
                                                         }
                                                     }else{
-                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                                         return
                                                     }
                                                 }
@@ -199,11 +199,11 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                                 question.delete()
                                                             }
                                                         }else{
-                                                            answer.reply(":x: Das ist keine Zahl! :x:")
+                                                            answer.reply("<:icons_Wrong:947468536492752906> Das ist keine Zahl! <:icons_Wrong:947468536492752906>")
                                                             return
                                                         }
                                                     }else{
-                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                                         return
                                                     }
                                                 }
@@ -227,11 +227,11 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                                 question.delete()
                                                             }
                                                         }else{
-                                                            answer.reply(":x: Das ist keine Zahl! :x:")
+                                                            answer.reply("<:icons_Wrong:947468536492752906> Das ist keine Zahl! <:icons_Wrong:947468536492752906>")
                                                             return
                                                         }
                                                     }else{
-                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                                         return
                                                     }
                                                 }
@@ -265,11 +265,11 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                                 question.delete()
                                                             }
                                                         }else{
-                                                            answer.reply(":x: Diese Rolle existiert nicht! :x:")
+                                                            answer.reply("<:icons_Wrong:947468536492752906> Diese Rolle existiert nicht! <:icons_Wrong:947468536492752906>")
                                                             return
                                                         }
                                                     }else{
-                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                                         return
                                                     }
                                                 }
@@ -290,7 +290,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                             question.delete()
                                                         }
                                                     }else{
-                                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                                         return
                                                     }
                                                 }
@@ -358,7 +358,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                 }
                                                 if(answerI instanceof harmony.Interaction){
                                                     if(answerI.isMessageComponent() && answerI.customID == "gw-bypass"){
-                                                        await (await answerI.respond({content:":white_check_mark: Erfolgreich ausgewählt! :white_check_mark:"})).deleteResponse()
+                                                        await (await answerI.respond({content:"<:icons_Correct:947467655630164038> Erfolgreich ausgewählt! <:icons_Correct:947467655630164038>"})).deleteResponse()
                                                         if(answerI.values[0] ==  "gw-bypass-role" ){
                                                             let question = await answerI.channel?.send({content:":question: **Welche Rolle gilt als Bypass?** :question:\nBitte schreibe den exakten Namen/die ID*:"})
                                                             answer = undefined;
@@ -386,18 +386,18 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                                     question?.delete()
                                                                     answer.delete()
                                                                 }else{
-                                                                    answer.reply(":x: Diese Rolle existiert nicht! :x:")
+                                                                    answer.reply("<:icons_Wrong:947468536492752906> Diese Rolle existiert nicht! <:icons_Wrong:947468536492752906>")
                                                                     return
                                                                 }
                                                             }else{
-                                                                await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                                                 return
                                                             }
                                                         }
                                                     }
                                                     
                                                 }else{
-                                                    await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                                     return
                                                 }
                                             }
@@ -414,7 +414,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                             if(bcontent != ""){
                                                 embed.addField({name:"Bypass",inline:true,value:bcontent})
                                             }
-                                            msg.editResponse({embeds:[embed],content:":white_check_mark: **Erfolgreich!** :white_check_mark:",components:[]})
+                                            msg.editResponse({embeds:[embed],content:"<:icons_Correct:947467655630164038> **Erfolgreich!** <:icons_Correct:947467655630164038>",components:[]})
                                             // FERTIG
                                             let channel = await client.channels.get(i.option<harmony.InteractionChannel>("channel").id)
                                             let description = `
@@ -478,30 +478,30 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                 })
                                                 saveDatabase("giveaways.json",giveawaydb)
                                             }else{
-                                                await i.channel.send({content:":x: Dieser Kanal ist kein Textkanal! :x:"})
+                                                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Dieser Kanal ist kein Textkanal! <:icons_Wrong:947468536492752906>"})
                                                 return
                                             }
                                         }
                                     }else{
-                                        await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                                         return
                                     }
                                 }else{
-                                    await i.channel.send({content:":x: Das Ende dieser Verlosung ist ungültig! :x:"})
+                                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Das Ende dieser Verlosung ist ungültig! <:icons_Wrong:947468536492752906>"})
                                     return
                                 }
                             }
                         }else{
-                            await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                            await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                         }
                     }else{
-                        await i.channel.send({content:":x: Es muss mindestens einen Gewinner geben! :x:"})
+                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Es muss mindestens einen Gewinner geben! <:icons_Wrong:947468536492752906>"})
                     }
                 }else{
-                    await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
                 }
             }else{
-                await i.channel.send({content:":x: Bitte antworte innerhalb 60 Sekunden :x:"})
+                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 60 Sekunden <:icons_Wrong:947468536492752906>"})
             }
         }
     }catch(err){

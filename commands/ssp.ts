@@ -77,7 +77,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                     userChoice = "papier"
                                 }else{
                                     answer.respond({
-                                        content:":x: Irgendetwas ist schief gelaufen... :x:"
+                                        content:"<:icons_Wrong:947468536492752906> Irgendetwas ist schief gelaufen... <:icons_Wrong:947468536492752906>"
                                     })
                                     console.log("[Info] SSP: Benutzerauswahl nicht gefunen")
                                     return
@@ -167,7 +167,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                             }
                         }else{
                             await i.channel?.send({
-                                content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
+                                content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"
                             })
                         }
                     }else if(i.option<string>("user") != undefined){
@@ -277,7 +277,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                             ownchoice = "papier"
                                                         }else{
                                                             answer.respond({
-                                                                content:":x: Irgendetwas ist schief gelaufen... :x:"
+                                                                content:"<:icons_Wrong:947468536492752906> Irgendetwas ist schief gelaufen... <:icons_Wrong:947468536492752906>"
                                                             })
                                                             console.log("[Info] SSP: Benutzerauswahl nicht gefunen")
                                                             return
@@ -294,13 +294,13 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                             enemychoice = "papier"
                                                         }else{
                                                             answer.respond({
-                                                                content:":x: Irgendetwas ist schief gelaufen... :x:"
+                                                                content:"<:icons_Wrong:947468536492752906> Irgendetwas ist schief gelaufen... <:icons_Wrong:947468536492752906>"
                                                             })
                                                             console.log("[Info] SSP: Benutzerauswahl nicht gefunen")
                                                             return
                                                         }
                                                     }
-                                                    answer?.respond({content:":white_check_mark: Du hast den Gegenstand erfolgreich ausgewählt! :white_check_mark:",ephemeral:true})
+                                                    answer?.respond({content:"<:icons_Correct:947467655630164038> Du hast den Gegenstand erfolgreich ausgewählt! <:icons_Correct:947467655630164038>",ephemeral:true})
                                                     // ZWEITE ABFRAGE
                                                     let answer1 = await client.waitFor("interactionCreate", (i2:harmony.Interaction) => {
                                                         if(firstchoice == 0){
@@ -331,7 +331,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                                     ownchoice = "papier"
                                                                 }else{
                                                                     answer.respond({
-                                                                        content:":x: Irgendetwas ist schief gelaufen... :x:"
+                                                                        content:"<:icons_Wrong:947468536492752906> Irgendetwas ist schief gelaufen... <:icons_Wrong:947468536492752906>"
                                                                     })
                                                                     console.log("[Info] SSP: Benutzerauswahl nicht gefunen")
                                                                     return
@@ -347,7 +347,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                                     enemychoice = "papier"
                                                                 }else{
                                                                     answer.respond({
-                                                                        content:":x: Irgendetwas ist schief gelaufen... :x:"
+                                                                        content:"<:icons_Wrong:947468536492752906> Irgendetwas ist schief gelaufen... <:icons_Wrong:947468536492752906>"
                                                                     })
                                                                     console.log("[Info] SSP: Benutzerauswahl nicht gefunen")
                                                                     return
@@ -453,19 +453,19 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                         }
                                                     }else{
                                                         await i.channel?.send({
-                                                            content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
+                                                            content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"
                                                         })
                                                     }
                                                 }
                                             }else{
                                                 await i.channel?.send({
-                                                    content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
+                                                    content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"
                                                 })
                                             }
                                         }
                                     }
                                 }else{
-                                    await i.channel?.send({content:":x: **" + member.user.username + "** hat die Herausforderung nicht angenommen."})
+                                    await i.channel?.send({content:"<:icons_Wrong:947468536492752906> **" + member.user.username + "** hat die Herausforderung nicht angenommen."})
                                 }     
                                 if(question.message){
                                     question.deleteMessage(question.message)

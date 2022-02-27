@@ -5,10 +5,6 @@ import {noPerms} from "../util/noPerms.ts"
 export async function gwSeeMembers(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.isApplicationCommand() && i.targetMessage){
-            if(!await isAuthorized(i.member)){
-                await i.respond({content:":x: Du hast dazu keine Rechte! :x:",ephemeral:true})
-                return
-            }
             let gwdb:{giveaways: {claimmsg:string|undefined,msgid:string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
             let index = 0;
             let check = false;
@@ -33,7 +29,7 @@ export async function gwSeeMembers(i:harmony.Interaction,client:harmony.Client){
                 index++
             }
             if(check == false){
-                await i.respond({content:":x: Dies ist keine Verlosung oder alle Gewinner stehen schon fest! :x:",ephemeral:true})
+                await i.respond({content:"<:icons_Wrong:947468536492752906> Dies ist keine Verlosung oder alle Gewinner stehen schon fest! <:icons_Wrong:947468536492752906>",ephemeral:true})
                 return
             }
         }

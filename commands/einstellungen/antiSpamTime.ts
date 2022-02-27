@@ -10,7 +10,7 @@ export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client)
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -38,7 +38,7 @@ export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client)
                             await i.respond({
                                 embeds:[
                                     {
-                                        "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
+                                        "title": "<:icons_Correct:947467655630164038> Erfolgreich eingestellt! <:icons_Correct:947467655630164038>",
                                         "description": `Du hast die Einstellung \`AntiSpamTime\` auf ${time.toString()} Sekunden gesetzt!`,
                                         "color": 44469,
                                         "footer": {
@@ -50,7 +50,7 @@ export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client)
                             })
                         }else{
                             await i.respond({
-                                content: ":x: Die Zeit in Sekunden muss über 0 und unter 100 Sekunden sein! :x:",
+                                content: "<:icons_Wrong:947468536492752906> Die Zeit in Sekunden muss über 0 und unter 100 Sekunden sein! <:icons_Wrong:947468536492752906>",
                                 ephemeral:true
                             })
                         }

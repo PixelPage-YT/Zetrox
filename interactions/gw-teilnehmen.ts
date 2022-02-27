@@ -98,7 +98,7 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                                         ephemeral: true
                                     })
                                 }else{
-                                    await i.respond({ephemeral:true,content:":x: **Du erfüllst die Anforderungen nicht!** :x:"})
+                                    await i.respond({ephemeral:true,content:"<:icons_Wrong:947468536492752906> **Du erfüllst die Anforderungen nicht!** <:icons_Wrong:947468536492752906>"})
                                     return
                                 }
                             }else{

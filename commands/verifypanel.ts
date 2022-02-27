@@ -16,7 +16,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
     try{
         if(!(await isAuthorized(i.member))){
             await i.respond({
-                content: ":x: Du hast dazu keine Rechte! :x:",
+                content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                 ephemeral: true
             })
             return
@@ -48,7 +48,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                 let question = await await i.respond({
                     embeds: [
                         {
-                            "title": ":x: Du hast bereits ein Verifizierungssystem :x:",
+                            "title": "<:icons_Wrong:947468536492752906> Du hast bereits ein Verifizierungssystem <:icons_Wrong:947468536492752906>",
                             "description": "Du kannst nur ein Verifizierungssystem pro Server haben.\n__Möchtest du das aktuelle löschen?__",
                             "color": 16734309,
                             "footer": {
@@ -113,7 +113,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                         }
                     }
                 }else{
-                    await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"})
                 }
                 return
             }
@@ -234,19 +234,19 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                                         if(answer != undefined){
                                                             panelem.setTitle(answer.content)
                                                         }else{
-                                                            await i.channel.send({content:":x: Bitte antworte innerhalb 1 Minute! :x:"})
+                                                            await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
                                                             return
                                                         }
                                                     }else{
-                                                        await i.channel.send({content:":x: Das ist keine URL! :x:"})
+                                                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Das ist keine URL! <:icons_Wrong:947468536492752906>"})
                                                         return
                                                     }
                                                 }else{
-                                                    await i.channel.send({content:":x: Bitte antworte innerhalb 1 Minute! :x:"})
+                                                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
                                                     return
                                                 }
                                             }else{
-                                                await i.channel.send({content:":x: Bitte antworte innerhalb 1 Minute! :x:"})
+                                                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 1 Minute! <:icons_Wrong:947468536492752906>"})
                                                 return
                                             }
                                         }
@@ -300,9 +300,9 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                         embed.addField({name:"Aufgabe vor Verifizierung",value:":ballot_box_with_check: Ja", inline: true})
                                     }
                                     if(answer.customID == "verify-no"){
-                                        embed.addField({name:"Aufgabe vor Verifizierung",value:":x: Nein", inline: true})
+                                        embed.addField({name:"Aufgabe vor Verifizierung",value:"<:icons_Wrong:947468536492752906> Nein", inline: true})
                                     }
-                                    msg.editResponse({components:[],embeds:[embed],content:":white_check_mark: **Erfolgreich!** :white_check_mark:"})
+                                    msg.editResponse({components:[],embeds:[embed],content:"<:icons_Correct:947467655630164038> **Erfolgreich!** <:icons_Correct:947467655630164038>"})
                                     const controls: harmony.MessageComponentData[] = [
                                         {
                                             type: harmony.MessageComponentType.ACTION_ROW,
@@ -332,19 +332,19 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                     saveDatabase("verify.json", verifydb)
                                 }
                             }else{
-                                await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"})
                             }
                         }else{
-                            await i.channel.send({content:":x: Diese Rolle existiert nicht... Schreibe den **exakten** Namen! :x:"})
+                            await i.channel.send({content:"<:icons_Wrong:947468536492752906> Diese Rolle existiert nicht... Schreibe den **exakten** Namen! <:icons_Wrong:947468536492752906>"})
                         }
                     }else{
-                        await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                        await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"})
                     }
                 }else{
-                    await i.channel.send({content:":x: Diesen Kanal habe ich nicht gefunden. :x:"})
+                    await i.channel.send({content:"<:icons_Wrong:947468536492752906> Diesen Kanal habe ich nicht gefunden. <:icons_Wrong:947468536492752906>"})
                 }
             }else{
-                await i.channel.send({content:":x: Bitte antworte innerhalb 10 Sekunden :x:"})
+                await i.channel.send({content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"})
             }
         }
     }catch(err){

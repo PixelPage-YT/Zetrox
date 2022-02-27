@@ -10,7 +10,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -39,7 +39,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
                                 await i.respond({
                                     embeds:[
                                         {
-                                            "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
+                                            "title": "<:icons_Correct:947467655630164038> Erfolgreich eingestellt! <:icons_Correct:947467655630164038>",
                                             "description": `Du hast die \`TeamRole\` erfolgreich gelöscht!`,
                                             "color": 44469,
                                             "footer": {
@@ -56,7 +56,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
                             await i.respond({
                                 embeds:[
                                     {
-                                        "title": ":white_check_mark: Erfolgreich eingestellt! :white_check_mark:",
+                                        "title": "<:icons_Correct:947467655630164038> Erfolgreich eingestellt! <:icons_Correct:947467655630164038>",
                                         "description": `Du hast die Einstellung \`TeamRole\` auf ${role.name} gesetzt!\n*Setze die Einstellung erneut auf ${role.name}, um die Rolle zu löschen.*`,
                                         "color": 44469,
                                         "footer": {
@@ -68,7 +68,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
                             })
                         }else{
                             await i.respond({
-                                content: ":x: Diese Rolle existiert nicht! :x:",
+                                content: "<:icons_Wrong:947468536492752906> Diese Rolle existiert nicht! <:icons_Wrong:947468536492752906>",
                                 ephemeral:true
                             })
                         }

@@ -6,7 +6,7 @@ export async function gwEnd(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.isApplicationCommand() && i.name == "Enden lassen" && i.targetMessage){
             if(!await isAuthorized(i.member)){
-                await i.respond({content:":x: Du hast dazu keine Rechte! :x:",ephemeral:true})
+                await i.respond({content:"<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",ephemeral:true})
                 return
             }
             let gwdb:{giveaways: {claimmsg:string|undefined,msgid:string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
@@ -19,16 +19,16 @@ export async function gwEnd(i:harmony.Interaction,client:harmony.Client){
                     if(gw.ended == false||gw.ended == undefined){
                         gw.end = Date.now() 
                         saveDatabase("giveaways.json",gwdb)
-                        await i.respond({content:":white_check_mark: Die Verlosung wird beendet... :white_check_mark:",ephemeral:true})
+                        await i.respond({content:"<:icons_Correct:947467655630164038> Die Verlosung wird beendet... <:icons_Correct:947467655630164038>",ephemeral:true})
                     }else{
-                        await i.respond({content:":x: Diese Verlosung ist bereits zu Ende. Bitte benutze 'Rerollen'! :x:",ephemeral:true})
+                        await i.respond({content:"<:icons_Wrong:947468536492752906> Diese Verlosung ist bereits zu Ende. Bitte benutze 'Rerollen'! <:icons_Wrong:947468536492752906>",ephemeral:true})
                         return
                     }
                 }
                 index++
             }
             if(check == false){
-                await i.respond({content:":x: Dies ist keine Verlosung oder alle Gewinner stehen schon fest! :x:",ephemeral:true})
+                await i.respond({content:"<:icons_Wrong:947468536492752906> Dies ist keine Verlosung oder alle Gewinner stehen schon fest! <:icons_Wrong:947468536492752906>",ephemeral:true})
             }
         }
     }catch(err){

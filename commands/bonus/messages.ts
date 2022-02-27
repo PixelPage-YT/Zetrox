@@ -7,7 +7,7 @@ export async function bonusAddMessages(i:harmony.Interaction,client:harmony.Clie
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -37,7 +37,7 @@ export async function bonusAddMessages(i:harmony.Interaction,client:harmony.Clie
                         messagedb[i.guild.id][member.id].count += anzahl
                         Deno.writeTextFileSync("./databases/messages.json", JSON.stringify(messagedb))
                         await i.respond({embeds: [{
-                            "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
+                            "title": "<:icons_Correct:947467655630164038> Erfolgreich! <:icons_Correct:947467655630164038>",
                             "description": `Du hast ${member.user.username} **${anzahl}** Nachrichten hinzugefügt.`,
                             "color": 15658734,
                             "author": {
@@ -51,7 +51,7 @@ export async function bonusAddMessages(i:harmony.Interaction,client:harmony.Clie
                         }]})
                     }else{
                         await i.respond({
-                            content: ":x: Du kannst jemandem maximal 10000 Nachrichten und minimal 1 hinzufügen! :x:",
+                            content: "<:icons_Wrong:947468536492752906> Du kannst jemandem maximal 10000 Nachrichten und minimal 1 hinzufügen! <:icons_Wrong:947468536492752906>",
                             ephemeral: true
                         })
                     }
@@ -68,7 +68,7 @@ export async function bonusRemoveMessages(i:harmony.Interaction,client:harmony.C
         if(i.member){
             if(!(await isAuthorized(i.member))){
                 await i.respond({
-                    content: ":x: Du hast dazu keine Rechte! :x:",
+                    content: "<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",
                     ephemeral: true
                 })
                 return
@@ -98,7 +98,7 @@ export async function bonusRemoveMessages(i:harmony.Interaction,client:harmony.C
                         messagedb[i.guild.id][member.id].count -= anzahl
                         Deno.writeTextFileSync("./databases/messages.json", JSON.stringify(messagedb))
                         await i.respond({embeds: [{
-                            "title": ":white_check_mark: Erfolgreich! :white_check_mark:",
+                            "title": "<:icons_Correct:947467655630164038> Erfolgreich! <:icons_Correct:947467655630164038>",
                             "description": `Du hast ${member.user.username} **${anzahl}** Nachrichten entfernt.`,
                             "color": 15658734,
                             "author": {
@@ -112,7 +112,7 @@ export async function bonusRemoveMessages(i:harmony.Interaction,client:harmony.C
                         }]})
                     }else{
                         await i.respond({
-                            content: ":x: Du kannst jemandem maximal 10000 Nachrichten und minimal 1 entfernen! :x:",
+                            content: "<:icons_Wrong:947468536492752906> Du kannst jemandem maximal 10000 Nachrichten und minimal 1 entfernen! <:icons_Wrong:947468536492752906>",
                             ephemeral: true
                         })
                     }

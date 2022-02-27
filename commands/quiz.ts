@@ -111,12 +111,12 @@ export async function quiz(i:harmony.Interaction, client:harmony.Client){
                             modifyGamePoints(i.member,belohnung)
                         }else{
                             // Falsch
-                            answer.respond({content:":x: Deine Antwort war Falsch! :x:"})
+                            answer.respond({content:"<:icons_Wrong:947468536492752906> Deine Antwort war Falsch! <:icons_Wrong:947468536492752906>"})
                         }
                     }
                 }else{
                     await i.channel?.send({
-                        content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
+                        content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"
                     })
                 }
             }

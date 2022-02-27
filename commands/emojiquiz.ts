@@ -40,7 +40,7 @@ export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
                     if(answer instanceof harmony.Message){
                         guessed = answer.content
                         if(guessed == "abbrechen"){
-                            await i.channel?.send({content:":x: Abgebrochen. :x:"})
+                            await i.channel?.send({content:"<:icons_Wrong:947468536492752906> Abgebrochen. <:icons_Wrong:947468536492752906>"})
                             break;
                         }
                         if(solution.solutions.findIndex(index => index.toLowerCase() === answer?.content.toLocaleLowerCase()) == -1){
@@ -85,7 +85,7 @@ export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
                         }
                     }else{
                         await i.channel?.send({
-                            content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
+                            content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"
                         })
                         break;
                     }

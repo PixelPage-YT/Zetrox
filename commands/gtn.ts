@@ -86,7 +86,7 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
                         }
                     }else{
                         await i.channel?.send({
-                            content:":x: Bitte antworte innerhalb 10 Sekunden :x:"
+                            content:"<:icons_Wrong:947468536492752906> Bitte antworte innerhalb 10 Sekunden <:icons_Wrong:947468536492752906>"
                         })
                         break;
                     }
