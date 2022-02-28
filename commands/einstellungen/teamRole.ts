@@ -52,7 +52,7 @@ export async function eTeamRole(i:harmony.Interaction,client:harmony.Client){
                                 return
                             }
                             item.teamRole = role.id
-                            table.items().edit("id", i.guild.id, item)
+                            await table.items().edit("id", i.guild.id, item)
                             await i.respond({
                                 embeds:[
                                     {
