@@ -23,25 +23,29 @@ export async function quiz(i:harmony.Interaction, client:harmony.Client){
                                 type: harmony.MessageComponentType.BUTTON,
                                 style: harmony.ButtonStyle.SECONDARY,
                                 customID: 'quiz-1',
-                                emoji: {name:"1️⃣"}
+                                emoji: {name:"1️⃣"},
+                                label:"Eins"
                             },
                             {
                                 type: harmony.MessageComponentType.BUTTON,
                                 style: harmony.ButtonStyle.SECONDARY,
                                 customID: 'quiz-2',
-                                emoji: {name:"2️⃣"}
+                                emoji: {name:"2️⃣"},
+                                label:"Zwei"
                             },
                             {
                                 type: harmony.MessageComponentType.BUTTON,
                                 style: harmony.ButtonStyle.SECONDARY,
                                 customID: 'quiz-3',
-                                emoji: {name:"3️⃣"}
+                                emoji: {name:"3️⃣"},
+                                label:"Drei"
                             },
                             {
                                 type: harmony.MessageComponentType.BUTTON,
                                 style: harmony.ButtonStyle.SECONDARY,
                                 customID: 'quiz-4',
-                                emoji: {name:"4️⃣"}
+                                emoji: {name:"4️⃣"},
+                                label:"Vier"
                             }
                         ]
                     },

@@ -1,3 +1,10 @@
 {
-    "deno.enable":true,"deno.path":"/Users/kloetzchengrafik/.deno/bin/deno"
+    "deno.enable": true,
+    "deno.path": "/Users/kloetzchengrafik/.deno/bin/deno",
+    "deno.suggest.imports.hosts": {
+        "https://deno.land": true,
+        "https://x.nest.land": true,
+        "https://crux.land": true,
+        "https://code.harmony.rocks": false
+    }
 }

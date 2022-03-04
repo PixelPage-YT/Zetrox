@@ -23,19 +23,22 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                         type: harmony.MessageComponentType.BUTTON,
                                         style: harmony.ButtonStyle.SECONDARY,
                                         customID: 'ssp-schere',
-                                        emoji: {name:"✂️"}
+                                        emoji: {name:"✂️"},
+                                        label:"Schere"
                                     },
                                     {
                                         type: harmony.MessageComponentType.BUTTON,
                                         style: harmony.ButtonStyle.SECONDARY,
                                         customID: 'ssp-stein',
-                                        emoji: {name:"🪨"}
+                                        emoji: {name:"🪨"},
+                                        label:"Stein"
                                     },
                                     {
                                         type: harmony.MessageComponentType.BUTTON,
                                         style: harmony.ButtonStyle.SECONDARY,
                                         customID: 'ssp-papier',
-                                        emoji: {name:"📄"}
+                                        emoji: {name:"📄"},
+                                        label:"Papier"
                                     }
                                 ]
                             },
@@ -217,19 +220,22 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
                                                             type: harmony.MessageComponentType.BUTTON,
                                                             style: harmony.ButtonStyle.SECONDARY,
                                                             customID: 'ssp-schere',
-                                                            emoji: {name:"✂️"}
+                                                            emoji: {name:"✂️"},
+                                                            label:"Schere"
                                                         },
                                                         {
                                                             type: harmony.MessageComponentType.BUTTON,
                                                             style: harmony.ButtonStyle.SECONDARY,
                                                             customID: 'ssp-stein',
-                                                            emoji: {name:"🪨"}
+                                                            emoji: {name:"🪨"},
+                                                            label:"Stein"
                                                         },
                                                         {
                                                             type: harmony.MessageComponentType.BUTTON,
                                                             style: harmony.ButtonStyle.SECONDARY,
                                                             customID: 'ssp-papier',
-                                                            emoji: {name:"📄"}
+                                                            emoji: {name:"📄"},
+                                                            label:"Papier"
                                                         }
                                                     ]
                                                 },
@@ -477,6 +483,7 @@ export async function ssp(i:harmony.Interaction, client:harmony.Client){
             }
         }
     }catch(err){
+        console.log(err)
         noPerms(i);
     }
 }
