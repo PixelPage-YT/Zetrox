@@ -382,5 +382,37 @@ export const commands: harmony.SlashCommandPartial[] = [
     {
       "name": "vote",
       "description": "Vote für Zetrox!"
+    },
+    {
+      "name": "guess",
+      "description": "Sende deine Antwort zu Emojiquiz/GTN ab!",
+      "options": [
+        {
+          "type": 1,
+          "name": "gtn",
+          "description": "Sende deine Antwort zu GTN ab!",
+          "options": [
+            {
+              "type": 4,
+              "name": "zahl",
+              "description": "Die Zahl, welche du angeben willst.",
+              "required": true
+            }
+          ]
+        },
+        {
+          "type": 1,
+          "name": "emojiquiz",
+          "description": "Sende deine Antwort zum EmojiQuiz ab!",
+          "options": [
+            {
+              "type": 3,
+              "name": "wort",
+              "description": "Das Wort, welches du absenden willst",
+              "required": true
+            }
+          ]
+        }
+      ]
     }
 ];
