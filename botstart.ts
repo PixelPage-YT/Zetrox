@@ -5,7 +5,7 @@ let latestpr = Deno.run({
 
 import * as harmony from "http://code.harmony.rocks/main/mod.ts";
 const client = new harmony.Client()
-client.on("presenceUpdate", (presence) => {
+client.on("presenceUpdate", async (presence) => {
     if(presence.status == "offline" && presence.user.id == config.watch){
         latestpr.close()
         setTimeout(() => {
@@ -13,6 +13,8 @@ client.on("presenceUpdate", (presence) => {
             cmd:config.startcmd.split(" "),
             })
         }, 5000)
+        const logchannel = await client.channels.fetch("950048866521206884")
+        if(logchannel.isText()) logchannel.send("Zetrox wurde wegen eines Absturzes neu gestartet.")
     }
 })
 client.connect(config.token,[harmony.GatewayIntents.GUILDS,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILD_PRESENCES])

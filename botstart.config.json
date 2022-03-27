@@ -1,5 +1,5 @@
 {
-    "startcmd": "deno run --allow-all mod.ts prod",
+    "startcmd": "deno run --allow-all --no-check=remote mod.ts prod",
     "watch": "706526290181619775",
     "token": "OTQ3Nzk5NTM1OTczOTgyMjk4.YhyhGg.AR6J2n9Bzmzc2skZP6I74OpBJgU"
 }
