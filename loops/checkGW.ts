@@ -1,8 +1,9 @@
 import * as harmony from "https://code.harmony.rocks/main"
+import {giveaway_database} from "../util/types.ts"
 
 export async function checkGW(client:harmony.Client){
     try{
-        let gwdb:{"giveaways": {msgid:string,claimmsg:undefined|string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,claimtime:number,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
+        let gwdb: giveaway_database = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
         let index = 0
         for(let gw of gwdb.giveaways){
             if(gw.end < Date.now() && (gw.ended == undefined || gw.ended == false)){

@@ -1,5 +1,6 @@
 import * as harmony from "https://code.harmony.rocks/main"
 import {noPerms} from "../util/noPerms.ts"
+import {gamepoints_member,invites_member,messages_member} from "../util/types.ts"
 async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
     try{
         if(i.isApplicationCommand()){
@@ -19,7 +20,7 @@ async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                 }
                 });
             if(i.guild){
-                let points: {member:string,count:number}[];
+                let points: messages_member[];
                 points = []
                 if(!(messagedb[i.guild.id])){
                     messagedb[i.guild.id] = {}
@@ -29,7 +30,7 @@ async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
                     // @ts-ignore
                     points.push({member:member1[0],count:member1[1].count})
                 }
-                let sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
+                let sorted = points.sort((a:messages_member, b:messages_member) => {
                     return b.count - a.count
                 })
                 let index = 0;
@@ -87,7 +88,7 @@ async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
             }
             });
         if(i.guild){
-            let points: {member:string,count:number}[];
+            let points: invites_member[];
             points = []
             if(!(invitedb[i.guild.id])){
                 invitedb[i.guild.id] = {}
@@ -97,7 +98,7 @@ async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
                 // @ts-ignore
                 points.push({member:member1[0],count:member1[1].count})
             }
-            let sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
+            let sorted = points.sort((a:invites_member, b:invites_member) => {
                 return b.count - a.count
             })
             for(let index in sorted){
@@ -152,7 +153,7 @@ async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
             }
         });
         if(i.guild){
-            let points: {member:string,count:number}[];
+            let points: gamepoints_member[];
             points = []
             if(!(invitedb[i.guild.id])){
                 invitedb[i.guild.id] = {}
@@ -162,7 +163,7 @@ async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
                 // @ts-ignore
                 points.push({member:member1[0],count:member1[1].count})
             }
-            let sorted = points.sort((a:{member:string,count:number}, b:{member:string,count:number}) => {
+            let sorted = points.sort((a:gamepoints_member, b:gamepoints_member) => {
                 return b.count - a.count
             })
             for(let index in sorted){

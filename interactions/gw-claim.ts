@@ -2,11 +2,12 @@ import * as harmony from "https://code.harmony.rocks/main"
 import {database ,saveDatabase} from "../util/database.ts"
 import {isAuthorized} from "../util/isAuthorized.ts"
 import {noPerms} from "../util/noPerms.ts"
+import {giveaway_database} from "../util/types.ts"
 
 export async function gwClaim(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.member && i.guild && i.message){
-            let gwdb:{giveaways: {claimmsg:string|undefined,msgid:string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
+            let gwdb:giveaway_database = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
             let index = 0;
             for(let gw of gwdb.giveaways){
                 if(gw.claimmsg == i.message.id){

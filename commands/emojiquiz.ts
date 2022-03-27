@@ -6,13 +6,14 @@ import{
 import {
     database
 } from "../util/database.ts"
+import {emojiquiz_solution} from "../util/types.ts"
 import {noPerms} from "../util/noPerms.ts"
 export async function emojiquiz(i:harmony.Interaction,client:harmony.Client) {
     try{
         if(i.member){
             if(i.guild){
                 const emojis = JSON.parse(Deno.readTextFileSync("./data/emojiquiz.json")).data;
-                const solution:{emojis:string,points:number,solutions:string[]} = random.choice(emojis)
+                const solution:emojiquiz_solution = random.choice(emojis)
                 let guessed:string
                 let startTime = Date.now()
                 await i.respond({

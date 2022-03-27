@@ -2,6 +2,7 @@ import * as harmony from "https://code.harmony.rocks/main"
 import {database ,saveDatabase} from "../util/database.ts"
 import {isAuthorized} from "../util/isAuthorized.ts"
 import {noPerms} from "../util/noPerms.ts"
+import {giveaway_database} from "../util/types.ts"
 export async function gwEnd(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.isApplicationCommand() && i.name == "Enden lassen" && i.targetMessage){
@@ -9,7 +10,7 @@ export async function gwEnd(i:harmony.Interaction,client:harmony.Client){
                 await i.respond({content:"<:icons_Wrong:947468536492752906> Du hast dazu keine Rechte! <:icons_Wrong:947468536492752906>",ephemeral:true})
                 return
             }
-            let gwdb:{giveaways: {claimmsg:string|undefined,msgid:string,winners:string[],channel:string,end:number,winnercount:number,users:string[],preis:string,ended:boolean|undefined}[]} = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
+            let gwdb:giveaway_database  = JSON.parse(Deno.readTextFileSync("./databases/giveaways.json"))
             let index = 0;
             let check = false;
             for(let gw of gwdb.giveaways){

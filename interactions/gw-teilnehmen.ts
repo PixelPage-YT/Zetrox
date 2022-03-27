@@ -2,10 +2,11 @@ import * as harmony from "https://code.harmony.rocks/main/mod.ts"
 import {database ,saveDatabase} from "../util/database.ts"
 import {isAuthorized} from "../util/isAuthorized.ts"
 import {noPerms} from "../util/noPerms.ts"
+import {giveaway_database} from "../util/types.ts"
 export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
     try{
         if(i.member && i.guild && i.message){
-            let giveawaydb:{giveaways:{reqs:{type:string,value:string|number}[]|undefined,start:number|undefined,msgid:string,users:string[],bypass:undefined|{type:string,value:string}}[]} = database("giveaways.json")
+            let giveawaydb:giveaway_database = database("giveaways.json")
             let index = 0
             let isthere = 0
             for(let giveaway of giveawaydb.giveaways){

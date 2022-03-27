@@ -2,6 +2,7 @@ import * as harmony from "https://code.harmony.rocks/main/mod.ts"
 import {isAuthorized} from "../util/isAuthorized.ts"
 import {database,saveDatabase} from "../util/database.ts"
 import {noPerms} from "../util/noPerms.ts"
+import {giveaway_req,giveaway_bypass} from "../util/types.ts"
 export async function giveaway(i:harmony.Interaction,client:harmony.Client){
     try{
         let answertime = 60 * 1000;
@@ -142,7 +143,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                     if(answerI1[0]){
                                         answerI = answerI1[0]
                                     }
-                                    let reqs: {type:string,value:string|number}[] = []
+                                    let reqs: giveaway_req[] = []
                                     if(answerI instanceof harmony.Interaction){
                                         if(answerI.isMessageComponent() && answerI.customID == "gw-reqs"){
                                             await (await answerI.respond({content:"<:icons_Correct:947467655630164038> Erfolgreich ausgewählt! <:icons_Correct:947467655630164038>"})).deleteResponse()
@@ -342,7 +343,7 @@ export async function giveaway(i:harmony.Interaction,client:harmony.Client){
                                                     ]
                                                 },
                                             ]
-                                            let bypass:{type:string,value:string} = {type:"no",value:"no"}
+                                            let bypass:giveaway_bypass = {type:"no",value:"no"}
                                             if(reqs.length > 0){
                                                 msg.editResponse({embeds:[embed],content:"**Welche Bypasses soll es geben?**",components:controls})
                                                 answer = undefined

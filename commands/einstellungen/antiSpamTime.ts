@@ -2,6 +2,7 @@ import * as harmony from "https://code.harmony.rocks/main"
 import {isAuthorized} from "../../util/isAuthorized.ts"
 import {noPerms} from "../../util/noPerms.ts"
 import { supabaseClient } from "https://deno.land/x/supabase_deno@v1.0.5/mod.ts"
+import {guild_setting} from "../../util/types.ts"
 
 export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client){
     try{
@@ -22,12 +23,6 @@ export async function eAntiSpamTime(i:harmony.Interaction,client:harmony.Client)
                     if(i.option<string>("time") != undefined){
                         let time = parseInt(i.option<string>("time"));
                         if(time > -1 && time < 100){
-                            type guild_setting = {
-                                id:string,
-                                teamRole:string,
-                                antiSpamTime:number,
-                                inviteChannel:string
-                            }
                             let item:guild_setting = {id:i.guild.id,teamRole:"0",antiSpamTime:10,inviteChannel:"0"}
                             let nitem: guild_setting = (await table.items().get("id", i.guild.id))[0]
                             if(nitem != undefined){
