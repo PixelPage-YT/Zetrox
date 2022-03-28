@@ -1,6 +1,7 @@
 const config: {startcmd:string,token:string,watch:string} = JSON.parse(Deno.readTextFileSync("botstart.config.json"))
 let latestpr = Deno.run({
     cmd:config.startcmd.split(" "),
+    stderr:"piped"
 })
 
 import * as harmony from "http://code.harmony.rocks/main/mod.ts";
