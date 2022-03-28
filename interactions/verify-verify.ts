@@ -107,7 +107,7 @@ export async function verifyVerify(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 

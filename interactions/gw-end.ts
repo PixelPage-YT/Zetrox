@@ -33,7 +33,7 @@ export async function gwEnd(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 

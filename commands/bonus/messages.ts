@@ -59,7 +59,7 @@ export async function bonusAddMessages(i:harmony.Interaction,client:harmony.Clie
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -120,6 +120,6 @@ export async function bonusRemoveMessages(i:harmony.Interaction,client:harmony.C
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }

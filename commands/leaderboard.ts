@@ -66,7 +66,7 @@ async function lbMessages(i:harmony.Interaction, client:harmony.Client) {
             })
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -132,7 +132,7 @@ async function lbInvites(i:harmony.Interaction, client:harmony.Client) {
             embeds: [embed]
         })
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
@@ -197,7 +197,7 @@ async function lbGamepoints(i:harmony.Interaction, client:harmony.Client) {
             embeds: [embed]
         })
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -218,6 +218,6 @@ export async function leaderboard(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i)
+        noPerms(i,err)
     }
 }

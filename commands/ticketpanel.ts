@@ -113,7 +113,7 @@ export async function ticketpanel(i:harmony.Interaction,client:harmony.Client){
                                                     if(dat){
                                                         panelmsg = new harmony.Embed(dat.data.embeds[0])
                                                     }else{
-                                                        noPerms(i);
+                                                        noPerms(i,"DiscoHook Link ist ungültig.")
                                                         return
                                                     }
                                                 }else{
@@ -222,7 +222,7 @@ export async function ticketpanel(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i)
+        noPerms(i,err)
     }
 }
 function isURL(str:string) {

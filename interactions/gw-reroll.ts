@@ -101,7 +101,7 @@ export async function gwReroll(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 

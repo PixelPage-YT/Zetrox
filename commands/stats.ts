@@ -59,7 +59,7 @@ export async function serverStats(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -115,7 +115,7 @@ export async function minecraftStats(i:harmony.Interaction,client:harmony.Client
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -166,6 +166,6 @@ export async function deleteStats(i:harmony.Interaction, client:harmony.Client){
         }
     }catch(err){
         console.log(err)
-        noPerms(i);
+        noPerms(i,err);
     }
 }

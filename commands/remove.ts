@@ -21,6 +21,6 @@ export async function remove(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i)
+        noPerms(i,err)
     }
 }

@@ -51,7 +51,7 @@ export async function bonusAddGamePoints(i:harmony.Interaction,client:harmony.Cl
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -104,7 +104,7 @@ export async function bonusRemoveGamePoints(i:harmony.Interaction,client:harmony
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 

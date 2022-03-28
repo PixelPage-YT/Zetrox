@@ -28,7 +28,7 @@ export async function achtball(i:harmony.Interaction,client:harmony.Client) {
             ]})
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 

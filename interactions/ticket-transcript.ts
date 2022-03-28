@@ -29,6 +29,6 @@ export async function ticketTranscript(i:harmony.Interaction,client:harmony.Clie
             await i.respond({content:"<:icons_Correct:947467655630164038> Transkript erstellt! https://zetrox.neocities.org/tickets/" + r + ".html <:icons_Correct:947467655630164038>"})
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }

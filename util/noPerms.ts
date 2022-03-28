@@ -1,8 +1,13 @@
 import * as harmony from "https://code.harmony.rocks/main/mod.ts"
 
-export async function noPerms(i:harmony.Interaction){
+export async function noPerms(i:harmony.Interaction,error:string){
     try{
         if(i){
+            let errorCode = Math.floor(Math.random() * 9999999);
+            const logChannel = await i.client.channels.fetch("950048866521206884")
+            if(logChannel && logChannel.isText() && i.isApplicationCommand()){
+                await logChannel.send(`ErrorCode: ${errorCode} | Jemand hat versucht, den Befehl ${i.name} zu nutzen, hat aber den folgenden Fehler erhalten: ${error}`)
+            }
             await i.channel?.send({
                 embeds: [
                     {

@@ -41,7 +41,7 @@ export async function resetInvites(i:harmony.Interaction, client:harmony.Client)
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -79,7 +79,7 @@ export async function resetMessages(i:harmony.Interaction, client:harmony.Client
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -117,6 +117,6 @@ export async function resetGamePoints(i:harmony.Interaction, client:harmony.Clie
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }

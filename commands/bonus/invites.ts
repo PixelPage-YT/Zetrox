@@ -59,7 +59,7 @@ export async function bonusAddInvites(i:harmony.Interaction,client:harmony.Clien
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
@@ -120,6 +120,6 @@ export async function bonusRemoveInvites(i:harmony.Interaction,client:harmony.Cl
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }

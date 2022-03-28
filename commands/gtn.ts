@@ -101,6 +101,6 @@ export async function gtn(i:harmony.Interaction,client:harmony.Client) {
         }
     }catch(err){
         console.log(err)
-        noPerms(i);
+        noPerms(i,err);
     }
 }

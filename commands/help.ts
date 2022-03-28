@@ -45,7 +45,7 @@ export async function help(i:harmony.Interaction,client:harmony.Client){
           components: controls
       })
     }catch(err){
-      noPerms(i);
+      noPerms(i,err);
     }
 }
 
@@ -255,6 +255,6 @@ export async function helpselect(i:harmony.Interaction, client:harmony.Client){
         }
     }
   }catch(err){
-    noPerms(i);
+    noPerms(i,err);
 }
 }

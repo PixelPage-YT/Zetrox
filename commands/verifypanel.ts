@@ -224,7 +224,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
                                                     if(dat){
                                                         panelem = new harmony.Embed(dat.data.embeds[0])
                                                     }else{
-                                                        noPerms(i);
+                                                        noPerms(i,"DiscoHook Link ist ungültig.")
                                                         return
                                                     }
                                                 }else{
@@ -358,7 +358,7 @@ export async function verifypanel(i:harmony.Interaction,client:harmony.Client){
             }
         }
     }catch(err){
-        noPerms(i);
+        noPerms(i,err);
     }
 }
 
