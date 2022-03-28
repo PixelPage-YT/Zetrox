@@ -5,13 +5,13 @@ export async function noPerms(i:harmony.Interaction,error:string){
         if(i){
             let errorCode = Math.floor(Math.random() * 9999999);
             const logChannel = await i.client.channels.fetch("950048866521206884")
-            if(logChannel && logChannel.isText() && i.isApplicationCommand()){
-                await logChannel.send(`ErrorCode: ${errorCode} | Jemand hat versucht, den Befehl ${i.name} zu nutzen, hat aber den folgenden Fehler erhalten: ${error}`)
+            if(logChannel && logChannel.isText()){
+                await logChannel.send(`ErrorCode: ${errorCode} | Jemand hat versucht, den Befehl ${i.isApplicationCommand() ? i.name : i.isMessageComponent() ? i.customID : "[unbekannt]"} zu nutzen, hat aber den folgenden Fehler erhalten: ${error}`)
             }
             await i.channel?.send({
                 embeds: [
                     {
-                        "title": ":warning: Da ist etwas schiefgelaufen! :warning:",
+                        "title": `:warning: Da ist etwas schiefgelaufen! (${errorCode}) :warning:`,
                         "description": "*Dies kann an mehreren Sachen liegen.*",
                         "color": 13750554,
                         "fields": [
