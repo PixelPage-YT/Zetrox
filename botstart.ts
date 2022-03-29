@@ -12,10 +12,11 @@ client.on("presenceUpdate", async (presence) => {
         setTimeout(() => {
             latestpr = Deno.run({
                 cmd:config.startcmd.split(" "),
+                stderr:"piped"
             })
         }, 5000)
         const logchannel = await client.channels.fetch("950048866521206884")
-        if(logchannel.isText()) logchannel.send("Zetrox ist abgestürzt und wird neu gestartet. Fehler: " + (await latestpr.stderrOutput()).toString())
+        if(logchannel.isText()) logchannel.send("Zetrox ist abgestürzt und wird neu gestartet. Fehler: " + new TextDecoder().decode(await latestpr.stderrOutput()))
     }
 })
 client.connect(config.token,[harmony.GatewayIntents.GUILDS,harmony.GatewayIntents.GUILD_MEMBERS,harmony.GatewayIntents.GUILD_PRESENCES])
