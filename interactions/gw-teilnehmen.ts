@@ -5,6 +5,7 @@ import {noPerms} from "../util/noPerms.ts"
 import {giveaway_database} from "../util/types.ts"
 export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
     try{
+        await i.defer();
         if(i.member && i.guild && i.message){
             let giveawaydb:giveaway_database = database("giveaways.json")
             let index = 0
@@ -94,12 +95,12 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                                         },
                                     ]
                                     await i.message.edit({components:controls})
-                                    await i.respond({
+                                    await i.editResponse({
                                         content:"✅ Du hast erfolgreich teilgenommen! ✅",
                                         ephemeral: true
                                     })
                                 }else{
-                                    await i.respond({ephemeral:true,content:"<:icons_Wrong:947468536492752906> **Du erfüllst die Anforderungen nicht!** <:icons_Wrong:947468536492752906>"})
+                                    await i.editResponse({ephemeral:true,content:"<:icons_Wrong:947468536492752906> **Du erfüllst die Anforderungen nicht!** <:icons_Wrong:947468536492752906>"})
                                     return
                                 }
                             }else{
@@ -126,14 +127,14 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                                     },
                                 ]
                                 await i.message.edit({components:controls})
-                                await i.respond({
+                                await i.editResponse({
                                     content:"✅ Du hast dich erfolgreich ausgetragen! ✅",
                                     ephemeral: true
                                 })
                                 return
                             }
                         }else{
-                            await i.respond({
+                            await i.editResponse({
                                 content:"⛔️ Die Verlosung hat noch nicht gestartet! ⛔️",
                                 ephemeral: true
                             })
@@ -144,7 +145,7 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                 index++
             }
             if(isthere == 0){
-                await i.respond({
+                await i.editResponse({
                     content:"⛔️ Diese Verlosung existiert nicht! ⛔️",
                     ephemeral: true
                 })

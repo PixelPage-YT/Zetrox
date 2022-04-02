@@ -1,0 +1,12 @@
+{
+    "name": "zetrox",
+    "version": "1.0.0",
+    "description": "Multifunktioneller, schneller und frei einstellbarer Discord Bot.",
+    "repository": "https://github.com/PixelPage-YT/Zetrox",
+    "author": "Folizza Studios",
+    "license": "MIT",
+    "scripts": {
+        "dev": "deno run --allow-all --no-check=remote mod.ts",
+        "prod": "deno run --allow-all botstart.ts"
+    }
+}
