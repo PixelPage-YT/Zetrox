@@ -5,7 +5,10 @@ import {noPerms} from "../util/noPerms.ts"
 import {giveaway_database} from "../util/types.ts"
 export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
     try{
-        await i.defer();
+        await i.respond({
+            content:":page_facing_up: Bitte warte kurz...",
+            ephemeral: true,
+        });
         if(i.member && i.guild && i.message){
             let giveawaydb:giveaway_database = database("giveaways.json")
             let index = 0
@@ -97,7 +100,7 @@ export async function gwTeilnehmen(i:harmony.Interaction,client:harmony.Client){
                                     await i.message.edit({components:controls})
                                     await i.editResponse({
                                         content:"✅ Du hast erfolgreich teilgenommen! ✅",
-                                        ephemeral: true
+                                        flags: harmony.InteractionResponseFlags.EPHEMERAL,
                                     })
                                 }else{
                                     await i.editResponse({ephemeral:true,content:"<:icons_Wrong:947468536492752906> **Du erfüllst die Anforderungen nicht!** <:icons_Wrong:947468536492752906>"})
