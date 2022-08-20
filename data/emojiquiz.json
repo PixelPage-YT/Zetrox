@@ -3,12 +3,12 @@
         {
             "emojis": "👣 🏐 🌾 ",
             "points": 34,
-            "solutions":["Fußballfeld", "Fussballfeld"]
+            "solutions": ["Fußballfeld", "Fussballfeld"]
         },
         {
             "emojis": "🎩 💫 🐇",
             "points": 10,
-            "solutions": ["Zauberer","Zauberin"]
+            "solutions": ["Zauberer", "Zauberin"]
         },
         {
             "emojis": "🐤 🔥",
@@ -43,7 +43,7 @@
         {
             "emojis": "🎅 🎁",
             "points": 20,
-            "solutions": ["Weihnachten","Weihnachtsmann"]
+            "solutions": ["Weihnachten", "Weihnachtsmann"]
         },
         {
             "emojis": "🐊 🩴",
@@ -77,7 +77,7 @@
         },
         {
             "emojis": "🏬 📔",
-            "points":  37,
+            "points": 37,
             "solutions": ["Bücherei", "Buecherei"]
         },
         {
@@ -103,7 +103,7 @@
         {
             "emojis": "✉️ 💻",
             "points": 35,
-            "solutions": ["E-Mail","email"]
+            "solutions": ["E-Mail", "email"]
         }
     ]
 }
